@@ -1,0 +1,19 @@
+\begin{table}
+  \centering%
+  \begin{tabular}{l
+                  c
+                  c}
+      \toprule
+      {}    & Anzahl der Filter in den Dichtelagen  & Struktur der Dropout Lagen      \\
+      \midrule
+      Modell 0    & (1024, 512, 128, 64, 32)  & (0.5, 0.4, 0.4, 0.3, 0.2) \\
+      Modell 1    & (1024, 512, 256, 128, 64, 32, 16)  & (0.5, 0.4, 0.4, 0.4, 0.2, 0.2, 0.1) \\
+      Modell 2    & (512, 256, 128, 64, 32, 16)  & (0.4, 0.4, 0.3, 0.3, 0.2, 0.1) \\
+      Modell 3    & (1024, 256, 64, 16)  & (0.6, 0.4, 0.2, 0.1) \\
+      Modell 4    & (512, 128, 32)  & (0.5, 0.3, 0.1) \\
+      \bottomrule
+  \end{tabular}
+  \caption{Getestete Grundstrukturen für die Netzarchitekturen der alternativen Methode. Das $n$-te Element der Tupel beschreibt jeweils die Filtergröße der $n$-ten Dichtelage. Selbiges gilt für die Dropout Lagen. Es folgt auf jede Dichtelage (abgesehen von der letzten Lage) eine Dropout Lage.}
+  \label{tab:grid}
+\end{table}
+%

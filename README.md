@@ -1,2 +1,2 @@
-# Master-Thesis
-Master Thesis: Analysis of the Crab Nebula using Photon Stream Data from FACT
+# Master Thesis
+Master thesis on the topic: __Analysis of the Crab Nebula using Photon Stream data collected by the FACT telescope__
