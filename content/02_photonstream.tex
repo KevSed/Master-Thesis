@@ -1,0 +1,30 @@
+\chapter{Representing IACT data}
+
+There are different ways to represent air shower data. FACT uses the so called main-pulse representation, whereas this work focuses on a novel data format, both of which are described in the following chapter.
+
+\section{The Main-Pulse representation}
+Data that has been taken by an Imaging-Air-Cherenkov-Telescope
+(IACT), like FACT, is usually represented in so called time series.
+These time series owe their name to the fact that they represent voltages at the photosensors over time. Within these time series lie so called main-pulses that represent the increased voltage that a charge deposition of an air shower causes. So by looking for those main-pulses shower events can be found upon the detector noise and ambient light in the camera. Of course, the main-pulses consist of multiple photon signals superposed over time, but they are first described by electric pulses. This means that the charge deposit has to be transferred into physics observables. By integrating the charge in one pixel and equivalent of a photon count can be obtained, called the \textit{photon equivalent} (PE). So the first observable in this representation is the PE which corresponds to the number of photons measured. The photon counts are spatially located by the corresponding pixel they are assigned to. The 1440 pixels of FACT are the determining grid that yield the spatial coordinates of every shower event. The last observable is the time. When the telescope is triggered and records data the arrival time of the photons is measured as explained above. From the time series a quantized timing information per pixel can be developed by dividing the event into time slices. Thus, the arrival times $t$ are the third observable of the main-pulse event representation.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{Plots/standard.png}
+  \caption{The measured observables of the main-pulse representation are shown as scatter plots within the pixels. On the left the distribution of photon equivalents $c$ of a typical shower event is shown as well as the arrival times of that events photons on the right.}
+  \label{fig:mainpulse}
+\end{figure}
+
+\section{The Photonstream representation}
+
+The Photonstream representation aims at creating a data format consisting of photons by storing their observed physical properties. So from the measured time series single photons are extracted instead of deriving photon counts in pixels. Each of these photons is assigned an arrival time and pixel, creating a list of arrival times per photon for each pixel. By doing so, a 3-dimensional data set is created, which can be represented in form of so called point clouds (\autoref{fig:event}).
+%
+\begin{figure}
+  \begin{subfigure}{0.475\textwidth}
+    \includegraphics[width=1.1\textwidth]{Plots/event1.png}
+  \end{subfigure}
+  \begin{subfigure}{0.475\textwidth}
+    \includegraphics[width=1.1\textwidth]{Plots/event2.png}
+  \end{subfigure}
+  \caption{Event represented by the 3-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel. The left figure shows the remaining photons after cleaning.}
+  \label{fig:event}
+\end{figure}
