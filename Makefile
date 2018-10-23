@@ -8,6 +8,7 @@ TeXOptions = -lualatex \
 
 build/thesis.pdf: FORCE | build
 	latexmk $(TeXOptions) thesis.tex
+	mv build/thesis.pdf master_thesis_kevin_sedlaczek.pdf
 
 FORCE:
 
