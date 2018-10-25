@@ -37,12 +37,86 @@ be captured by cameras capable of filming very short time scales (about
 $\SI{e-9}{\second}$).
 
 Imaging Air Cherenkov Telescopes (IACTs) are using videos of this light, to
-reconstruct properties of the incident cosmic radiation, by analyzing
-properties of the measured pictures. By doing so, the atmosphere is used as a very large Cherenkov-detector material.
+reconstruct properties of the incident cosmic radiation above
+$\SI{100}{\giga\electronvolt}$, by analyzing the spatial geometry of the
+measured pictures.
+% \newpage
 
-The three properties of interest are:
-\begin{description}[labelsep=3em, align=right]
+The three properties of interest for each event are:
+%
+\begin{description}[labelsep=1em, align=right]
   \item[source position]{the position of the source of the primary particle on the sky}
   \item[particle type]{the distinction between cosmic gamma rays and other particles like protons or secondary particles like muons}
   \item[particle energy]{the energy of the primary gamma-ray}
 \end{description}
+%
+This means that the task is to resolve single incoming cosmic gamma rays and
+reconstruct these properties. By doing so, the atmosphere is used as a very
+wide spread detector. When trying to avoid any interactions of the incident
+particles and measuring their properties directly in a specifically prepared
+detector material, one eventuually has to leave earth's atmosphere. Such direct
+measurements are carried out in earth's orbit, outside its atmosphere.
+Detectors like the Fermi Large-Area-Telescope (Fermi LAT) are satellites
+carrying their own detectors for the necessary measurements. They consist of
+interaction volumes taking over what the atmosphere does to intersecting cosmic
+rays: particles like gamma rays interact with the material, creating new
+particles by losing energy, which then continue to do so in particle cascades
+until the enrgy has spread to a certain amount. This process is called
+shower (or air-shower, depending on the medium of interaction). The
+characteristics of these interactions and the produced particles strongly
+depend on the properties of the incident particle, such as energy and particle
+type. There are particles that mainly interact via the electromagnetic force.
+Such showers are called electromagnetic showers. They are usually initiated by
+photons or electrons and mainly consist of light, charged fermions like electrons or
+muons and photons or light, charged bosons like pions. Showers initiated by
+hadronic cosmic rays like protons show different kinds of interactions, also
+resulting in different spatial topologies. The momentum perpendicular to the
+primary particle's trajectory is bigger, givving the shower a wider spread of
+secondary particles. This is the main characteristic to distinguish hadronic
+showers, resembling the main background within the measurements (apart from
+muons) from signal gamma rays. When a proton interacts with a
+nucleus within the atmosphere or a dedicated detector material, a lot of
+different particles can be created. Heavier Hadrons usually quickly decay into
+the lightest ones which are protons for the class of baryons as well as pions
+for the class of mesons. The pions mainly decay into muons, which eventually
+yield electrons and neutrinos. During all those interactions photons and
+electrons and their anti-particles as well as neutrinos are created. The
+neutrinos very rarely contribute to any interactions after their creation,
+whereas electrons can interact with photons, emit or absorb them or annihilate
+to such.
+
+Considering this, the higher the energy of the incident particle the more
+energy is available for the resulting shower. Thus, the size of these showers
+is expected to strongly correlate with the energy. But, to register a cosmic
+ray, there has to be interaction first. The effective area of the telescope
+is mainly determined by the interactions that can be covered by the sensors. So
+bringing up a detector to earth's orbit strongly limits the sensored
+interaction material, which already highlights the disadvantage of satellite
+telescopes: the amount of interaction material is strongly limited and the
+measurement is strongly dependant on that quantity. Direct measurements, e.g.
+can derive the direction of cosmic rays by reconstructing the interactions of
+the cosmic ray itself inside the tracker volume, rather than secondary
+particles. They also give the possibility to measure the energy by counting the
+energy depositions within a well calibrated and understood calorimeter, as well
+as the particle type. But the strong limitations on size and weight confine the
+effective areas of such telescopes very strictly. Thus, detectors in space are
+usually unable to resolve time structures of events, but are well suited for
+static and wide field-of-view surveys with large exposure times.
+
+So there are quite some disadvantages that direct measurements have over
+indirect measurements and vice versa. Of course, using the atmosphere means
+using a detector undergoing strong, uncontrollable fluctuations in all its
+properties. It also means using a detector that is bigger than anything
+man-build and readily available. Good understanding of these fluctuations and
+the respective modelling is crucial for the analysis of the data.
+
+High energy cosmic particles interacting with the earth's atmosphere generate
+showers as described above in a highly boosted way. The secondary particles
+therefore continue their trajectories almost parallel to the incident particle.
+The spatial distribution of the shower again depends on the energy of the
+cosmic ray, ranging from several kilometers to showers not reaching their
+climax before hitting the ground. IACTs record the Cherenkov photons of the
+showers from energies of about $\SI{100}{\giga\electronvolt}$ to the highest
+energies of the cosmic spectrum. But since the cosmic ray energy spectrum
+rapidly decreases at high energies, the majority of the recorded events
+resemble the lower energy limit of the telescopes.
