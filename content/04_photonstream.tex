@@ -38,12 +38,8 @@ representation, besides the photon-equivalents.
 The Photonstream representation aims at creating a data format consisting of photons by storing their observed physical properties. So from the measured time series single photons are extracted instead of deriving photon counts in pixels. Each of these photons is assigned an arrival time and pixel, creating a list of arrival times per photon for each pixel. By doing so, a 3-dimensional data set is created, which can be represented in form of so called point clouds (\autoref{fig:event}).
 %
 \begin{figure}
-  \begin{subfigure}{0.475\textwidth}
-    \includegraphics[width=1.1\textwidth]{Plots/event1.png}
-  \end{subfigure}
-  \begin{subfigure}{0.475\textwidth}
-    \includegraphics[width=1.1\textwidth]{Plots/event2.png}
-  \end{subfigure}
-  \caption{Event represented by the 3-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel. The left figure shows the remaining photons after cleaning.}
+  \centering
+  \includegraphics[width=1.1\textwidth]{Plots/event2.png}
+  \caption{Uncleaned event represented by the 3-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel.}
   \label{fig:event}
 \end{figure}
