@@ -1170,7 +1170,7 @@
             \item[size] number of photons in cluster
             \item[length] std. dev. along long half-axis
             \item[width] std. dev. along short half-axis
-            \item[delta] angle between length and disp
+            \item[delta] angle between shower axis and x-axis
             \item[skewness/ kurtosis] higher order statistical moments along half-axes in cluster system
         \end{description}
     \end{column}
@@ -1252,6 +1252,22 @@
         \centering
         \Large{FACTtools-like}
         \includegraphics[width=\textwidth]{fig/theta2_plot_thresh.pdf}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Origin reconstruction (PhotonStream)}
+  \begin{columns}[onlytextwidth]
+    \begin{column}{0.475\textwidth}
+        \centering
+        \Large{DBSCAN}
+        \includegraphics[width=\textwidth]{fig/delta_delta_specific.pdf}
+    \end{column}
+    \hfill%
+    \begin{column}{0.475\textwidth}
+        \centering
+        \Large{FACTtools-like}
+        \includegraphics[width=\textwidth]{fig/delta_delta_fact.pdf}
     \end{column}
   \end{columns}
 \end{frame}
@@ -1360,10 +1376,10 @@
 \centering{FACTtools cleaning}
 \begin{columns}[onlytextwidth]
     \begin{column}{0.475\textwidth}
-        \includegraphics[width=1.1\textwidth,page=9]{fig/feature_comp_cuts_thresh.pdf}
+        \includegraphics[width=1.1\textwidth,page=9]{fig/feature_comp_cuts.pdf}
     \end{column}
     \begin{column}{0.475\textwidth}
-        \includegraphics[width=1.1\textwidth,page=17]{fig/feature_comp_cuts_thresh.pdf}
+        \includegraphics[width=1.1\textwidth,page=17]{fig/feature_comp_cuts.pdf}
     \end{column}
 \end{columns}
 \end{frame}
@@ -1372,10 +1388,10 @@
 \centering{FACTtools cleaning}
 \begin{columns}[onlytextwidth]
     \begin{column}{0.475\textwidth}
-        \includegraphics[width=1.1\textwidth,page=11]{fig/feature_comp_cuts_thresh.pdf}
+        \includegraphics[width=1.1\textwidth,page=11]{fig/feature_comp_cuts.pdf}
     \end{column}
     \begin{column}{0.475\textwidth}
-        \includegraphics[width=1.1\textwidth,page=6]{fig/feature_comp_cuts_thresh.pdf}
+        \includegraphics[width=1.1\textwidth,page=6]{fig/feature_comp_cuts.pdf}
     \end{column}
 \end{columns}
 \end{frame}
