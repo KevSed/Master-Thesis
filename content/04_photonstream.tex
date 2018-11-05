@@ -35,11 +35,64 @@ representation, besides the photon-equivalents.
 
 \section{The PhotonStream representation}
 
-The Photonstream representation aims at creating a data format consisting of photons by storing their observed physical properties. So from the measured time series single photons are extracted instead of deriving photon counts in pixels. Each of these photons is assigned an arrival time and pixel, creating a list of arrival times per photon for each pixel. By doing so, a 3-dimensional data set is created, which can be represented in form of so called point clouds (\autoref{fig:event}).
+The Photonstream representation aims at creating a data format consisting of photons by storing their observed physical properties. So from the measured time series single photons are extracted instead of deriving photon counts in pixels. Each of these photons is assigned an arrival time and pixel, creating a list of arrival times per photon for each pixel. By doing so, a 3-dimensional data set is created, which can be represented in form of so called point clouds (\autoref{fig:point_cloud}).
 %
 \begin{figure}
   \centering
-  \includegraphics[width=1.1\textwidth]{Plots/event2.png}
+  \includegraphics[width=0.7\textwidth]{Plots/event2.png}
   \caption{Uncleaned event represented by the 3-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel.}
-  \label{fig:event}
+  \label{fig:point_cloud}
 \end{figure}
+%
+\subsection{Single Photon Extraction}
+%
+To generate the PhotonStream data from the measured time series single photons
+need to be found and extracted. FACT is sampling recorded events with a
+frequency of $\SI{2}{\giga\hertz}$. This yields a very high time resolution, but still quantized values within the time series. The time series consists of multiple signals
+of single photons and different kinds of noise. Among the latter are several
+electronic artifacts [\textbf{source}]. The photon extraction does not take such artifacts into
+account, so the data has to be cleaned of those at first. Unfortunately there
+are rare kinds of artifacts that can not be handled and may remain in the
+calibrated data.
+
+The transformation of data to the PhotonStream consists of two steps:
+%
+\begin{enumerate}
+  \item find single photons and determine their arrival times
+  \item subtract those photons from the time series until only noise is left
+\end{enumerate}
+%
+To achieve this two templates are used. At first, the ideal template of a
+single photon pulse $T_1$ is generated. It represents the discharge-pulse of a
+GAPD when measuring a photon. This template is used to subtract found photons
+from the remaining time series. To find these pulses the rising edge of that
+template is used. This template $T_2$ represents the first
+$\SI{10}{\nano\second}$ of $T_1$.
+
+To extract all photons from a time series an iterative algorithm is used, that
+finds rising edges of single photons and then extracts the full photon pulse
+$T_1$. An example is shown in \autoref{fig:extraction}. Red vertical lines
+indicate the time position of a found rising edge template $T_2$. The time
+series of a single pixel is correlated with $T_2$ to find the maximum of that
+correlation. The response is defined as
+%
+\begin{equation}
+  R[t] = A_\text{pixel}[t]\cdot T_2[t] \, .
+\end{equation}
+%
+The maximum of the response is identified as the arrival time of a photon pulse.
+After such a pulse has been found, the full photon pulse template $T_1$ is
+subtracted. The remaining time series is then searched for further photon
+pulses until only noise is left. The stopping-criterion defining the last
+iteration step is reached when the maximum of the response $R[t]$ drops below
+half of the maximum of the response to a single-pulse.
+Every found arrival time of a photon is written to a list containing the
+PhotonStream for the specific event and pixel.
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Plots/photon_extraction_sebastian.png}
+  \caption{Example of the photon extraction from a calibrated time series. Shown are several steps of the iterative extraction for the time series of a single pixel. The top frame shows the full time series as returned from the calibration process. The red vertical line shows the time position of the first found photon. After subtracting the photon pulse template $T_1$, the series as shown in the frame below remains, where another photon is found at the same position (red vertical line). The extraction continues until the time series in the bottom frame remains, which is considered noise. The extracted photon arrival times represent the PhotonStream for this specific pixel.}
+  \label{fig:extraction}
+\end{figure}
+%

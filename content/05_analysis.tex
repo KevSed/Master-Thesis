@@ -78,8 +78,8 @@ each dimension.
 %
 To find clusters of photons within the space described above, the PhotonStream
 uses the \textit{density-based algorithm for discovering clusters with noise}
-(DBSCAN). The DBSCAN is well suited for finding air-showers with the
-PhotonStream's observables, when choosing the right parameter set. This
+(DBSCAN) \cite{DBSCAN}. The DBSCAN is well suited for finding air-showers with the
+PhotonStream's observables, when choosing the right parameter set for the algorithm. This
 algorithm either assigns each extracted photon to one of potentially multiple
 clusters or identifies it as a night-sky-background photon. There are no
 assumptions on the shape, location or number of the clusters. The algorithm is
@@ -106,7 +106,7 @@ the clusters by iterating over the photons in 4 steps:
 \end{enumerate}
 %
 This way every photon is either belonging to a cluster of an air-shower, or
-discarded as background. This Determination is taking place in the whole space
+discarded as background. This determination is taking place in the whole space
 of observables the whole time. There are no intermediate steps, only taking
 single observables into account, which very much represents a way to find
 air-showers in a space well suited for describing them. Furthermore, this way

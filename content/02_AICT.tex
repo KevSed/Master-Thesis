@@ -1,5 +1,13 @@
 \chapter{Imaging Air Cherenkov Astronomy}
 \label{ch:iact}
+%
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{Plots/cosmic_rays.jpg}
+  \caption{Different constituents of the cosmic rays reaching earth \cite{cosmic-rays}. There are three different particle types of cosmic rays that can be used for astronomy. The uncharged and very light neutrinos (white) barely interact with anything on their way through the universe. Thus, they give strong hints on their origin, but are very hard to detect as well. The charged particles such as protons or ionized atoms (blue) are deflected by magnetic fields and therefore lose any direction information. Lastly, cosmic gamma-rays (yellow), massless uncharged photons, are emitted through various processes and from different sources such as active galctic nuclei. They are not deflected much and are the main signal for Cherenkov astronomy.}
+  \label{fig:rays}
+\end{figure}
+%
 The atmosphere of earth is continously penetrated by radiation from different
 sources within our universe. This cosmic radiation is made up of different types
 of particles, interacting with the atmosphere in various ways. There are
@@ -9,13 +17,16 @@ detectable by optical telescopes at all. Protons make up the largest number of
 particles reaching earths atmosphere. Due to their electric charge, they are
 deflected by magnetic fields and therefore lose information on their origin on
 the way to earth, making them unsuitable for Cherenkov astronomy.
-
+%
+\section{Cosmic Gamma-Rays}
+%
 Cosmic gamma-rays are photons with a very high energy, originating from bright
 sources such as active galactic nuclei or nebulae. When such particles intersect
-with earth's atmosphere, they move faster than light within that atmosphere due
-to their high energy. Particles moving at such speeds through a medium cause,
-among the creation of other particles, the emission of bluish photons, the
-Cherenkov-light. Cherenkov-light is emitted directly from the moving particle
+with earth's atmosphere, they create new particles moving faster than light
+within that atmosphere due to their high energy. Particles moving at such
+speeds through a medium cause, among the creation of other particles, the
+emission of bluish photons, the Cherenkov-light.
+Cherenkov-light is emitted directly from the moving particle
 within a specific angle towards the direction of movement of that primary
 particle.
 %
@@ -35,6 +46,8 @@ cosmic gamma-ray, can be used to reconstruct physical properties of
 said gamma-ray. To do so, the flashes of the Cherenkov-light need to
 be captured by cameras capable of filming very short time scales (about
 $\SI{e-9}{\second}$).
+
+\section{Imaging Air Cherenkov Telescopes}
 
 Imaging Air Cherenkov Telescopes (IACTs) are using videos of this light, to
 reconstruct properties of the incident cosmic radiation above
@@ -56,7 +69,7 @@ wide spread detector. When trying to avoid any interactions of the incident
 particles and measuring their properties directly in a specifically prepared
 detector material, one eventuually has to leave earth's atmosphere. Such direct
 measurements are carried out in earth's orbit, outside its atmosphere.
-Detectors like the Fermi Large-Area-Telescope (Fermi LAT) are satellites
+Detectors like the Fermi Large-Area-Telescope \cite{fermiLAT} (Fermi LAT) are satellites
 carrying their own detectors for the necessary measurements. They consist of
 interaction volumes taking over what the atmosphere does to intersecting cosmic
 rays: particles like gamma rays interact with the material, creating new
@@ -71,12 +84,12 @@ photons or electrons and mainly consist of light, charged fermions like electron
 muons and photons or light, charged bosons like pions. Showers initiated by
 hadronic cosmic rays like protons show different kinds of interactions, also
 resulting in different spatial topologies. The momentum perpendicular to the
-primary particle's trajectory is bigger, givving the shower a wider spread of
+primary particle's trajectory is bigger, giving the shower a wider spread of
 secondary particles. This is the main characteristic to distinguish hadronic
 showers, resembling the main background within the measurements (apart from
 muons) from signal gamma rays. When a proton interacts with a
 nucleus within the atmosphere or a dedicated detector material, a lot of
-different particles can be created. Heavier Hadrons usually quickly decay into
+different particles can be created. Heavier hadrons usually quickly decay into
 the lightest ones which are protons for the class of baryons as well as pions
 for the class of mesons. The pions mainly decay into muons, which eventually
 yield electrons and neutrinos. During all those interactions photons and
@@ -101,7 +114,10 @@ energy depositions within a well calibrated and understood calorimeter, as well
 as the particle type. But the strong limitations on size and weight confine the
 effective areas of such telescopes very strictly. Thus, detectors in space are
 usually unable to resolve time structures of events, but are well suited for
-static and wide field-of-view surveys with large exposure times.
+static and wide field-of-view surveys with large exposure times. Since the
+abundance of cosmic rays is dependant on the energy and high energy cosmic rays
+are much less likely to appear, such detectors are rather suited for the lower
+energies.
 
 So there are quite some disadvantages that direct measurements have over
 indirect measurements and vice versa. Of course, using the atmosphere means
