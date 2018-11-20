@@ -1,12 +1,84 @@
 \chapter{Results and Performance}
 %
-\section{Performance of the PhotonStream on Simulations}
+\section{Time features of PhotonStream}
 %
-\section{Performance of the PhotonStream on Data}
+\begin{figure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=1.1\textwidth]{Plots/all_slices.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=1.1\textwidth]{Plots/all_slices_10_per_pixel.pdf}
+  \end{subfigure}
+  \caption{Caption.}
+  \label{fig:slices}
+\end{figure}
+
+\section{Photon Extraction}
 %
+\begin{figure}
+  \begin{subfigure}{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, page=17]{Plots/pe_difference_pe_20131104_162.pdf}
+  \end{subfigure}
+  \begin{subfigure}{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, page=26]{Plots/pe_difference_pe_20131104_162.pdf}
+  \end{subfigure}
+  \begin{subfigure}{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, page=33]{Plots/pe_difference_pe_20131104_162.pdf}
+  \end{subfigure}
+  \begin{subfigure}{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, page=53]{Plots/pe_difference_pe_20131104_162.pdf}
+  \end{subfigure}
+  \caption{Caption.}
+  \label{fig:difference}
+\end{figure}
+
+\section{Origin Reconstruction}
+%
+\begin{figure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=1.1\textwidth]{Plots/delta_diff_hist_DBSCAN_pe_20131104_162.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=1.1\textwidth]{Plots/delta_diff_hist_thresholds_pe_20131104_162.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=1.1\textwidth]{Plots/delta_hist_same_cleaning_pe_20131104_162.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=1.1\textwidth]{Plots/delta_true_diff_hist_thresholds_rad_20131104_162.pdf}
+  \end{subfigure}
+  \caption{Caption.}
+  \label{fig:delta}
+\end{figure}
+
 \section{Evaluation of the image cleaning}
 %
 \section{Parameters of DBSCAN}
 %
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{Plots/Epsilon/eps_scores.pdf}
+  \caption{Scores.}
+  \label{fig:eps_scores}
+\end{figure}
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{Plots/Epsilon/eps_sigma.pdf}
+  \caption{Detection significance.}
+  \label{fig:eps_sigma}
+\end{figure}
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{Plots/Epsilon/eps_theta_cut.pdf}
+  \caption{Detection $\theta^2$ cuts.}
+  \label{fig:eps_sigma}
+\end{figure}
+
 \section{Pixelbased Threshold Cleaning on the PhotonStream}
 %
