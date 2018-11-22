@@ -1,0 +1,16 @@
+backend: pgf
+figure.figsize: 6.84, 4.56
+
+text.usetex:        true
+text.latex.unicode: true
+text.color:         black
+pgf.rcfonts:        false
+pgf.texsystem:      lualatex
+pgf.preamble:       \input{header_matplotlib.tex}
+font.size:          8
+font.family: serif
+legend.fontsize:    8
+xtick.labelsize:    8
+ytick.labelsize:    8
+
+lines.linewidth: 1
