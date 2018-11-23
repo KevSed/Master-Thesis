@@ -130,20 +130,27 @@ closer to the true air-shower image.
 %
 For the classical analysis the detected images need to be parametrized. The
 learning algorithms work with specific features rather than the whole image,
-although there are indeed ways to analyze single pixels. The parametrization
-that is most frequently chosen for IACT data is the one proposed by
-Hillas~\cite{Hillas}. It operates on the two dimensional images recorded by the
-cameras, calculating features of the air-shower pixels. In the original
-publication these features were used to successfully analyze images on a
-37-pixels camera. The parametrization is based on the light distribution among
+although there are indeed ways to analyze single pixels.
+
+The parametrization that is most frequently chosen for IACT data is based on the one
+proposed by Hillas~\cite{Hillas}. It operates on the two dimensional images
+recorded by the cameras, calculating features of the air-shower pixels. In the
+original publication these features were used to successfully analyze images on
+a 37-pixels camera. The parametrization is based on the light distribution among
 the air-shower pixels by calculating the eigenvalue decomposition of the
 covariance. A graphical representation of a typical air-shower image is shown
 in \autoref{fig:hillas}.
 %
 \begin{figure}
   \centering%
-  \includegraphics[width=0.6\textwidth]{Plots/hillas.pdf}%
-  \caption{Hillas features.}%
+  \includegraphics[width=0.7\textwidth]{Plots/hillas.pdf}%
+  \caption{A graphical representation of a typical air-shower image. The figure shows the number of photons per pixel of an air-shower. The dotted
+  line represents the air-shower axis. It corresponds to the line minimising the
+  sum of perpendicular angular distance, weighted by the number of photons per
+  pixel. The standard deviations along this axis and the perpendicular axis are
+  the two features called length and width. The centre of
+  gravity (cog) of the air-shower image is the two dimensional weighted
+  mean of all shower pixels.}%
   \label{fig:hillas}%
 \end{figure}
 %
@@ -158,13 +165,48 @@ characterized by the angle \textbf{delta}. It is the angle between the shower
 axis and the camera's $x$-axis. The \textbf{size} of the air-shower simply
 corresponds to the sum of photons measured in all air-shower pixels.
 
+To further parametrize the air-showers also higher order statistical moments of
+the light distributions are used. Those are the third (\textbf{skewness}) and
+fourth (\textbf{kurtosis}) statistical moments of the air-shower photons along
+the two axes defined above. The values are calculated in a rotated system in
+respective to the camera system, so that the two main axes define the
+coordinate axes.
+%
+\begin{align}
+  \text{skew}(X) &= \text{E}\left[\left(\frac{X-\mu}{\sigma}\right)^3\right] \label{eq:skew} \\
+  \text{kurt}(X) &= \text{E}\left[\left(\frac{X-\mu}{\sigma}\right)^4\right]  \label{eq:kurt}
+\end{align}
+%
+Additional to the size of an air-shower the \textbf{number of pixels}
+containing air-shower photons is used as a feature.
+%
+\section{Reconstruction of the Source Position}
+%
+FACT is a single telescope and therefore has no stereoscopic features to
+determine the origin of the cosmic ray showers. Thus, specific techniques only
+using the features of the air-shower images have to be performed. In this
+analysis the so called disp-method is used. It uses
+\begin{figure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=\textwidth]{Plots/hillas_4.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=\textwidth]{Plots/hillas_5.pdf}
+  \end{subfigure}
+  \caption{Disp method ambiguity.}
+  \label{fig:disp_amb}
+\end{figure}
 
-
-
+%
+\begin{figure}
+  \centering%
+  \includegraphics[width=0.67\textwidth]{Plots/hillas_disp.pdf}%
+  \caption{Disp method.}%
+  \label{fig:disp}%
+\end{figure}
+%
 \section{Image Cleaning with pixelbased Thresholds}
 %
 \section{Energy Estimation}
-%
-\section{Reconstruction of the Source Position}
 %
 \section{Signal-Background Separation}

@@ -45,7 +45,7 @@ def generate_shower(cog_x, cog_y, width, length, size, delta, skewness):
 def add_hillas_annotations(cog_x, cog_y, width, length, delta, ax):
     ax.annotate(
         r'\texttt{length}',
-        xy=long2xy(-length / 2, delta, cog_x, cog_y),
+        xy=long2xy(-length/2, delta, cog_x, cog_y),
         xytext=(-15, 15),
         textcoords='offset points',
         color='C1',
@@ -70,7 +70,7 @@ def add_hillas_annotations(cog_x, cog_y, width, length, delta, ax):
         color='white'
     )
     ax.plot(
-        *long2xy([-length, -4 * length], delta, cog_x, cog_y),
+        *long2xy([-length, -4*length], delta, cog_x, cog_y),
         linestyle=':',
         color='white',
     )
@@ -90,7 +90,7 @@ def add_hillas_params(cog_x, cog_y, width, length, delta, ax):
     eps = Ellipse(
         (np.mean(px), np.mean(py)),
         width=2 * length,
-        height=2 * width,
+        height=2*width,
         angle=np.rad2deg(delta),
         facecolor='none',
         edgecolor='C0',
@@ -142,11 +142,8 @@ def reset(ax):
 
 if __name__ == '__main__':
     fig = plt.figure()
-    width = 0.8
-    height = 0.95
-    y = (1 - height) / 2
-    ax = fig.add_axes([0, y, width, height])
-    cax = fig.add_axes([0.74, y + 0.018, 0.024, height * 0.961])
+    ax = fig.add_axes([0, 0.11, 0.78, 0.78])
+    cax = fig.add_axes([0.8, 0.11, 0.05, 0.78])
 
     reset(ax)
 
@@ -168,11 +165,68 @@ if __name__ == '__main__':
     )
 
     img = add_image(px, py, ax)
-
     fig.colorbar(img, cax=cax, label='Number of Photons')
+    # fig.savefig('Plots/hillas_1.pdf')
 
     cog_x, cog_y, width, length, delta = calc_hillas(px, py)
 
     add_hillas_params(cog_x, cog_y, width, length, delta, ax)
     add_hillas_annotations(cog_x, cog_y, width, length, delta, ax)
+
     fig.savefig('Plots/hillas.pdf')
+
+    for sign, num in zip([1, -1], [5, 4]):
+        reset(ax)
+        img = add_image(px, py, ax)
+        fig.colorbar(img, cax=cax, label='Number of Photons')
+        add_hillas_params(cog_x, cog_y, width, length, delta, ax)
+
+        ax.plot(30, 5, '*', mew=0, markersize=10, color='C4', zorder=3)
+        ax.annotate(
+            '$\mathrm{\gamma}$-Source',
+            xy=(30, 5),
+            xytext=(10, 0),
+            textcoords='offset points',
+            color='C4',
+            va='top',
+            ha='left',
+        )
+
+        # fig.savefig('Plots/hillas_3.pdf')
+
+        ax.plot(
+            *long2xy([0, sign * 3 * length], delta, cog_x, cog_y),
+            linestyle=':',
+            color='C5',
+        )
+
+        ax.plot(*long2xy(sign * 3 * length, delta, cog_x, cog_y), '*', mew=0, markersize=10, color='C5', zorder=3)
+        ax.annotate(
+            'Est. source position',
+            xy=long2xy(sign * 3 * length, delta, cog_x, cog_y),
+            xytext=(10 if sign < 0 else -10, 0),
+            textcoords='offset points',
+            color='C5',
+            va='center',
+            ha='left' if sign < 0 else 'right',
+        )
+
+        ax.annotate(
+            r'\texttt{disp}' if sign < 0 else r'-\texttt{disp}',
+            xy=long2xy(sign * 1.5 * length, delta, cog_x, cog_y),
+            xytext=(-5, 5),
+            textcoords='offset points',
+            color='C5',
+            va='bottom',
+            ha='right'
+        )
+
+        fig.savefig(f'Plots/hillas_{num}.pdf')
+
+    x, y = long2xy(sign * 3 * length, delta, cog_x, cog_y)
+    ax.plot([x, 30], [y, 5], 'C6')
+
+    x = np.mean([x, 30])
+    y = np.mean([y, 5])
+    ax.annotate(r'\texttt{theta}', xy=[x, y], xytext=(5, -5), textcoords='offset points', color='C6')
+    fig.savefig('Plots/hillas_disp.pdf')
