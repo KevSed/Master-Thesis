@@ -185,7 +185,23 @@ containing air-shower photons is used as a feature.
 FACT is a single telescope and therefore has no stereoscopic features to
 determine the origin of the cosmic ray showers. Thus, specific techniques only
 using the features of the air-shower images have to be performed. In this
-analysis the so called disp-method is used. It uses
+analysis the so called disp-method is used. It estimates the origin position of
+the cosmic gamma-rays by calculating the disp and estimating the sign. The two
+dimensional problem of determining $x$ and $y$ coordinates is turned into a
+regression task and a classification task. The estimated source position within
+the camera's image is assumed to be on the shower's main axis. To find this
+position the first step is to estimate the distance to the cog of the
+air-shower. disp is representing that distance of the estimated source inside
+the camera. As described earlier the fraction of width and length is dependant
+on the angle under that the air-shower is hitting the camera. Thus, it is
+"pointing" to the cosmic origin of the shower. To estimate disp
+\textbf{[FORMULA]}. The second step is to determine the direction of disp along
+the main axis. As shown in \autoref{fig:disp_amb} the distance disp alone is
+not sufficient to determine the source position, but an additional direction is
+needed. Otherwise there remained an ambiguity, as shown in the two examples.
+The assumption of the origin position being on the shower axis reduces this
+task to a binary classification of the sign of disp.
+%
 \begin{figure}
   \begin{subfigure}{0.5\textwidth}
     \includegraphics[width=\textwidth]{Plots/hillas_4.pdf}
