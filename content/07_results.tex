@@ -1,19 +1,26 @@
 \chapter{Results and Performance}
 %
-\section{Time features of PhotonStream}
-%
-\begin{figure}
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=1.1\textwidth]{Plots/all_slices.pdf}
-  \end{subfigure}
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=1.1\textwidth]{Plots/all_slices_10_per_pixel.pdf}
-  \end{subfigure}
-  \caption{Caption.}
-  \label{fig:slices}
-\end{figure}
+The generation of the data from the calibrated time series, i.e. the direct
+detector response on air-shower photons, is what differs the PhotonStream data
+from previous data representations. By finding single photons the goal is to
+neglect the noise that is intrinsic when integrating over time series and
+getting a more accurat time information. However, the results of this procedure
+yield a different data set, so it is important to investigate the differences.
 
 \section{Photon Extraction}
+%
+The Photon Extraction is the key difference when generating PhotonStream data.
+It does not calculate the photon features from the time series but aims at
+finding the single photon pulses, which opens the possibility of generating
+arrival times per photon and hopefully yields an acurate description of the
+air-showers. When comparing the PhotonStream data to the standard data
+representation, the intuitive questions at hand are:
+%
+\begin{enumerate}
+  \item What is the difference concerning the number of reconstructed photons?
+  \item What is the difference in the number of noise photons?
+  \item What is the difference between simulations and data?
+\end{enumerate}
 %
 \begin{figure}
   \begin{subfigure}{\textwidth}
@@ -47,6 +54,23 @@
   \caption{PE differences between Standard and PhotonStream.}
   \label{fig:pe_diffs}
 \end{figure}
+
+
+\section{Time features of PhotonStream?}
+%
+\begin{figure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=1.1\textwidth]{Plots/all_slices.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=1.1\textwidth]{Plots/all_slices_10_per_pixel.pdf}
+  \end{subfigure}
+  \caption{Caption.}
+  \label{fig:slices}
+\end{figure}
+
+\section{Features on the PhotonStream}
+%
 
 
 \section{Origin Reconstruction}

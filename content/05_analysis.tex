@@ -116,9 +116,11 @@ closer to the true air-shower image.
 %
 \begin{figure}
   \begin{subfigure}{0.5\textwidth}
+    \centering
     \includegraphics[width=1.1\textwidth]{Plots/event2.png}
   \end{subfigure}
   \begin{subfigure}{0.5\textwidth}
+    \centering
     \includegraphics[width=1.1\textwidth]{Plots/event1.png}
   \end{subfigure}
   \caption{Event represented by the 3-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel. The right figure shows the remaining photons after cleaning.}
@@ -132,14 +134,14 @@ For the classical analysis the detected images need to be parametrized. The
 learning algorithms work with specific features rather than the whole image,
 although there are indeed ways to analyze single pixels.
 
-The parametrization that is most frequently chosen for IACT data is based on the one
-proposed by Hillas~\cite{Hillas}. It operates on the two dimensional images
-recorded by the cameras, calculating features of the air-shower pixels. In the
-original publication these features were used to successfully analyze images on
-a 37-pixels camera. The parametrization is based on the light distribution among
-the air-shower pixels by calculating the eigenvalue decomposition of the
-covariance. A graphical representation of a typical air-shower image is shown
-in \autoref{fig:hillas}.
+The parametrization that is most frequently chosen for IACT data is based on
+the one proposed by Hillas~\cite{Hillas}. It operates on the two dimensional
+images recorded by the cameras, calculating features of the air-shower pixels.
+In the original publication these features were used to successfully analyze
+images on a 37-pixels camera. The parametrization is based on the light
+distribution among the air-shower pixels by calculating the eigenvalue
+decomposition of the covariance. A graphical representation of a typical
+air-shower image is shown in \autoref{fig:hillas}.
 %
 \begin{figure}
   \centering%
@@ -223,6 +225,37 @@ task to a binary classification of the sign of disp.
 %
 \section{Image Cleaning with pixelbased Thresholds}
 %
+When using the largest pulse representation (LP), there is a different cleaning
+used. Since the PhotonStream is a different representation, of course the
+optimal cleaning differs. When cleaning LP data an algorithm working on the PE
+of the pixels is used. This cleaning is based on the assumption that air-shower
+images contain a certain minimum number of photons per pixel and appear in a
+quite small range of time and space within one event. It does not contain any
+assumptions on the number of clusters per event, but with the mentioned
+assumptions generally implies a certain topology within the camera's
+coordinates. Since arrival times in this representation are properties per
+pixel the time correlation has to be given between neighboring pixels. The
+algorithm executes the following steps [paper]:
+%
+\begin{enumerate}
+  \item find pixels containing more photons than an upper threshold $t_1$ (5~p.e.)
+  \item remove pixels with less than 2 neighbors above $t_1$
+  \item add neighbors of remaining pixels that are above a lower threshold $t_2$ (2.5~p.e.)
+  \item remove pixels that have less than 2 neighbors arriving in $\SI{5}{\nano\second}$ time window
+  \item remove single pixels with less than 2 neighbors
+  \item remove pixels that have less than 2 neighbors inside a $\SI{5}{\nano\second}$ time window
+\end{enumerate}
+%
+The remaining pixels are considered to be the cleaned image. When projecting
+the PhotonStream data into a camera image and calculating the mean arrival
+times per pixel, this cleaning can equivalently be performed on PhotonStream
+data.
+
+
 \section{Energy Estimation}
 %
+RANDOM FORESTS!!!11!!!elf!
+
 \section{Signal-Background Separation}
+%
+RANDOM FORESTS!!!11!!!elf!
