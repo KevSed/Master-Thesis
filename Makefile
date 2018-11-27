@@ -19,6 +19,14 @@ clean:
 	rm -rf build
 
 Plots/hillas*: plot_hillas.py matplotlibrc header_matplotlib.tex
-	TEXINPUTS=$$(pwd): \
+	TEXINPUTS=$$(pwd)/header_matplotlib.tex: \
 	MATPLOTLIBRC=matplotlibrc \
 	python plot_hillas.py
+
+# Plots/zenith.pdf: build/runs.csv
+# 	TEXINPUTS=/home/kevin/Documents/Master-Thesis/header-matplotlib.tex \
+# 	MATPLOTLIBRC=/home/kevin/Documents/Master-Thesis/matplotlibrc_full \
+# 	python plot_zenith.py
+
+build/runs.csv: build
+	curl -o build/runs.csv https://www.fact-project.org/data/open_crab_sample_runs.csv
