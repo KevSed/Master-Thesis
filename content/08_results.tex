@@ -128,22 +128,81 @@ data.
 
 \section{Origin Reconstruction}
 %
+As described in \autoref{sec:source_pos} the reconstruction of the source
+position uses the air-shower's features \texttt{delta}, \texttt{width} and
+\texttt{length}. The calculated angle \texttt{delta} plays a major role in
+finding the right source position, since it describes the axis along which
+the source position is assumed to be. It is calculated as the angle between
+the shower's main axis and the camera's $x$-axis. Therefore, it is dependant
+on the covariance of the light distribution and thus affected by the
+differences within the PhotonStream.
+
+To investigate the differences on PhotonStream data, it is possible to
+calculate a true delta on the data images by using the telescope's pointing
+position. From the pointing position and the known source position an
+expected source position within the camera can be calculated. The
+air-shower's cog and the calculated source position within the camera can
+then be used to calculate a vector representing the estimated shower axis.
+The calculated angle $\delta_\text{true}$ of that shower axis can thus be
+compared to the calculated angle of the cleaned air-shower's main axis. The
+distribution of these differences is expected to have two peaks: one around
+zero and one around a difference of $\pi$. These two peaks correspond to
+air-showers with a very small difference in $\delta$ and on the one hand the
+right estimated sign of \texttt{disp} (zero) and on the other hand the
+opposite estimated sign of \texttt{disp} ($\pi$). When dividing the
+distribution into the different signs of \texttt{disp} there shoudl only be
+two peaks for a working sign classifier.
+
+%
 \begin{figure}
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=\textwidth]{Plots/delta_diff_hist_DBSCAN_pe_20131104_162.pdf}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Plots/delta_delta/delta_delta_facttools.pdf}
+  \caption{Difference between calculated delta and true delta for the FACTtools analysis.}
+  \label{fig:delta_fact}
+\end{figure}
+
+\begin{figure}
+  \subcaptionbox{\label{fig:delta_diff_a}}[0.48\textwidth]{
+    \includegraphics[width=0.5\textwidth]{Plots/delta_delta/delta_true_diff_hist_thresholds_rad_20131104_162.pdf}
+  }
+  \subcaptionbox{\label{fig:delta_diff_perc}}[0.48\textwidth]{
+    \includegraphics[width=0.5\textwidth]{Plots/delta_delta/delta_delta _DBSCAN_1perc_rad_20131104_162.pdf}
+  }
+  \caption{Difference between the calculated delta and the true delta for a subset of 500 data events. delta is calculated using all cleaned pixels (a) and using only cleaned pixels containing more than $\SI{1}{\percent}$ of the air-shower's size.}
+  \label{fig:true_delta}
+\end{figure}
+
+%
+\begin{figure}
+  \begin{subfigure}{\textwidth}
+    \centering
+    \includegraphics[width=0.8\textwidth]{Plots/delta_delta/delta_diff_hist_different_cleanings_DBSCAN_delta_20131104_162.pdf}
   \end{subfigure}
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=1.1\textwidth]{Plots/delta_diff_hist_thresholds_pe_20131104_162.pdf}
-  \end{subfigure}
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=1.1\textwidth]{Plots/delta_hist_same_cleaning_pe_20131104_162.pdf}
-  \end{subfigure}
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=1.1\textwidth]{Plots/delta_true_diff_hist_thresholds_rad_20131104_162.pdf}
+  \begin{subfigure}{\textwidth}
+    \centering
+    \includegraphics[width=0.8\textwidth]{Plots/delta_delta/delta_diff_hist_perc_DBSCAN_delta_20131104_162.pdf}
   \end{subfigure}
   \caption{Caption.}
   \label{fig:delta}
 \end{figure}
+%
+% \begin{figure}
+%   \begin{subfigure}{0.5\textwidth}
+%     \includegraphics[width=\textwidth]{Plots/delta_delta/delta_diff_hist_DBSCAN_pe_20131104_162.pdf}
+%   \end{subfigure}
+%   \begin{subfigure}{0.5\textwidth}
+%     \includegraphics[width=1.1\textwidth]{Plots/delta_delta/delta_diff_hist_thresholds_pe_20131104_162.pdf}
+%   \end{subfigure}
+%   \begin{subfigure}{0.5\textwidth}
+%     \includegraphics[width=1.1\textwidth]{Plots/delta_delta/delta_hist_same_cleaning_pe_20131104_162.pdf}
+%   \end{subfigure}
+%   \begin{subfigure}{0.5\textwidth}
+%     \includegraphics[width=\textwidth]{Plots/delta_delta/delta_delta _DBSCAN_1perc_rad_20131104_162.pdf}
+%   \end{subfigure}
+%   \caption{Caption.}
+%   \label{fig:delta}
+% \end{figure}
+
 
 \section{Evaluation of the image cleaning}
 %
