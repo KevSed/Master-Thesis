@@ -150,16 +150,46 @@ zero and one around a difference of $\pi$. These two peaks correspond to
 air-showers with a very small difference in $\delta$ and on the one hand the
 right estimated sign of \texttt{disp} (zero) and on the other hand the
 opposite estimated sign of \texttt{disp} ($\pi$). When dividing the
-distribution into the different signs of \texttt{disp} there shoudl only be
-two peaks for a working sign classifier.
+distribution into the different signs of \texttt{disp} there should only be
+one peak for each distribution for a working sign classifier.
 
+\autoref{fig:delta_fact} shows a distribution of $\symup{\Delta}\delta$ for
+the pixel based cleaning as described in \autoref{sec:thresh} on LP data.
+The two histograms represent the different estimations of the sign of
+\texttt{disp} for the whole open data sample. The distributions show very
+good agreement with the expectations described above. While this is not a
+comparison with any real truth, it nevertheless shows a working
+reconstruction of the air-shower events.
 %
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Plots/delta_delta/delta_delta_facttools.pdf}
-  \caption{Difference between calculated delta and true delta for the FACTtools analysis.}
+  \caption{Difference between calculated delta and true delta for the FACTtools analysis. The distributions show the calculated $\symup{\Delta}\delta$ for the different predictions of sign of \texttt{disp} on the whole open data crab sample.}
   \label{fig:delta_fact}
 \end{figure}
+%
+When calculating $\symup{\Delta}\delta$ on the cleaned PhotonStream data, a
+very different picture emerges. \autoref{fig:delta_diff_a} shows
+$\symup{\Delta}\delta$ for the DBSCAN cleaning, when projecting the found
+photons back to the camera plane and calculating \texttt{delta}. There are
+hardly any peaks in these distributions, but rather widely spread
+accumulation ranges around zero and $\pi$. Thus, the calculated
+\texttt{delta} seems to differ quite sicnificantly from the expected
+\texttt{delta}. Furthermore, both \texttt{sign} predictions show similar
+distributions, hinting at a low accuracy for the \texttt{sign}
+classification. The main differrence between the air-showers found by DBSCAN
+and the ones found by the classic cleaning projected to the camera plane is
+the spread across the camera axes. DBSCAN clustering is associating photons
+from pixels quite distant from the shower core to the air-shower cluster.
+This way, the spread within $x$ and $y$ becomes way bigger. Because
+\texttt{delta} is calculated on the $x$-$y$-distribution weighted by the
+number of photons, these outlier photons might have a big impact on the
+calculation of \texttt{delta}, even though they usually only contain very
+few photons. To prevent this from happening, the cleaning can be extened by
+a step excluding pixels with less than $\SI{1}{\percent}$ of the total
+amount of photons from the calculations of \texttt{delta}, \texttt{length}
+and \texttt{width}. The distributions of $\symup{\Delta}\delta$ for this
+cleaning are shown in \autoref{fig:delta_diff_perc}.
 
 \begin{figure}
   \subcaptionbox{\label{fig:delta_diff_a}}[0.48\textwidth]{
@@ -168,10 +198,11 @@ two peaks for a working sign classifier.
   \subcaptionbox{\label{fig:delta_diff_perc}}[0.48\textwidth]{
     \includegraphics[width=0.5\textwidth]{Plots/delta_delta/delta_delta _DBSCAN_1perc_rad_20131104_162.pdf}
   }
-  \caption{Difference between the calculated delta and the true delta for a subset of 500 data events. delta is calculated using all cleaned pixels (a) and using only cleaned pixels containing more than $\SI{1}{\percent}$ of the air-shower's size.}
+  \caption{Difference between calculated delta and true delta for a subset of 500 data events. delta is calculated using all cleaned pixels (a) and using only cleaned pixels containing more than $\SI{1}{\percent}$ of the air-shower's size.}
   \label{fig:true_delta}
 \end{figure}
-
+%
+Ergebnisse
 %
 \begin{figure}
   \begin{subfigure}{\textwidth}
