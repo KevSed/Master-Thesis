@@ -109,6 +109,47 @@ data.
 
 
 
+\section{Features on the PhotonStream}
+%
+\begin{figure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, page=23]{Plots/data_mc/features_DBSCAN.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, page=13]{Plots/data_mc/features_DBSCAN.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, page=15]{Plots/data_mc/features_DBSCAN.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, page=9]{Plots/data_mc/features_DBSCAN.pdf}
+  \end{subfigure}
+  \caption{Features using DBSCAN and standard parameters.}
+  \label{fig:feat_dbscan}
+\end{figure}
+
+\begin{figure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=\textwidth, page=23]{Plots/data_mc/features_DBSCAN_perc.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=\textwidth, page=13]{Plots/data_mc/features_DBSCAN_perc.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=\textwidth, page=15]{Plots/data_mc/features_DBSCAN_perc.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=\textwidth, page=9]{Plots/data_mc/features_DBSCAN_perc.pdf}
+  \end{subfigure}
+  \caption{Features using DBSCAN and additionally excluding pixels with less than $\SI{1}{\percent}$ PE of the air-shower's total \texttt{size}.}
+  \label{fig:feat_dbscan}
+\end{figure}
+
+
 \section{Time features of PhotonStream?}
 %
 \begin{figure}
@@ -121,10 +162,6 @@ data.
   \caption{Caption.}
   \label{fig:slices}
 \end{figure}
-
-\section{Features on the PhotonStream}
-%
-
 
 \section{Origin Reconstruction}
 %
@@ -185,7 +222,7 @@ This way, the spread within $x$ and $y$ becomes way bigger. Because
 \texttt{delta} is calculated on the $x$-$y$-distribution weighted by the
 number of photons, these outlier photons might have a big impact on the
 calculation of \texttt{delta}, even though they usually only contain very
-few photons. To prevent this from happening, the cleaning can be extened by
+few photons. To prevent this from happening, the cleaning can be extended by
 a step excluding pixels with less than $\SI{1}{\percent}$ of the total
 amount of photons from the calculations of \texttt{delta}, \texttt{length}
 and \texttt{width}. The distributions of $\symup{\Delta}\delta$ for this
@@ -198,11 +235,27 @@ cleaning are shown in \autoref{fig:delta_diff_perc}.
   \subcaptionbox{\label{fig:delta_diff_perc}}[0.48\textwidth]{
     \includegraphics[width=0.5\textwidth]{Plots/delta_delta/delta_delta _DBSCAN_1perc_rad_20131104_162.pdf}
   }
-  \caption{Difference between calculated delta and true delta for a subset of 500 data events. delta is calculated using all cleaned pixels (a) and using only cleaned pixels containing more than $\SI{1}{\percent}$ of the air-shower's size.}
+  \caption{Difference between calculated delta and true delta for a subset of 500 data events. delta is calculated using all cleaned pixels \protect\subref{fig:delta_diff_a} and using only cleaned pixels containing more than $\SI{1}{\percent}$ of the air-shower's size \protect\subref{fig:delta_diff_perc}.}
   \label{fig:true_delta}
 \end{figure}
 %
-Ergebnisse
+The distributions change significantly, when adapting the cleaning.
+The two peaks become quite distinctive around $0$ and $\pi$. Also the
+different sign predictions show different heights around the two
+accumulation points corresponding to the rightly classified signs, although
+there seem to be frequent misclassifications. Although the results still
+differ strongly from the ones shown in \autoref{fig:delta_fact}, the
+accuracy of delta improves when neglecting outlying pixels. Thus, there
+seems to be an impact of the large spread of DBSCAN clusters which is very
+likely to also affect the origin reconstruction on such events.
+
+Since the FACTtools analysis yields good results and a working origin
+reconstruction, the differences between its features and the DBSCAN cluster
+features can also be investigated to understand the new data representation.
+\autoref{fig:delta} shows the differences between the PhotonStream
+\texttt{delta} and the FACTtools \texttt{delta} for the DBSCAN cleaning (top
+histogram) and the DBSCAN cleaning extended by excluding pixels with less
+than $\SI{1}{\percent}$ of the shower's \texttt{size}.
 %
 \begin{figure}
   \begin{subfigure}{\textwidth}
@@ -213,26 +266,21 @@ Ergebnisse
     \centering
     \includegraphics[width=0.8\textwidth]{Plots/delta_delta/delta_diff_hist_perc_DBSCAN_delta_20131104_162.pdf}
   \end{subfigure}
-  \caption{Caption.}
+  \caption{Differences between the PhotonStream \texttt{delta} and the FACTtools \texttt{delta} for the DBSCAN cleaning (top histogram) and the DBSCAN cleaning extended by excluding pixels with less than $\SI{1}{\percent}$ of the shower's \texttt{size}.}
   \label{fig:delta}
 \end{figure}
 %
-% \begin{figure}
-%   \begin{subfigure}{0.5\textwidth}
-%     \includegraphics[width=\textwidth]{Plots/delta_delta/delta_diff_hist_DBSCAN_pe_20131104_162.pdf}
-%   \end{subfigure}
-%   \begin{subfigure}{0.5\textwidth}
-%     \includegraphics[width=1.1\textwidth]{Plots/delta_delta/delta_diff_hist_thresholds_pe_20131104_162.pdf}
-%   \end{subfigure}
-%   \begin{subfigure}{0.5\textwidth}
-%     \includegraphics[width=1.1\textwidth]{Plots/delta_delta/delta_hist_same_cleaning_pe_20131104_162.pdf}
-%   \end{subfigure}
-%   \begin{subfigure}{0.5\textwidth}
-%     \includegraphics[width=\textwidth]{Plots/delta_delta/delta_delta _DBSCAN_1perc_rad_20131104_162.pdf}
-%   \end{subfigure}
-%   \caption{Caption.}
-%   \label{fig:delta}
-% \end{figure}
+From these distributions, it becomes clear that the difference of the
+PhotonStream's air-showers does not solely result from the wider spread of
+the light distribution over the camera pixels. The two distributions barely
+differ from another, although as shown by \autoref{fig:delta_diff_perc}, the
+reconstruction of \texttt{delta} seems to improve with the additional
+cleaning. For the majority of events the calculated \texttt{delta} is within
+$\mathcal{O}(\SI{10}{\degree})$ to the FACTtools \texttt{delta}, but for the
+origin reconstruction such a difference can become a difficult obstacle.
+However, this comparison, as the one with the expected source position
+within the camera, is not a comparison with truth values, but rather one
+with a working analysis.
 
 
 \section{Evaluation of the image cleaning}
