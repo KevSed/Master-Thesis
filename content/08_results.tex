@@ -8,6 +8,7 @@ getting a more accurate time information. However, the results of this procedure
 yield a different data set, so it is important to investigate the differences.
 
 \section{Photon Extraction}
+\label{sec:ph_ex}%
 %
 The photon extraction is the key difference when generating PhotonStream data.
 It does not calculate the photon features from the time series but aims at
@@ -58,7 +59,7 @@ source apparently does not suit the clustering criteria.
   \subcaptionbox{Normalized distribution.\label{fig:pe_diffs}}[0.5\textwidth]{
     \includegraphics[width=0.5\textwidth]{Plots/diffs_hist_DBSCAN_pe_20131104_162.pdf}
   }
-  \caption{PE differences per event and pixel between LP data and PhotonStream data accumulated for 300 events.}
+  \caption{PE differences per event and pixel between LP data and PhotonStream data accumulated for 300 events and normalized.}
   % \label{fig:pe_diffs}
 \end{figure}
 %
@@ -109,7 +110,47 @@ data.
 
 
 
-\section{Features on the PhotonStream}
+\section{Standard Features on the PhotonStream}
+%
+Using the single extracted photons from the PhotonStream, every classical
+analysis parameter can be generated, because the photons can be accumulated
+along their time axis to reproduce a camera image like the one from LP data. Of
+course, the big ooportunity of the PhotonStream is the additional timing
+information per photon, which may yield new possibilities for analyses.
+Nonetheless, it is neccessary to understand the differences on known territory
+and thus to examine the classical features.
+
+The main features from the Hillas parametrization are \texttt{width} and
+\texttt{length} along with higher order statistical moments and the
+air-shower's \texttt{size}. As shown in \autoref{sec:ph_ex}, the photon
+extraction is generally reconstructing more PE than LP data, especially within
+air-shower pixels. \autoref{fig:feat_comp} shows the Hillas features for the
+same events on PhotonStream data and DBSCAN cleaning (blue) and on LP data and
+FACTtools cleaning (orange).
+%
+\begin{figure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, page=1]{Plots/std_phs_comparison_hist_same_DBSCAN_crab.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, page=2]{Plots/std_phs_comparison_hist_same_DBSCAN_crab.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+  \includegraphics[width=\textwidth, page=5]{Plots/std_phs_comparison_hist_same_DBSCAN_crab.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+  \includegraphics[width=\textwidth, page=4]{Plots/std_phs_comparison_hist_same_DBSCAN_crab.pdf}
+  \end{subfigure}
+  \caption{Hillas features for the same events on PhotonStream data and DBSCAN cleaning (blue) and on LP data and FACTtools cleaning (orange).}
+  \label{fig:feat_comp}
+\end{figure}
+
+Furthermore the DBSCAN cleaning is associating photons to
+the shower cluster that lie within pixels far from the shower core. Especially when comparing
 %
 \begin{figure}
   \begin{subfigure}{0.5\textwidth}
@@ -146,20 +187,20 @@ data.
     \includegraphics[width=\textwidth, page=9]{Plots/data_mc/features_DBSCAN_perc.pdf}
   \end{subfigure}
   \caption{Features using DBSCAN and additionally excluding pixels with less than $\SI{1}{\percent}$ PE of the air-shower's total \texttt{size}.}
-  \label{fig:feat_dbscan}
+  \label{fig:feat_dbscan_perc}
 \end{figure}
 
 
-\section{Time features of PhotonStream?}
+\section{Time features of PhotonStream}
 %
 \begin{figure}
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=1.1\textwidth]{Plots/all_slices.pdf}
-  \end{subfigure}
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=1.1\textwidth]{Plots/all_slices_10_per_pixel.pdf}
-  \end{subfigure}
-  \caption{Caption.}
+  \subcaptionbox{Arrival times for all photons on data and MC simulations.\label{fig:slices_a}}[\textwidth]{
+    \includegraphics[width=0.8\textwidth]{Plots/all_slices_min_0_per_pixel.pdf}
+  }
+  \subcaptionbox{Arrival times for air-shower photons from pixels containing at least 10 photons on data and MC simulations.\label{fig:slices_b}}[\textwidth]{
+    \includegraphics[width=0.8\textwidth]{Plots/all_slices_min_10_per_pixel.pdf}
+  }
+  \caption{Arrival times of the single photons within the camera images \protect\subref{fig:slices_a} and the cleaned air-shower pixels \protect\subref{fig:slices_b}.}
   \label{fig:slices}
 \end{figure}
 
@@ -200,7 +241,7 @@ reconstruction of the air-shower events.
 %
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{Plots/delta_delta/delta_delta_facttools.pdf}
+  \includegraphics[width=0.7\textwidth]{Plots/delta_delta/delta_delta_facttools.pdf}
   \caption{Difference between calculated delta and true delta for the FACTtools analysis. The distributions show the calculated $\symup{\Delta}\delta$ for the different predictions of sign of \texttt{disp} on the whole open data crab sample.}
   \label{fig:delta_fact}
 \end{figure}
