@@ -118,7 +118,11 @@ along their time axis to reproduce a camera image like the one from LP data. Of
 course, the big ooportunity of the PhotonStream is the additional timing
 information per photon, which may yield new possibilities for analyses.
 Nonetheless, it is neccessary to understand the differences on known territory
-and thus to examine the classical features.
+and thus to examine the classical features. For the general purpose of
+parametrizing events and analysing them, an open python package called
+\texttt{FeatureStream}~\cite{FeatureStream} has been developed. It contains
+functions for all the data preparation steps and already contains a large 
+fraction of the classical features, along with some PhotonStream-specific ones.
 
 The main features from the Hillas parametrization are \texttt{width} and
 \texttt{length} along with higher order statistical moments and the
@@ -191,16 +195,18 @@ the shower cluster that lie within pixels far from the shower core. Especially w
 \end{figure}
 
 
-\section{Time features of PhotonStream}
+\section{Time Features on the PhotonStream}
 %
 \begin{figure}
-  \subcaptionbox{Arrival times for all photons on data and MC simulations.\label{fig:slices_a}}[\textwidth]{
+  \begin{subfigure}{\textwidth}
+    \centering
     \includegraphics[width=0.8\textwidth]{Plots/all_slices_min_0_per_pixel.pdf}
-  }
-  \subcaptionbox{Arrival times for air-shower photons from pixels containing at least 10 photons on data and MC simulations.\label{fig:slices_b}}[\textwidth]{
+  \end{subfigure}
+  \begin{subfigure}{\textwidth}
+    \centering
     \includegraphics[width=0.8\textwidth]{Plots/all_slices_min_10_per_pixel.pdf}
-  }
-  \caption{Arrival times of the single photons within the camera images \protect\subref{fig:slices_a} and the cleaned air-shower pixels \protect\subref{fig:slices_b}.}
+  \end{subfigure}
+  \caption{Arrival times of the single photons within all the camera images (top) and the cleaned air-shower pixels containing at least 10 photons (bottom) on data and MC simulations.}
   \label{fig:slices}
 \end{figure}
 
