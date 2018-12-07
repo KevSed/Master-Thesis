@@ -121,16 +121,31 @@ Nonetheless, it is neccessary to understand the differences on known territory
 and thus to examine the classical features. For the general purpose of
 parametrizing events and analysing them, an open python package called
 \texttt{FeatureStream}~\cite{FeatureStream} has been developed. It contains
-functions for all the data preparation steps and already contains a large 
+functions for all the data preparation steps and already contains a large
 fraction of the classical features, along with some PhotonStream-specific ones.
+
+\begin{figure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+  \includegraphics[width=\textwidth, page=5]{Plots/std_phs_comparison_hist_same_DBSCAN_crab.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, page=5]{Plots/comparison_data_dl3.pdf}
+  \end{subfigure}
+  \caption{\texttt{size} of the air-shower for the same events on PhotonStream data and DBSCAN cleaning (blue) and on LP data and FACTtools cleaning (orange).}
+  \label{fig:size_comp}
+\end{figure}
+%
+When comparing the \texttt{size} of the same events in PhotonStream data and LP data (\autoref{fig:size_comp}),
+the conclusions from \autoref{sec:ph_ex} are confirmed: As shown in
+\autoref{sec:ph_ex}, the photon extraction is generally reconstructing more PE
+than LP data, especially within air-shower pixels, therefore also leading to
+larger air-shower clusters than the classical approach.
 
 The main features from the Hillas parametrization are \texttt{width} and
 \texttt{length} along with higher order statistical moments and the
-air-shower's \texttt{size}. As shown in \autoref{sec:ph_ex}, the photon
-extraction is generally reconstructing more PE than LP data, especially within
-air-shower pixels. \autoref{fig:feat_comp} shows the Hillas features for the
-same events on PhotonStream data and DBSCAN cleaning (blue) and on LP data and
-FACTtools cleaning (orange).
+air-shower's \texttt{size}. \autoref{fig:feat_comp} shows the Hillas features for the same events on PhotonStream data and DBSCAN cleaning (blue) and on LP data and FACTtools cleaning (orange).
 %
 \begin{figure}
   \begin{subfigure}{0.5\textwidth}
@@ -143,18 +158,40 @@ FACTtools cleaning (orange).
   \end{subfigure}
   \begin{subfigure}{0.5\textwidth}
     \centering
-  \includegraphics[width=\textwidth, page=5]{Plots/std_phs_comparison_hist_same_DBSCAN_crab.pdf}
+    \includegraphics[width=\textwidth, page=3]{Plots/comparison_data_dl3.pdf}
   \end{subfigure}
   \begin{subfigure}{0.5\textwidth}
     \centering
-  \includegraphics[width=\textwidth, page=4]{Plots/std_phs_comparison_hist_same_DBSCAN_crab.pdf}
+    \includegraphics[width=\textwidth, page=4]{Plots/comparison_data_dl3.pdf}
   \end{subfigure}
   \caption{Hillas features for the same events on PhotonStream data and DBSCAN cleaning (blue) and on LP data and FACTtools cleaning (orange).}
   \label{fig:feat_comp}
 \end{figure}
+%
+The direct comparison of the PhotonStream data's features illustrates the
+differences of the cleaned air-showers: The air-shower's spatial features like
+\texttt{width} and \texttt{length} are strongly shifted towards larger values.
+From this it becomes clear that the DBSCAN cleaning is associating photons to
+the shower cluster that lie within pixels far from the shower core, when
+comparing to the classical cleaning. For the DBSCAN cleaning in the chosen
+metric, photons that arrive in a close temporal proximity but within pixels not
+containing large amounts of PE, can still easily be considered part of the
+air-shower.
 
-Furthermore the DBSCAN cleaning is associating photons to
-the shower cluster that lie within pixels far from the shower core. Especially when comparing
+From these deviations another important question arises: how well do the MC
+simualtions describe the reality or in other words do simulations and data
+match as expected? Without knowing which photons within an event are air-shower
+photons and which not it is hard to tell, whether the different topology of the
+PhotonStream clusters is closer to the real air-shower or not.
+\textbf{[Untersuchungen von Sebastian?]} Independent from that it is crucial to
+have that same behaviour on simulations. \autoref{fig:feat_dbscan} shows the
+distributions of \texttt{width}, \texttt{length} and \texttt{size} of
+PhotonStream data on the DBSCAN cleaning for data and the gamma and proton MC
+simulations.
+
+The vast majority of the observed data is generally expected to be proton
+events or other background. Therefore, the distributions of data and proton MC
+should be more or less similar.
 %
 \begin{figure}
   \begin{subfigure}{0.5\textwidth}
@@ -171,7 +208,7 @@ the shower cluster that lie within pixels far from the shower core. Especially w
   \end{subfigure}
   \begin{subfigure}{0.5\textwidth}
     \centering
-    \includegraphics[width=\textwidth, page=9]{Plots/data_mc/features_DBSCAN.pdf}
+    \includegraphics[width=\textwidth, page=8]{Plots/data_mc/features_DBSCAN.pdf}
   \end{subfigure}
   \caption{Features using DBSCAN and standard parameters.}
   \label{fig:feat_dbscan}
@@ -188,7 +225,7 @@ the shower cluster that lie within pixels far from the shower core. Especially w
     \includegraphics[width=\textwidth, page=15]{Plots/data_mc/features_DBSCAN_perc.pdf}
   \end{subfigure}
   \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=\textwidth, page=9]{Plots/data_mc/features_DBSCAN_perc.pdf}
+    \includegraphics[width=\textwidth, page=8]{Plots/data_mc/features_DBSCAN_perc.pdf}
   \end{subfigure}
   \caption{Features using DBSCAN and additionally excluding pixels with less than $\SI{1}{\percent}$ PE of the air-shower's total \texttt{size}.}
   \label{fig:feat_dbscan_perc}
@@ -206,7 +243,7 @@ the shower cluster that lie within pixels far from the shower core. Especially w
     \centering
     \includegraphics[width=0.8\textwidth]{Plots/all_slices_min_10_per_pixel.pdf}
   \end{subfigure}
-  \caption{Arrival times of the single photons within all the camera images (top) and the cleaned air-shower pixels containing at least 10 photons (bottom) on data and MC simulations.}
+  \caption{Arrival times of the single photons within all the pixels (top) and the cleaned air-shower pixels containing at least 10 photons (bottom) on data and MC simulations.}
   \label{fig:slices}
 \end{figure}
 
@@ -329,9 +366,76 @@ However, this comparison, as the one with the expected source position
 within the camera, is not a comparison with truth values, but rather one
 with a working analysis.
 
-
-\section{Evaluation of the image cleaning}
 %
+\begin{figure}
+  \begin{subfigure}{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Plots/results/DBSCAN/theta2_plot.pdf}
+  \end{subfigure}
+  \begin{subfigure}{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Plots/results/DBSCAN_perc/theta2_plot.pdf}
+  \end{subfigure}
+  \caption{$\theta^2$ plots.}
+  \label{fig:theta2}
+\end{figure}
+%
+\section{Energy Estimation}
+%
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth, page=1]{Plots/results/DBSCAN/energy_performance.pdf}
+  \caption{Energy estimation.}
+  \label{fig:energy1}
+\end{figure}
+%
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth, page=3]{Plots/results/DBSCAN/energy_performance.pdf}
+  \caption{Energy estimation 2.}
+  \label{fig:energy2}
+\end{figure}
+%
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth, page=4]{Plots/results/DBSCAN/energy_performance.pdf}
+  \caption{Energy estimation 3.}
+  \label{fig:energy3}
+\end{figure}
+%
+
+\section{Gamma Hadron Separation}
+%
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth, page=1]{Plots/results/DBSCAN/separation_performance.pdf}
+  \caption{Gamma hadron separation.}
+  \label{fig:sep1}
+\end{figure}
+%
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth, page=3]{Plots/results/DBSCAN/separation_performance.pdf}
+  \caption{Gamma hadron separation 2.}
+  \label{fig:sep2}
+\end{figure}
+%
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth, page=4]{Plots/results/DBSCAN/separation_performance.pdf}
+  \caption{Gamma hadron separation 3.}
+  \label{fig:sep3}
+\end{figure}
+%
+
+
+
 \section{Parameters of DBSCAN}
 %
 \begin{figure}
