@@ -333,13 +333,6 @@ accuracy of delta improves when neglecting outlying pixels. Thus, there
 seems to be an impact of the large spread of DBSCAN clusters which is very
 likely to also affect the origin reconstruction on such events.
 
-Since the FACTtools analysis yields good results and a working origin
-reconstruction, the differences between its features and the DBSCAN cluster
-features can also be investigated to understand the new data representation.
-\autoref{fig:delta} shows the differences between the PhotonStream
-\texttt{delta} and the FACTtools \texttt{delta} for the DBSCAN cleaning (top
-histogram) and the DBSCAN cleaning extended by excluding pixels with less
-than $\SI{1}{\percent}$ of the shower's \texttt{size}.
 %
 \begin{figure}
   \begin{subfigure}{\textwidth}
@@ -354,6 +347,13 @@ than $\SI{1}{\percent}$ of the shower's \texttt{size}.
   \label{fig:delta}
 \end{figure}
 %
+Since the FACTtools analysis yields good results and a working origin
+reconstruction, the differences between its features and the DBSCAN cluster
+features can also be investigated to understand the new data representation.
+\autoref{fig:delta} shows the differences between the PhotonStream
+\texttt{delta} and the FACTtools \texttt{delta} for the DBSCAN cleaning (top
+histogram) and the DBSCAN cleaning extended by excluding pixels with less
+than $\SI{1}{\percent}$ of the shower's \texttt{size}.
 From these distributions, it becomes clear that the difference of the
 PhotonStream's air-showers does not solely result from the wider spread of
 the light distribution over the camera pixels. The two distributions barely
@@ -366,6 +366,29 @@ However, this comparison, as the one with the expected source position
 within the camera, is not a comparison with truth values, but rather one
 with a working analysis.
 
+All these investigations, of course, serve the sole purpose of understanding
+the different prerequisites for reconstructing the source position on
+air-shower images. As described in \autoref{sec:source_pos} this is done by
+using the \texttt{disp} method on Hillas parametrized images. Random forests
+are used to estimate $|\texttt{disp}|$ via a regression task and then determine
+the $\text{sign}(\texttt{disp})$ via a classification. The used random forests
+consist of \num{100} estimators, each of which has a maximum depth of \num{15}.
+
+The output of these random forests can then be projected from the air-shower's
+core within the camera to sky coordinates, resembling the estimated source
+position. Since the Crab Nebula is a well known source with a well known
+position, the difference between the reconstructed and the knwon source
+position can be calculated. It is tipically quantized as the euklidian distance
+squared in $[\theta^2] = \si{\degree\squared}$ and illustrated as shown in
+\autoref{fig:theta2}. These $\theta^2$-plots show the distribution of the
+distances squared of the reconstructed source position per event from the Crab
+Nebula's known position. They contain all events after preselection cuts and
+applying the gamma hadron separation at a specific \texttt{gamma\_prediction}
+threshold. The blue bins show the reconstructed signal events (On events) while
+the orange bins represent the reconstructed background events (Off events). The
+$\theta^2$-cut
+
+For a Crab Nebula data sample and a working analysis the $\theta^2$-plot is expected to
 %
 \begin{figure}
   \begin{subfigure}{\textwidth}
@@ -376,7 +399,7 @@ with a working analysis.
     \centering
     \includegraphics[width=\textwidth]{Plots/results/DBSCAN_perc/theta2_plot.pdf}
   \end{subfigure}
-  \caption{$\theta^2$ plots.}
+  \caption{$\theta^2$-plots for the PhotonStream data and dedicated analysis. The distributions of the distances squared of the reconstructed source position per event from the Crab Nebula's known position are shown. They contain all events after preselection cuts and applying the gamma hadron separation at a specific \texttt{gamma\_prediction} threshold. The blue bins show the reconstructed signal events (On events) while the orange bins represent the reconstructed background events (Off events).}
   \label{fig:theta2}
 \end{figure}
 %

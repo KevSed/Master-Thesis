@@ -121,7 +121,7 @@ Decision tress can also be used for regression tasks. The only difference when
 solving such tasks is the metric to find the best thresholds at each leaf.
 While for classification tasks the accuracy is the natural choice, regression
 tasks require a metric describing the error of the single result. Thus, the
-mean squared error e.g. can be used.
+thresholds are determined by minimizing the variance of the target variable.
 
 \subsection{Random forests}
 %
@@ -173,4 +173,25 @@ When randomly deciding on an equally distributed dataset of two classes, the
 AUC is expected to be about \num{0.5}, representing the worst possible
 classification performance. A perfect classification yields an AUC of \num{1}.
 
+\textbf{Precision.} For a classification the precision describes the fraction
+of events correctly classified as signal events over all events labelled as
+signal events.
+%
+\begin{equation}
+  \text{precision} = \frac{T_{\text{p}}}{T_{\text{p}} + F_{\text{p}}}
+\end{equation}
+%
+\textbf{Recall.} The recall of a classification model describes the fraction
+of events correctly classified as signal events over all true signal events.
+%
+\begin{equation}
+  \text{recall} = \frac{T_{\text{p}}}{T_{\text{p}} + F_{\text{n}}}
+\end{equation}
+%
+\textbf{$F_\beta$ score.} The $F_\beta$ score of a classification model describes the harmonic mean of the precision and recall.
+%
+\begin{equation}
+  F_\beta = (1 + \beta^2)\frac{\text{precision} \cdot \text{recall}}{\text{precision} + \text{recall}}
+\end{equation}
+%
 \textbf{$\symbf{R^2}$ Score.} \blindtext
