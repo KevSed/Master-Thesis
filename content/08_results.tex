@@ -7,8 +7,10 @@ neglect the noise that is intrinsic when integrating over time series and
 getting a more accurate time information. However, the results of this procedure
 yield a different data set, so it is important to investigate the differences.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Photon Extraction}
 \label{sec:ph_ex}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 The photon extraction is the key difference when generating PhotonStream data.
 It does not calculate the photon features from the time series but aims at
@@ -109,8 +111,9 @@ data.
 \end{figure}
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Standard Features on the PhotonStream}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 Using the single extracted photons from the PhotonStream, every classical
 analysis parameter can be generated, because the photons can be accumulated
@@ -191,7 +194,25 @@ simulations.
 
 The vast majority of the observed data is generally expected to be proton
 events or other background. Therefore, the distributions of data and proton MC
-should be more or less similar.
+should be more or less similar. When comparing the distributions in
+\autoref{fig:feat_dbscan} there seems to be a shift of the proton MC
+simulations to slightly higher values for \texttt{width} and \texttt{length}.
+So the air-shower clusters reconstructed on the proton MC simulations are
+usually a bit bigger. Apart from that the distributions show a similar shape.
+When comparing the \texttt{size} of the found air-showers, the data events
+contain a lot more small-sized events than the simulated proton MC. This is
+expected, because the data naturally contains a lot of noise and other rather
+low energy events with small sizes. However, the distributions show very
+similar structures on the whole range, even at the lower end. Spatially bigger
+air-showers and bigger values for \texttt{size} in the MC simulations might
+appear due to missing noise events in the simulations \textbf{[really?]}.
+
+When expanding the DBSCAN clustering by excluding very dark pixels from the
+calculations of \texttt{width} and \texttt{length},
+\autoref{fig:feat_dbscan_perc}, the proton MC distributions of those features
+are shifted to smaller values, as expected. The distributions of the features
+on data are not really affected much, resulting in a better agreement of data
+and MC simualtions.
 %
 \begin{figure}
   \begin{subfigure}{0.5\textwidth}
@@ -210,10 +231,11 @@ should be more or less similar.
     \centering
     \includegraphics[width=\textwidth, page=8]{Plots/data_mc/features_DBSCAN.pdf}
   \end{subfigure}
-  \caption{Features using DBSCAN and standard parameters.}
+  \caption{Features of the reconstructed air-showers using the DBSCAN cleaning. The blue histograms show the observed data, whereas orange and green show proton and gamma MC simulations respectively.}
   \label{fig:feat_dbscan}
 \end{figure}
-
+%
+%
 \begin{figure}
   \begin{subfigure}{0.5\textwidth}
     \includegraphics[width=\textwidth, page=23]{Plots/data_mc/features_DBSCAN_perc.pdf}
@@ -221,18 +243,28 @@ should be more or less similar.
   \begin{subfigure}{0.5\textwidth}
     \includegraphics[width=\textwidth, page=13]{Plots/data_mc/features_DBSCAN_perc.pdf}
   \end{subfigure}
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=\textwidth, page=15]{Plots/data_mc/features_DBSCAN_perc.pdf}
-  \end{subfigure}
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=\textwidth, page=8]{Plots/data_mc/features_DBSCAN_perc.pdf}
-  \end{subfigure}
-  \caption{Features using DBSCAN and additionally excluding pixels with less than $\SI{1}{\percent}$ PE of the air-shower's total \texttt{size}.}
+  \caption{Features of the reconstructed air-showers using DBSCAN and additionally excluding pixels with less than $\SI{1}{\percent}$ PE of the air-shower's total \texttt{size}. The blue histograms show the observed data, whereas orange and green show proton and gamma MC simulations respectively.}
   \label{fig:feat_dbscan_perc}
 \end{figure}
+%
+\textbf{[Anhand von mismatches die cuts motivieren?]}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Time Features on the PhotonStream}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+The PhotonStream does not only open the possibilities for analyses of single
+photon features, while still containing all relevant data from the classical
+representation, it furthermore contains \textbf{time information} per photon.
+This additional dimension in the data makes it even more interesting for
+analyses and might promise great advances in performance.
+
+With the additional time information a series of new features can be
+implemented. The classical features can be expanded onto this dimension,
+examining the light distributions along the time axis and calculating
+statistical moments of them. There are additional angles describing the
+shower's position when working in three dimensions, and new features can be
+engineered. \textbf{[Soll hier überhaupt weiter drauf eingegangen werden? Großartige Untersuchungen hab ich ja nich gemacht... Man k"onnte natürlich alle schon durchgeführten Untersuchungen einfach auf time features schmeißen]}
 %
 \begin{figure}
   \begin{subfigure}{\textwidth}
@@ -247,7 +279,9 @@ should be more or less similar.
   \label{fig:slices}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Origin Reconstruction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 As described in \autoref{sec:source_pos} the reconstruction of the source
 position uses the air-shower's features \texttt{delta}, \texttt{width} and
@@ -366,6 +400,10 @@ However, this comparison, as the one with the expected source position
 within the camera, is not a comparison with truth values, but rather one
 with a working analysis.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Origin Reconstruction on Data}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 All these investigations, of course, serve the sole purpose of understanding
 the different prerequisites for reconstructing the source position on
 air-shower images. As described in \autoref{sec:source_pos} this is done by
@@ -384,11 +422,33 @@ squared in $[\theta^2] = \si{\degree\squared}$ and illustrated as shown in
 distances squared of the reconstructed source position per event from the Crab
 Nebula's known position. They contain all events after preselection cuts and
 applying the gamma hadron separation at a specific \texttt{gamma\_prediction}
-threshold. The blue bins show the reconstructed signal events (On events) while
-the orange bins represent the reconstructed background events (Off events). The
-$\theta^2$-cut
+threshold. The blue bins show the reconstructed signal events (On events) when
+pointing directly to the source position while the orange bins represent the
+reconstructed background events (Off events), pointing to the night sky next to
+the source. The $\theta^2$-cut, represented by the dashed, grey vertical line,
+represents the optimal cut for the source's signal events. Events between
+\num{0} and this cut are considered when calculating the excess significance.
+The ratio of on-source observation time and off-source observation time is
+\num{0.2}. This fraction is used to estimate the background within the
+on-source observations. Both, $\theta^2$-cut and the \texttt{gamma\_prediction}
+threshold are determined by finding the highest significance, calculated as
+described by Li \& Ma \cite{LiMa}.
 
-For a Crab Nebula data sample and a working analysis the $\theta^2$-plot is expected to
+For a Crab Nebula data sample and a working analysis the $\theta^2$-plot is
+expected to have an equally distributed, low number of Off-events with a
+significant excess of On-events as close to $\theta^2 = 0$ as possible. From
+the results shown in \autoref{fig:theta2} it becomes very clear, that the
+reconstruction of the PhotonStream data in the way described above does not
+yield a very good source reconstruction. The optimal $\theta^2$-cuts around
+\num{0.1} are quite large. The distribution of the On-events around the true
+source position are rather fuzzy: there is no clear peak, especially not around
+\num{0}. The source excess starts around \num{0.10} and grows until between
+\num{0} and \num{0.05}. Thus, the reconstruction of the source position and
+especially the regression of \texttt{disp} seem to have a big error margin,
+reconstructing events to the close proximity of the true source position. Since
+$\theta$ is not the error on the reconstructed position, but rather the
+distance of all cleaned events to a specific source, the cleaning and
+especially the gamma hadron separation affect the results.
 %
 \begin{figure}
   \begin{subfigure}{\textwidth}
@@ -399,16 +459,86 @@ For a Crab Nebula data sample and a working analysis the $\theta^2$-plot is expe
     \centering
     \includegraphics[width=\textwidth]{Plots/results/DBSCAN_perc/theta2_plot.pdf}
   \end{subfigure}
-  \caption{$\theta^2$-plots for the PhotonStream data and dedicated analysis. The distributions of the distances squared of the reconstructed source position per event from the Crab Nebula's known position are shown. They contain all events after preselection cuts and applying the gamma hadron separation at a specific \texttt{gamma\_prediction} threshold. The blue bins show the reconstructed signal events (On events) while the orange bins represent the reconstructed background events (Off events).}
+  \caption{$\theta^2$-plots for the PhotonStream data and dedicated analysis for the DBSCAN cleaning (top) and extended by excluding pixels with less than $\SI{1}{\percent}$ of the air-shower's \texttt{size} (bottom). The distributions of the distances squared of the reconstructed source position per event from the Crab Nebula's known position are shown. They contain all events after preselection cuts and applying the gamma hadron separation at a specific \texttt{gamma\_prediction} threshold. The blue bins show the reconstructed signal events (On events) when pointing directly to the source position while the orange bins represent the reconstructed background events (Off events), pointing to the night sky next to the source.}
   \label{fig:theta2}
 \end{figure}
 %
-\section{Energy Estimation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Gamma Hadron Separation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+The observed data mainly consists of proton events, since the majority of the
+cosmic ray flux consists of protons. Therefore, it is important to distinguish
+gamma air-shower events from proton events, which are considered background for
+this analysis. A working gamma hadron separation affects all steps of the
+analysis, because the energy reconstruction is trained on gamma events as well
+as the source reconstruction. A badly cleaned data set thus will not work well
+with the trained models.
+
+For this analysis a random forest is used for the classification. It consists
+of \num{100} decision trees and a maximum depth of \num{15} for the single
+tree. The forest is trained on the features shown in \autoref{fig:sep_feat}.
+This figure also shows the proportional importances of the single features
+within the trained model. The most important features for the separation are
+the \texttt{width} and \texttt{kurtosis\_trans}, the higher order statistical
+moment along the same axis. From this, one can see that the spatial topology of
+the air-shower is the main discriminator.
+
+% neccessary line ^^^^
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth, page=4]{Plots/results/DBSCAN/separation_performance.pdf}
+  \caption{Features used for the gamma hadron separation model. The features are defined in \autoref{sec:params} and sorted by their importance for the separation task.}
+  \label{fig:sep_feat}
+\end{figure}
+%
+The trained model can be validated on the MC data, because the particle type is
+known for the datasets. To do so, the model is trained on a subset of the
+available simulations to then be validated on the small contemplementary
+dataset. To avoid statistical fluctuations within the subsamples to affect the
+results, a cross-validation is used. \autoref{fig:sep_auc} shows the ROC curve
+of the trained model, consisting of the true positive rate dependant on the
+false positive rate. The blue line shows the results of the averaging from the
+cross-validation. The AUC is $0.8425\,\pm\,0.0016$ with the error resulting
+from the averaging. This is a very good result for the separation of the gamma
+showers from the proton background, especially since this analysis is not
+primarily focused on optimizing these metrics. However, this is a result on
+Monte Carlo simulations and the quality of the model on data might differ quite
+significantly.
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth, page=1]{Plots/results/DBSCAN/separation_performance.pdf}
+  \caption{\textit{Receiver Operating Characteristic} (ROC) curve for the binary gamma hadron separation. The true positive rate dependant on the false positive rate is shown in grey. The blue line represents the averaged result out of a 5-fold cross-validation. The averaged \textit{area under curve} (AUC) from the 5-fold cross-validation for the trained models is $0.8425\,\pm\,0.0016$ with the error resulting from the averaging.}
+  \label{fig:sep_auc}
+\end{figure}
 %
 %
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth, page=1]{Plots/results/DBSCAN/energy_performance.pdf}
+  \includegraphics[width=0.8\textwidth, page=3]{Plots/results/DBSCAN/separation_performance.pdf}
+  \caption{Gamma hadron separation plot.}
+  \label{fig:sep2}
+\end{figure}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Energy Estimation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+The reconstruction of the air-shower's energy
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth, page=4]{Plots/results/DBSCAN/energy_performance.pdf}
+  \caption{Energy estimation 3.}
+  \label{fig:energy3}
+\end{figure}
+%
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth, page=1]{Plots/results/DBSCAN/energy_performance.pdf}
   \caption{Energy estimation.}
   \label{fig:energy1}
 \end{figure}
@@ -416,50 +546,16 @@ For a Crab Nebula data sample and a working analysis the $\theta^2$-plot is expe
 %
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth, page=3]{Plots/results/DBSCAN/energy_performance.pdf}
+  \includegraphics[width=0.9\textwidth, page=3]{Plots/results/DBSCAN/energy_performance.pdf}
   \caption{Energy estimation 2.}
   \label{fig:energy2}
 \end{figure}
 %
-%
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth, page=4]{Plots/results/DBSCAN/energy_performance.pdf}
-  \caption{Energy estimation 3.}
-  \label{fig:energy3}
-\end{figure}
-%
-
-\section{Gamma Hadron Separation}
-%
-%
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth, page=1]{Plots/results/DBSCAN/separation_performance.pdf}
-  \caption{Gamma hadron separation.}
-  \label{fig:sep1}
-\end{figure}
-%
-%
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth, page=3]{Plots/results/DBSCAN/separation_performance.pdf}
-  \caption{Gamma hadron separation 2.}
-  \label{fig:sep2}
-\end{figure}
-%
-%
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth, page=4]{Plots/results/DBSCAN/separation_performance.pdf}
-  \caption{Gamma hadron separation 3.}
-  \label{fig:sep3}
-\end{figure}
-%
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Parameters of DBSCAN}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \begin{figure}
   \centering
@@ -482,5 +578,7 @@ For a Crab Nebula data sample and a working analysis the $\theta^2$-plot is expe
   \label{fig:eps_theta}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Pixelbased Threshold Cleaning on the PhotonStream}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %

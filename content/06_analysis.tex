@@ -129,6 +129,7 @@ closer to the true air-shower image.
 %
 
 \section{Parametrization of Events}
+\label{sec:params}
 %
 For the classical analysis the detected images need to be parametrized. The
 learning algorithms work with specific features rather than the whole image,
@@ -145,7 +146,7 @@ air-shower image is shown in \autoref{fig:hillas}.
 %
 \begin{figure}
   \centering%
-  \includegraphics[width=0.7\textwidth]{Plots/hillas.pdf}%
+  \includegraphics[width=0.6\textwidth]{Plots/hillas.pdf}%
   \caption{A graphical representation of a typical air-shower image. The figure shows the number of photons per pixel of an air-shower. The dotted
   line represents the air-shower axis. It corresponds to the line minimising the
   sum of perpendicular angular distance, weighted by the number of photons per
@@ -197,7 +198,7 @@ position the first step is to estimate the distance to the cog of the
 air-shower. disp is representing that distance of the estimated source inside
 the camera. As described earlier the fraction of width and length is dependant
 on the angle under that the air-shower is hitting the camera. Thus, it is
-"pointing" to the cosmic origin of the shower. To estimate disp
+"pointing" to the cosmic origin of the shower. To estimate \texttt{disp}
 \textbf{[FORMULA]}.
 %
 \begin{equation}
@@ -209,7 +210,7 @@ the main axis. As shown in \autoref{fig:disp_amb} the distance disp alone is
 not sufficient to determine the source position, but an additional direction is
 needed. Otherwise there remained an ambiguity, as shown in the two examples.
 The assumption of the origin position being on the shower axis reduces this
-task to a binary classification of the sign of disp.
+task to a binary classification of the sign of \texttt{disp}.
 %
 \begin{figure}
   \begin{subfigure}{0.5\textwidth}
@@ -218,15 +219,18 @@ task to a binary classification of the sign of disp.
   \begin{subfigure}{0.5\textwidth}
     \includegraphics[width=\textwidth]{Plots/hillas_5.pdf}
   \end{subfigure}
-  \caption{Disp method ambiguity.}
+  \caption{Ambiguity of the reconstruction direction along an example shower's main axis. The calculated \texttt{disp} can be applied to two directions along the shower axis and therefore needs to be determined as well.}
   \label{fig:disp_amb}
 \end{figure}
-
+%
+The reconstructed source position can then be validated by comparing it to the
+known source position as shown in \autoref{fig:disp}. The calculated distance
+between the both is labelled $\theta$ and source specific.
 %
 \begin{figure}
   \centering%
-  \includegraphics[width=0.67\textwidth]{Plots/hillas_disp.pdf}%
-  \caption{Disp method.}%
+  \includegraphics[width=0.6\textwidth]{Plots/hillas_disp.pdf}%
+  \caption{Result of the reconstruction of the source position using the disp method. From the reconstructed source position the distance $\theta$ to the true source position can be calculated to validate the reconstruction.}%
   \label{fig:disp}%
 \end{figure}
 %
