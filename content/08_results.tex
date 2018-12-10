@@ -526,21 +526,41 @@ significantly.
 \section{Energy Estimation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-The reconstruction of the air-shower's energy
+The reconstruction of the air-shower's energy is applied on cleaned and as
+gamma air-shower classified images.
+
+For this analysis a random forest is used for the energy estimation, as well.
+It performs a regression task and consists of \num{100} decision trees and a
+maximum depth of \num{15} for the single tree. The forest is trained on the
+features shown in \autoref{fig:energy_feat}. This figure also shows the
+proportional importances of the single features within the trained model. The
+most important features for the energy estimation of a shower are those
+strongly correlated with the number of photons within the air-shower. The
+\texttt{size} and the number of pixels associated with the air-shower
+(\texttt{n\_pixel}) are by far the most important features, together making up
+almost $\sfrac{2}{3}$ of the total importance. Of course, since the number of
+photons depends on the number and energy of secondary particles, which itself
+depends on the energy of the primary particle, one would expect that.
 %
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth, page=4]{Plots/results/DBSCAN/energy_performance.pdf}
-  \caption{Energy estimation 3.}
-  \label{fig:energy3}
+  \caption{Features used for the energy estimation model. The features are defined in \autoref{sec:params} and sorted by their importance for the estimation task.}
+  \label{fig:energy_feat}
 \end{figure}
 %
+
+Since the primary particle's energy an air-shower was simulated with is known
+for the simulation data, the performance of the trained model can be
+validated on the MC simulations. \autoref{fig:energy_matr} shows the confusion
+matrix for the enrgy estimation. The energy estimated by the random forest
+($y$-axis) is shown against the event's true energy ($x$-axis).
 %
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth, page=1]{Plots/results/DBSCAN/energy_performance.pdf}
-  \caption{Energy estimation.}
-  \label{fig:energy1}
+  \caption{Confusion matrix for the estimation of the primary particle's energy. The energy estimated by the random forest ($y$-axis) is shown against the event's true energy ($x$-axis).}
+  \label{fig:energy_matr}
 \end{figure}
 %
 %
