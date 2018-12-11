@@ -459,7 +459,7 @@ especially the gamma hadron separation affect the results.
     \centering
     \includegraphics[width=\textwidth]{Plots/results/DBSCAN_perc/theta2_plot.pdf}
   \end{subfigure}
-  \caption{$\theta^2$-plots for the PhotonStream data and dedicated analysis for the DBSCAN cleaning (top) and extended by excluding pixels with less than $\SI{1}{\percent}$ of the air-shower's \texttt{size} (bottom). The distributions of the distances squared of the reconstructed source position per event from the Crab Nebula's known position are shown. They contain all events after preselection cuts and applying the gamma hadron separation at a specific \texttt{gamma\_prediction} threshold. The blue bins show the reconstructed signal events (On events) when pointing directly to the source position while the orange bins represent the reconstructed background events (Off events), pointing to the night sky next to the source.}
+  \caption{$\theta^2$-plots for the PhotonStream data and dedicated analysis for the DBSCAN cleaning (top) and extended by excluding pixels with less than $\SI{1}{\percent}$ of the air-shower's \texttt{size} (bottom). They contain all events after preselection cuts and applying the gamma hadron separation at a specific \texttt{gamma\_prediction} threshold. The blue bins show the reconstructed signal events (On events) when pointing directly to the source position while the orange bins represent the reconstructed background events (Off events), pointing to the night sky next to the source.}
   \label{fig:theta2}
 \end{figure}
 %
@@ -527,7 +527,10 @@ significantly.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 The reconstruction of the air-shower's energy is applied on cleaned and as
-gamma air-shower classified images.
+gamma air-shower classified images. It uses the same features as the separation
+model. Since the PhotonStream paired with DBSCAN reconstructs bigger air-shower
+images and a larger number of photons it is interesting to investigate the
+results on the reconstructed energy.
 
 For this analysis a random forest is used for the energy estimation, as well.
 It performs a regression task and consists of \num{100} decision trees and a
@@ -553,8 +556,19 @@ depends on the energy of the primary particle, one would expect that.
 Since the primary particle's energy an air-shower was simulated with is known
 for the simulation data, the performance of the trained model can be
 validated on the MC simulations. \autoref{fig:energy_matr} shows the confusion
-matrix for the enrgy estimation. The energy estimated by the random forest
-($y$-axis) is shown against the event's true energy ($x$-axis).
+matrix for the energy estimation. The energy estimated by the random forest
+($y$-axis) is shown against the event's true energy ($x$-axis). A clear
+correlation is visible on the diagonal, showing that the trained model is
+reconstructing energies close to the true energies. Rather than a thin line,
+the spread of this distribution however is quite wide. The reconstructed
+energies therefore ie within a wide error margin around the true energy.
+Especially for low energies the spread becomes very large. Air-showers
+resulting from low energy primary particles contain less Cherenkov photons, as
+described above. Therefore the reconstructed air-shower not only contains less
+photons but also illuminates a smaller area of the camera. Thus, fluctuations
+become more important and the acurat reconstruction of the image features more
+difficult. Low energy events consequently are intrinsically harder to assign
+the right energy to.
 %
 \begin{figure}
   \centering
@@ -577,23 +591,159 @@ matrix for the enrgy estimation. The energy estimated by the random forest
 \section{Parameters of DBSCAN}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+The physical properties used for this analysis are derived from the cleaned
+images, i.e. the reconstructed shower clusters. The reconstruction of these
+clusters is done by the DBSCAN algorithm. To set the right topology for the
+clustering, DBSCAN is defined by two dedicated parameters, as described in
+\autoref{sec:phs_clean}. The used parameters can be optimized for the analysis,
+as well. However, there does not appear to be reason to believe that an
+analysis specific set of the two parameters needs to be derived.
+
+The minimum number of photons within a cluster $m$ has not been investigated.
+
+The minimum distance $\varepsilon$ for a photon to still be associated with a
+dense cluster has been investigated to be \num{0.1} for optimal results. The
+effects of this parameter on the features of the air-shower clusters can be
+examined nonetheless. \autoref{fig:eps_feat1}, \ref{fig:eps_feat2} and
+\ref{fig:eps_feat3} show the distributions of the number of reconstructed
+clusters and the spatial dimension of the air-shower represented by the
+\texttt{width} for clusterings with different $\varepsilon$-configurations. To
+give a picture of the dependance $\varepsilon$ is varied below and above the
+default value of \num{0.1}. To simultaneously give a hint on the agreement of
+MC simulations and the observed data, the proton MC simulated data (orange) is
+also shown. The distributions are normalized to their observation time and the
+expected night sky flux.
+
+The effect of $\varepsilon$ on the topology of the clusters becomes very clear
+when comparing the feature distributions for different values of $\varepsilon$.
+The bigger $\varepsilon$ is set, the bigger the \texttt{width} gets. Therefore,
+going to smaller values, the air-shower clusters will be confined to a smaller
+space. The number of reconstructed clusters also gradually rises when setting
+a bigger $\varepsilon$. This is to be expected, since a bigger $\varepsilon$
+allows for less dense regions of the point cloud to be considered a dense
+cluster. At some point this will lead to noise or ambient light to be
+classified as air-shower clusters. For $\varepsilon = 0.11 \/ 0.12$ however, it
+definiteley leads to large mismatches between MC simulations and data, that
+become very clear for $\varepsilon = 0.14$. For $\varepsilon = 0.175$ the
+distance for photons within a cluster becomes so big, that the initial large
+number of small clusters decreases again, because many of these are combined to
+a few bigger clusters.
+
+For the observed data another development for bigger values of $\varepsilon$
+emerges: The number of found air-showers within data events compared to those
+found in proton MC simulations rises. This supposedly is the result of the
+clustering reconstructing noise events within the data, that are not present in
+the proton MC simulations. All in all, the agreement of simulations and data
+seem to be best for smaller $\varepsilon$, rather than ones above \num{0.1}.
+
+%
+\begin{figure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    $\symbf{\varepsilon = 0.07}$\par\smallskip
+    \includegraphics[width=0.9\textwidth, page=23]{Plots/Epsilon/07_comparison.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    $\symbf{\varepsilon = 0.07}$\par\smallskip
+    \includegraphics[width=0.9\textwidth, page=2]{Plots/Epsilon/07_comparison.pdf}
+  \end{subfigure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    $\symbf{\varepsilon = 0.09}$\par\smallskip
+    \includegraphics[width=0.9\textwidth, page=23]{Plots/Epsilon/09_comparison.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    $\symbf{\varepsilon = 0.09}$\par\smallskip
+    \includegraphics[width=0.9\textwidth, page=2]{Plots/Epsilon/09_comparison.pdf}
+  \end{subfigure}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \caption{Features for different $\varepsilon$.}
+  \label{fig:eps_feat1}
+\end{figure}
+%
+%
+\begin{figure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    $\symbf{\varepsilon = 0.10}$\par\smallskip
+    \includegraphics[width=0.9\textwidth, page=23]{Plots/Epsilon/10_comparison.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    $\symbf{\varepsilon = 0.11}$\par\smallskip
+    \includegraphics[width=0.9\textwidth, page=2]{Plots/Epsilon/11_comparison.pdf}
+  \end{subfigure}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    $\symbf{\varepsilon = 0.12}$\par\smallskip
+    \includegraphics[width=0.9\textwidth, page=23]{Plots/Epsilon/12_comparison.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    $\symbf{\varepsilon = 0.12}$\par\smallskip
+    \includegraphics[width=0.9\textwidth, page=2]{Plots/Epsilon/12_comparison.pdf}
+  \end{subfigure}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \caption{Features for different $\varepsilon$.}
+  \label{fig:eps_feat2}
+\end{figure}
+%
+%
+\begin{figure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    $\symbf{\varepsilon = 0.14}$\par\smallskip
+    \includegraphics[width=0.9\textwidth, page=23]{Plots/Epsilon/14_comparison.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    $\symbf{\varepsilon = 0.14}$\par\smallskip
+    \includegraphics[width=0.9\textwidth, page=2]{Plots/Epsilon/14_comparison.pdf}
+  \end{subfigure}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    $\symbf{\varepsilon = 0.175}$\par\smallskip
+    \includegraphics[width=0.9\textwidth, page=22]{Plots/Epsilon/175_comparison.pdf}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    $\symbf{\varepsilon = 0.175}$\par\smallskip
+    \includegraphics[width=0.9\textwidth, page=2]{Plots/Epsilon/175_comparison.pdf}
+  \end{subfigure}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \caption{Features for different $\varepsilon$.}
+  \label{fig:eps_feat3}
+\end{figure}
+%
+To investigate the effects of $\varepsilon$ further on a higher level than the
+feature distributions, the scores used to validate the analysis results can be
+investigated in dependancy to the value of $\varepsilon$. To do so, these
+scores are shown in \autoref{fig:eps_scores}, \ref{fig:eps_sigma} and
+\ref{fig:eps_theta} for $\varepsilon \in [0.07,\,0.1]$. No real dependancy can
+be seen and the results seem to be the same throughout the variation.
+%
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{Plots/Epsilon/eps_scores.pdf}
+  \includegraphics[width=0.85\textwidth]{Plots/Epsilon/eps_scores.pdf}
   \caption{Scores.}
   \label{fig:eps_scores}
 \end{figure}
 %
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{Plots/Epsilon/eps_sigma.pdf}
+  \includegraphics[width=0.85\textwidth]{Plots/Epsilon/eps_sigma.pdf}
   \caption{Detection significance.}
   \label{fig:eps_sigma}
 \end{figure}
 %
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{Plots/Epsilon/eps_theta_cut.pdf}
+  \includegraphics[width=0.85\textwidth]{Plots/Epsilon/eps_theta_cut.pdf}
   \caption{Detection $\theta^2$ cuts.}
   \label{fig:eps_theta}
 \end{figure}
@@ -602,3 +752,5 @@ matrix for the enrgy estimation. The energy estimated by the random forest
 \section{Pixelbased Threshold Cleaning on the PhotonStream}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+The pixel-based cleaning on PE thresholds as described in \autoref{sec:thresh}
+has been implemented on PhotonStream data. \textbf{[Rein theoretisch kann man hier alles bereits gezeigte daran nochmal durchexerzieren... Aber im Prinzip kam nur raus, dass es damit noch ein bisschen schlechter läuft, die Sachen aber logischerweise besser zur FACTtools Analyse passen.]}
