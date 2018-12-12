@@ -660,7 +660,9 @@ seem to be best for smaller $\varepsilon$, rather than ones above \num{0.1}.
     \includegraphics[width=0.9\textwidth, page=2]{Plots/Epsilon/09_comparison.pdf}
   \end{subfigure}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \caption{Features for different $\varepsilon$.}
+  \caption{Distributions of the number of reconstructed
+  clusters and the spatial dimension of the air-shower represented by the
+  \texttt{width} for clusterings with different $\varepsilon$-configurations. To simultaneously give a hint on the agreement of MC simulations and the observed data, the proton MC simulated data (orange) is also shown. The distributions are normalized to their observation time and the expected night sky flux. The default value is $\varepsilon = 0.1$.}
   \label{fig:eps_feat1}
 \end{figure}
 %
@@ -673,7 +675,7 @@ seem to be best for smaller $\varepsilon$, rather than ones above \num{0.1}.
   \end{subfigure}
   \begin{subfigure}{0.5\textwidth}
     \centering
-    $\symbf{\varepsilon = 0.11}$\par\smallskip
+    $\symbf{\varepsilon = 0.10}$\par\smallskip
     \includegraphics[width=0.9\textwidth, page=2]{Plots/Epsilon/11_comparison.pdf}
   \end{subfigure}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -688,7 +690,9 @@ seem to be best for smaller $\varepsilon$, rather than ones above \num{0.1}.
     \includegraphics[width=0.9\textwidth, page=2]{Plots/Epsilon/12_comparison.pdf}
   \end{subfigure}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \caption{Features for different $\varepsilon$.}
+  \caption{Distributions of the number of reconstructed
+  clusters and the spatial dimension of the air-shower represented by the
+  \texttt{width} for clusterings with different $\varepsilon$-configurations. To simultaneously give a hint on the agreement of MC simulations and the observed data, the proton MC simulated data (orange) is also shown. The distributions are normalized to their observation time and the expected night sky flux. The default value is $\varepsilon = 0.1$.}
   \label{fig:eps_feat2}
 \end{figure}
 %
@@ -716,7 +720,9 @@ seem to be best for smaller $\varepsilon$, rather than ones above \num{0.1}.
     \includegraphics[width=0.9\textwidth, page=2]{Plots/Epsilon/175_comparison.pdf}
   \end{subfigure}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \caption{Features for different $\varepsilon$.}
+  \caption{Distributions of the number of reconstructed
+  clusters and the spatial dimension of the air-shower represented by the
+  \texttt{width} for clusterings with different $\varepsilon$-configurations. To simultaneously give a hint on the agreement of MC simulations and the observed data, the proton MC simulated data (orange) is also shown. The distributions are normalized to their observation time and the expected night sky flux. The default value is $\varepsilon = 0.1$.}
   \label{fig:eps_feat3}
 \end{figure}
 %
@@ -725,26 +731,28 @@ feature distributions, the scores used to validate the analysis results can be
 investigated in dependancy to the value of $\varepsilon$. To do so, these
 scores are shown in \autoref{fig:eps_scores}, \ref{fig:eps_sigma} and
 \ref{fig:eps_theta} for $\varepsilon \in [0.07,\,0.1]$. No real dependancy can
-be seen and the results seem to be the same throughout the variation.
+be seen and the results seem to be the same throughout the variation. Except
+for the number of reconstructed air-showers, which decreases strongly for small
+$\varepsilon$.
 %
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{Plots/Epsilon/eps_scores.pdf}
-  \caption{Scores.}
+  \caption{Validation scores for the analysis tasks in dependance of the DBSCAN's $\varepsilon$. The AUC for the gamma hadron separation's ROC (blue), the source position reconstruction's accuracy of the sign(disp) (black) and the $R^2$-score for the \texttt{disp} regression (green), as well as the $R^2$-score for the energy reconstrcution (red) are shown.}
   \label{fig:eps_scores}
 \end{figure}
 %
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{Plots/Epsilon/eps_sigma.pdf}
-  \caption{Detection significance.}
+  \caption{Detection significances for the PhotonStream open crab sample in dependancy of the DBSCAN's $\varepsilon$.}
   \label{fig:eps_sigma}
 \end{figure}
 %
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{Plots/Epsilon/eps_theta_cut.pdf}
-  \caption{Detection $\theta^2$ cuts.}
+  \caption{$\theta^2$ cuts for the maximum detection signifance on the PhotonStream open crab sample for different $\varepsilon$-configurations.}
   \label{fig:eps_theta}
 \end{figure}
 
