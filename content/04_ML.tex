@@ -176,7 +176,7 @@ classification performance. A perfect classification yields an AUC of \num{1}.
 \textbf{Confusion Matrix.} The confusion matrix shows the results of a machine
 learning algorithm against the true values. It therefore shows how well the
 algorithm performs by showing where mismatches occur and with what effect. For
-classifications this matrix shows what classes are most frequently confused 
+classifications this matrix shows what classes are most frequently confused
 with each other, while for a regression task it shows how big the spread of
 reconstructed values is.
 
@@ -201,4 +201,9 @@ of events correctly classified as signal events over all true signal events.
   F_\beta = (1 + \beta^2)\frac{\text{precision} \cdot \text{recall}}{\text{precision} + \text{recall}}
 \end{equation}
 %
-\textbf{$\symbf{R^2}$ Score.} \blindtext
+\textbf{$\symbf{R^2}$ Score.} This metric quantifies the goodness of fit for a
+chosen model. For a regression task, the $\symbf{R^2}$ score or sometimes
+called \textit{coefficient of determination} measures how well the input data
+points are approximated by the model. A regression perfectly describing the
+input data is indicated by an $\symbf{R^2}$ score of 1, whereas an
+$\symbf{R^2}$ score of \num{0} characterizes the opposite.
