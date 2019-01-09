@@ -4,7 +4,7 @@ For the PhotonStream data representation, as a new way of describing IACT data,
 there is no reference analysis chain so far. The new possibilities of this
 representation need new analysis structures and give way for new methods and
 solutions. This work is therefore comparing different approaches to solve the
-tasks of this analysis. A schematic representation of the analysis flows is
+tasks of this analysis. A schematic representation of the analysis flow is
 shown in \autoref{fig:analysis}.
 %
 \begin{figure}[H]
@@ -140,7 +140,7 @@ clusters or identifies it as a night-sky-background photon. There are no
 assumptions on the shape, location or number of the clusters. The algorithm is
 characterized by only two parameters.
 %
-\begin{description}[align=right]
+\begin{description}[]
   \item[m] the minimum number of photons to make up a cluster
   \item[$\symbf{\varepsilon}$] the maximum distance between two photons to be considered dense
 \end{description}
@@ -170,13 +170,13 @@ background photons also within signal pixels, this should yield a cleaned image,
 closer to the true air-shower image.
 %
 \begin{figure}
-  \begin{subfigure}{0.5\textwidth}
+  \begin{subfigure}{\textwidth}
     \centering
-    \includegraphics[width=1.1\textwidth]{Plots/event2.png}
+    \includegraphics[width=0.9\textwidth]{Plots/event2.png}
   \end{subfigure}
-  \begin{subfigure}{0.5\textwidth}
+  \begin{subfigure}{\textwidth}
     \centering
-    \includegraphics[width=1.1\textwidth]{Plots/event1.png}
+    \includegraphics[width=0.9\textwidth]{Plots/event1.png}
   \end{subfigure}
   \caption{Event represented by the 3-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel. The right figure shows the remaining photons after cleaning.}
   \label{fig:event}
@@ -314,10 +314,6 @@ times per pixel, unlike the threedimensional DBSCAN, this cleaning can
 equivalently be performed on PhotonStream data.
 
 
-\section{Energy Estimation}
+\section{Energy Estimation and Signal-Background Separation}
 %
-RANDOM FORESTS!!!11!!!elf!
-
-\section{Signal-Background Separation}
-%
-RANDOM FORESTS!!!11!!!elf!
+IACT-tools
