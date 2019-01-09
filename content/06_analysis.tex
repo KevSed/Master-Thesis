@@ -1,5 +1,60 @@
 \chapter{Analysis chain}
 %
+For the PhotonStream data representation, as a new way of describing IACT data,
+there is no reference analysis chain so far. The new possibilities of this
+representation need new analysis structures and give way for new methods and
+solutions. This work is therefore comparing different approaches to solve the
+tasks of this analysis. A schematic representation of the analysis flows is
+shown in \autoref{fig:analysis}.
+%
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance = 1.5cm, auto]
+    \node (f1) [feature, xshift=-2.0cm] {PhotonStream};
+    \node (f2) [LP, xshift=2.0cm] {Largest Pulse};
+    \draw[line width=0.7mm, below of=f1] (-4.2,0.7) -- (4.2,0.7);
+    \node (s1) [astep, xshift=-4.0cm, anchor=west, below of=f1] {calibration};
+    \node (f3) [feature, below of=f1] {\begin{varwidth}{9em}\centering{Extracting single photons}\end{varwidth}};
+    \node (f4) [LP, below of=f2] {\begin{varwidth}{9em}\centering{Identifying large pulses}\end{varwidth}};
+
+    \node (f5) [feature, below of=f3] {DBSCAN};
+    \node (f6) [LP, below of=f4] {\begin{varwidth}{9em}\centering{pixelbased thresholds}\end{varwidth}};
+    \node (s2) [astep, below of=s1] {image cleaning};
+    \node (f7) [feature, below of=f5] {parameter set A};
+    \node (f8) [LP, below of=f6] {parameter set B};
+    \node (s3) [astep, below of=s2] {parametrization};
+    \node (f9) [both, below of=f7, xshift=2.0cm] {IACT tools};
+    \node (s4) [astep, below of=s3] {separation};
+    \node (f10) [both, below of=f9] {IACT tools};
+    \node (s5) [astep, below of=s4] {energy \& origin reconstruction};
+
+    \draw [arrg] (f3) -- node[anchor=east] {} (f5);
+    \draw [arrg] (f3) -- node[anchor=east] {} (f6);
+    \draw [arry] (f4) -- node[anchor=east] {} (f6);
+    \draw [arrg] (f5) -- node[anchor=east] {} (f7);
+    \draw [arrg] (f6) -- node[anchor=east] {} (f7);
+    \draw [arry] (f6) -- node[anchor=east] {} (f8);
+    \draw [arrg] (f7) -- node[anchor=east] {} (f9);
+    \draw [arry] (f8) -- node[anchor=east] {} (f9);
+    \draw [arry, color=cyan] (f9) -- node[anchor=east] {} (f10);
+  \end{tikzpicture}
+  \caption{Schematic flow of the different analysis steps of this analysis. The PhotonStream analysis uses different calibrations (\autoref{sec:phs}) and a different cleaning (DBSCAN) than the LP representation. Nonetheless, the PhotonStream data contains all information neccessary to apply the LP pixel based threshold cleaning on the calibrated data.}
+  \label{fig:analysis}
+\end{figure}
+%
+To generate PhotonStream data a different calibration is needed. As described
+in \autoref{sec:phs}, instead of finding large pulses and calculating the data
+coordinates, the time series data is turned into single photons. The additional
+information of the PhotonStream is then used to clean the image in the
+threedimensional spacetime via the DBSCAN algorithm, rather than by setting
+timing and PE thresholds for air-shower pixels. Nonetheless, the PhotonStream
+data contains all that is neccessary to perform this pixel-based cleaning
+instead. Therefore, this analysis is investigating said cleaning on
+PhotonStream data as well as the DBSCAN cleaning. The parametrization of the
+events in PhotonStream representation uses a subset of the features of the LP
+analysis, to have the best comparability. Especially the additional timing
+information of the PhotonStream is not used in feature generation for this
+analysis.
 
 \section{Image Cleaning on the PhotonStream}\label{sec:phs_clean}
 %
@@ -133,7 +188,7 @@ closer to the true air-shower image.
 %
 For the classical analysis the detected images need to be parametrized. The
 learning algorithms work with specific features rather than the whole image,
-although there are indeed ways to analyze single pixels.
+although there are indeed ways to analyze whole images.
 
 The parametrization that is most frequently chosen for IACT data is based on
 the one proposed by Hillas~\cite{Hillas}. It operates on the two dimensional
@@ -198,13 +253,8 @@ position the first step is to estimate the distance to the cog of the
 air-shower. disp is representing that distance of the estimated source inside
 the camera. As described earlier the fraction of width and length is dependant
 on the angle under that the air-shower is hitting the camera. Thus, it is
-"pointing" to the cosmic origin of the shower. To estimate \texttt{disp}
-\textbf{[FORMULA]}.
-%
-\begin{equation}
-    a^2 + b^2 = c^2
-\end{equation}
-%
+\enquote{pointing} to the cosmic origin of the shower.
+
 The second step is to determine the direction of disp along
 the main axis. As shown in \autoref{fig:disp_amb} the distance disp alone is
 not sufficient to determine the source position, but an additional direction is
@@ -247,7 +297,7 @@ assumptions on the number of clusters per event, but with the mentioned
 assumptions generally implies a certain topology within the camera's
 coordinates. Since arrival times in this representation are properties per
 pixel the time correlation has to be given between neighboring pixels. The
-algorithm executes the following steps [paper]:
+algorithm executes the following steps \cite{facttools}:
 %
 \begin{enumerate}
   \item find pixels containing more photons than an upper threshold $t_1$ (5~p.e.)

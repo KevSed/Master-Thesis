@@ -77,7 +77,7 @@
 %------------------------------------------------------------------------------
 
 \usepackage[
-  locale=DE,
+  locale=US,
   separate-uncertainty=true,
   per-mode=symbol-or-fraction,
 ]{siunitx}
@@ -146,12 +146,19 @@
 %------------------------------    TIKZ:   ------------------------------------
 %------------------------------------------------------------------------------
 \usepackage{tikz}
+\usepackage{varwidth}
+\usepackage{calc}
 \usetikzlibrary{shapes.geometric, arrows}
 \tikzstyle{edge from parent}=[tugreen,thick,draw]
-\tikzstyle{feature} = [rectangle, minimum width=2cm, minimum height=1cm,text centered, draw=white, fill=tugreen]
+\tikzstyle{feature} = [rectangle, minimum width=3.5cm, minimum height=1cm, text centered, draw=white, fill=tugreen]
+\tikzstyle{LP} = [rectangle, minimum width=3.5cm, minimum height=1cm, text centered, draw=white, fill=blue, text=white]
+\tikzstyle{both} = [rectangle, minimum width=2cm, minimum height=1cm, text centered, draw=white, fill=cyan]
 \tikzstyle{class1} = [rectangle, minimum width=1cm, minimum height=0.75cm,text centered, draw=white, text=white, fill=black]
 \tikzstyle{class2} = [rectangle, minimum width=1cm, minimum height=0.75cm,text centered, draw=black, fill=white]
+\tikzstyle{astep} = [, minimum width=3cm, minimum height=0.75cm, draw=white, fill=white, font=\bfseries]
 \tikzstyle{pil} = [-, thick, color=tugreen, text=tugreen]
+\tikzstyle{arrg} = [->, very thick, color=tugreen, text=tugreen]
+\tikzstyle{arry} = [->, very thick, color=blue, text=tugreen]
 
 %------------------------------------------------------------------------------
 %-------------------------    Angaben zur Arbeit   ----------------------------
