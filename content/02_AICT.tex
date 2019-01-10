@@ -4,24 +4,24 @@
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.95\textwidth]{Plots/cosmic_rays.jpg}
-  \caption{Different constituents of the cosmic rays reaching earth \cite{cosmic-rays}. There are three different particle types of cosmic rays that can be used for astronomy. The uncharged and very light neutrinos (white) barely interact with anything on their way through the universe. Thus, they give strong hints on their origin, but are very hard to detect as well. The charged particles such as protons or ionized atoms (blue) are deflected by magnetic fields and therefore lose any direction information. Lastly, cosmic gamma-rays (yellow), massless uncharged photons, are emitted through various processes and from different sources such as active galctic nuclei. They are not deflected much and are the main signal for Cherenkov astronomy.}
+  \caption{Different constituents of the cosmic rays reaching earth \cite{cosmic-rays}. There are three different particle types of cosmic rays that reach Earth. The uncharged and very light neutrinos (white) barely interact with anything on their way through the universe. Thus, they give strong hints on their origin, but are very hard to detect as well. The charged particles such as protons or ionized atoms (blue) are deflected by magnetic fields and therefore lose any direction information, making astronomical analyses impossible. Lastly, cosmic gamma-rays (yellow), massless uncharged photons, are emitted through various processes and from different sources such as active galctic nuclei. They are not deflected much and are the main signal for Cherenkov astronomy.}
   \label{fig:rays}
 \end{figure}
 %
-The atmosphere of earth is continously penetrated by radiation from different
+The atmosphere of Earth is continously penetrated by radiation from different
 sources within our universe. This cosmic radiation is made up of different types
 of particles, interacting with the atmosphere in various ways. There are
 charged protons and the uncharged neutrinos and photons (gamma rays). Neutrinos
 are uncharged, very light fermions, that interact very weakly and are not
-detectable by optical telescopes at all. Protons make up the largest number of
-particles reaching earths atmosphere. Due to their electric charge, they are
+detectable by optical telescopes yet. Protons make up the largest number of
+particles reaching Earth's atmosphere. Due to their electric charge, they are
 deflected by magnetic fields and therefore lose information on their origin on
-the way to earth, making them unsuitable for Cherenkov astronomy.
+the way to Earth, making them unsuitable for Cherenkov astronomy.
 %
 \section{Cosmic Gamma-Rays}
 %
 Cosmic gamma-rays are photons with a very high energy, originating from bright
-sources such as active galactic nuclei or nebulae. When such particles intersect
+sources such as active galactic nuclei or super nova remnants \cite{FACT-Design}. When such particles intersect
 with earth's atmosphere, they create new particles moving faster than light
 within that atmosphere due to their high energy. Particles moving at such
 speeds through a medium cause, among the creation of other particles, the
@@ -31,12 +31,12 @@ within a specific angle towards the direction of movement of that primary
 particle.
 %
 \begin{equation}
-    \cos(\vartheta) = \frac{1}{n\beta}
+    \cos(\vartheta) = \frac{1}{n\beta}, \quad \text{with } \beta=\frac{v}{c}
     \label{eq:angle_cherenkov}
 \end{equation}
 %
 As \autoref{eq:angle_cherenkov} shows, this angle depends on the index of
-refraction $n$ of the medium and the particle's velocity. Due to this emission
+refraction $n$ of the medium and the particle's velocity $v$. Due to this emission
 angle the light traverses the medium in a cone-shape, when being described from
 earth's point of view. By the time it is reaching the ground it thus
 illuminates an elliptical area of about $\SI{200}{\meter}$ diameter, depending
@@ -73,7 +73,7 @@ carrying their own detectors for the necessary measurements. They consist of
 interaction volumes taking over what the atmosphere does to intersecting cosmic
 rays: particles like gamma rays interact with the material, creating new
 particles by losing energy, which then continue to do so in particle cascades
-until the energy has spread to a certain amount. This process is called
+until the energy has spread and falls below the lower production threshold \cite{aharonian}. This process is called
 shower (or air-shower, depending on the medium of interaction). The
 characteristics of these interactions and the produced particles strongly
 depend on the properties of the incident particle, such as energy and particle

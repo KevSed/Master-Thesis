@@ -1,4 +1,5 @@
 \chapter{Results and Performance}
+\label{ch:results}
 %
 The generation of the data from the calibrated time series, i.e. the direct
 detector response on air-shower photons, is what differs the PhotonStream data
@@ -280,7 +281,7 @@ engineered. \textbf{[Soll hier überhaupt weiter drauf eingegangen werden? Groß
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Origin Reconstruction}
+\section{Reconstruction of the Source Position}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 As described in \autoref{sec:source_pos} the reconstruction of the source
@@ -401,7 +402,7 @@ within the camera, is not a comparison with truth values, but rather one
 with a working analysis.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Origin Reconstruction on Data}
+\subsection{Reconstruction of the Source Position on Data}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 All these investigations, of course, serve the sole purpose of understanding
@@ -572,7 +573,7 @@ the right energy to.
 %
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth, page=1]{Plots/results/DBSCAN/energy_performance.pdf}
+  \includegraphics[width=0.9\textwidth]{Plots/results/DBSCAN/energy_migration.pdf}
   \caption{Confusion matrix for the estimation of the primary particle's energy. The energy estimated by the random forest ($y$-axis) is shown against the event's true energy ($x$-axis).}
   \label{fig:energy_matr}
 \end{figure}
@@ -580,9 +581,9 @@ the right energy to.
 %
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth, page=3]{Plots/results/DBSCAN/energy_performance.pdf}
-  \caption{Energy estimation 2.}
-  \label{fig:energy2}
+  \includegraphics[width=0.9\textwidth]{Plots/results/DBSCAN/bias_resolution.pdf}
+  \caption{Bias and resolution.}
+  \label{fig:bias}
 \end{figure}
 %
 
