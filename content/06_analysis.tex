@@ -23,9 +23,9 @@ shown in \autoref{fig:analysis}.
     \node (f7) [feature, below of=f5] {parameter set A};
     \node (f8) [LP, below of=f6] {parameter set B};
     \node (s3) [astep, below of=s2] {parametrization};
-    \node (f9) [both, below of=f7, xshift=2.0cm] {IACT tools};
+    \node (f9) [both, below of=f7, xshift=2.0cm] {IACT Tools};
     \node (s4) [astep, below of=s3] {separation};
-    \node (f10) [both, below of=f9] {IACT tools};
+    \node (f10) [both, below of=f9] {IACT Tools};
     \node (s5) [astep, below of=s4] {energy \& origin reconstruction};
 
     \draw [arrg] (f3) -- node[anchor=east] {} (f5);
@@ -205,12 +205,12 @@ air-shower image is shown in \autoref{fig:hillas}.
 \begin{figure}
   \centering%
   \includegraphics[width=0.6\textwidth]{Plots/hillas.pdf}%
-  \caption{A graphical representation of a typical air-shower image. The figure shows the number of photons per pixel of an air-shower. The dotted
+  \caption{A graphical representation of a typical air-shower image \textcolor{red}{[\textbf{source}]}. The figure shows the number of photons per pixel of an air-shower. The dotted
   line represents the air-shower axis. It corresponds to the line minimising the
   sum of perpendicular angular distance, weighted by the number of photons per
   pixel. The standard deviations along this axis and the perpendicular axis are
-  the two features called length and width. The centre of
-  gravity (cog) of the air-shower image is the two dimensional weighted
+  the two features called \texttt{length} and \texttt{width}. The center of
+  gravity (\texttt{cog}) of the air-shower image is the two dimensional weighted
   mean of all shower pixels.}%
   \label{fig:hillas}%
 \end{figure}
@@ -219,16 +219,16 @@ The figure shows the number of photons per pixel of an air-shower. The dotted
 line represents the air-shower axis. It corresponds to the line minimising the
 sum of perpendicular angular distance, weighted by the number of photons per
 pixel. The standard deviations along this axis and the perpendicular axis are
-the two features called \textbf{length} and \textbf{width}. The centre of
-gravity (\textbf{cog}) of the air-shower image is the two dimensional weighted
+the two features called \texttt{length} and \texttt{width}. The center of
+gravity (\texttt{cog}) of the air-shower image is the two dimensional weighted
 mean of all shower pixels. The position and orientation of the shower is also
-characterized by the angle \textbf{delta}. It is the angle between the shower
-axis and the camera's $x$-axis. The \textbf{size} of the air-shower simply
+characterized by the angle \texttt{delta}. It is the angle between the shower
+axis and the camera's $x$-axis. The \texttt{size} of the air-shower simply
 corresponds to the sum of photons measured in all air-shower pixels.
 
 To further parametrize the air-showers also higher order statistical moments of
-the light distributions are used. Those are the third (\textbf{skewness}) and
-fourth (\textbf{kurtosis}) statistical moments of the air-shower photons along
+the light distributions are used. Those are the third (\texttt{skewness}) and
+fourth (\texttt{kurtosis}) statistical moments of the air-shower photons along
 the two axes defined above. The values are calculated in a rotated system in
 respective to the camera system, so that the two main axes define the
 coordinate axes.
@@ -238,7 +238,7 @@ coordinate axes.
   \text{kurt}(X) &= \text{E}\left[\left(\frac{X-\mu}{\sigma}\right)^4\right]  \label{eq:kurt}
 \end{align}
 %
-Additional to the size of an air-shower the \textbf{number of pixels}
+Additional to the \texttt{size} of an air-shower the \texttt{number of pixels}
 containing air-shower photons is used as a feature.
 %
 \section{Reconstruction of the Source Position}
@@ -248,13 +248,13 @@ FACT is a single telescope and therefore has no stereoscopic features to
 determine the origin of the cosmic ray showers. Thus, specific techniques only
 using the features of the air-shower images have to be performed. In this
 analysis the so called disp-method is used. It estimates the origin position of
-the cosmic gamma-rays by calculating the disp and estimating the sign. The two
+the cosmic gamma-rays by estimating the \texttt{disp} and the \texttt{sign}. The two
 dimensional problem of determining $x$ and $y$ coordinates is turned into a
 regression task and a classification task. The estimated source position within
 the camera's image is assumed to be on the shower's main axis. To find this
-position the first step is to estimate the distance to the cog of the
+position the first step is to estimate the distance to the \texttt{cog} of the
 air-shower. disp is representing that distance of the estimated source inside
-the camera. As described earlier the fraction of width and length is dependant
+the camera. As described earlier the fraction of \texttt{width} and \texttt{length} is dependant
 on the angle under that the air-shower is hitting the camera. Thus, it is
 \enquote{pointing} to the cosmic origin of the shower.
 
@@ -272,7 +272,7 @@ task to a binary classification of the sign of \texttt{disp}.
   \begin{subfigure}{0.5\textwidth}
     \includegraphics[width=\textwidth]{Plots/hillas_5.pdf}
   \end{subfigure}
-  \caption{Ambiguity of the reconstruction direction along an example shower's main axis. The calculated \texttt{disp} can be applied to two directions along the shower axis and therefore needs to be determined as well.}
+  \caption{Ambiguity of the reconstruction direction along an example shower's main axis \textcolor{red}{[\textbf{source}]}. The calculated \texttt{disp} can be applied to two directions along the shower axis and therefore needs to be determined as well.}
   \label{fig:disp_amb}
 \end{figure}
 %
@@ -283,14 +283,14 @@ between the both is labelled $\theta$ and source specific.
 \begin{figure}
   \centering%
   \includegraphics[width=0.6\textwidth]{Plots/hillas_disp.pdf}%
-  \caption{Result of the reconstruction of the source position using the disp method. From the reconstructed source position the distance $\theta$ to the true source position can be calculated to validate the reconstruction.}%
+  \caption{Result of the reconstruction of the source position using the disp method \textcolor{red}{[\textbf{source}]}. From the reconstructed source position the distance $\theta$ to the true source position can be calculated to validate the reconstruction.}%
   \label{fig:disp}%
 \end{figure}
 %
 \section{Image Cleaning with Pixelbased Thresholds}
 \label{sec:thresh}
 %
-When using the largest pulse representation (LP), there is a different cleaning
+When using the largest pulse representation (LP), a different cleaning is
 used. Since the PhotonStream is a different representation, of course the
 optimal cleaning differs. When cleaning LP data an algorithm working on the PE
 of the pixels is used. This cleaning is based on the assumption that air-shower

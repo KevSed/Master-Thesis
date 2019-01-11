@@ -12,7 +12,7 @@ data format, both of which are described in the following chapter.
 %
 Data taken by an Imaging-Air-Cherenkov-Telescope
 (IACT), like FACT, is usually represented in so called time series.
-These time series owe their name to the fact that they represent voltages at the photosensors over time. Within these time series lie so called main-pulses that represent the increased voltage that a charge deposition of an air-shower causes. So by looking for those main-pulses shower events can be found upon the detector noise and ambient light in the camera. Of course, the main-pulses consist of multiple photon signals and noise superposed over time, but in this state they are electric pulses representing the response of very specific hardware. So rather than measuring physical properties, this means that the charge deposit has to be interpretated to be transferred into physics observables, independent of these specifics \textbf{[which ones?]}. Such interpretations always include assumptions of physical and technical kinds. By integrating the charge in one pixel an equivalent of a photon count can be obtained, called the \textit{photon equivalent} (PE). So the first observable in this representation is the PE which corresponds to the best estimate of the number of photons measured per pixel. The photon counts are spatially located by the corresponding pixel they are assigned to. The 1440 pixels of FACT are the determining grid that yield the spatial coordinates of every shower event.
+These time series owe their name to the fact that they represent voltages at the photosensors over time. Within these time series lie so called main-pulses that represent the increased voltage that a charge deposition of an air-shower causes. So by looking for those main-pulses, shower events can be found upon the detector noise and ambient light in the camera. Of course, the main-pulses consist of multiple photon signals and noise superposed over time, but in this state they are electric pulses representing the response of very specific hardware. So rather than measuring physical properties, this means that the charge deposit has to be interpretated to be transferred into physics observables, independent of these specifics \textcolor{red}{(which ones?)}. Such interpretations always include assumptions of physical and technical kinds. By integrating the charge in one pixel an equivalent of a photon count can be obtained, called the \textit{photon equivalent} (PE). So the first observable in this representation is the PE which corresponds to the best estimate of the number of photons measured per pixel. The photon counts are spatially located by the corresponding pixel they are assigned to. The 1440 pixels of FACT are the determining grid that yield the spatial coordinates of every shower event.
 
 The second observable is the time. When the telescope is triggered and records
 data the arrival time of the event is measured via the time information within
@@ -29,14 +29,14 @@ representation, besides the photon-equivalents.
   \begin{subfigure}{0.475\textwidth}
     \includegraphics[width=1.1\textwidth, page=40]{Plots/cleaning_facttools_arrival_times_20131104_162.pdf}
   \end{subfigure}
-  \caption{The measured observables of the main-pulse representation are shown as scatter plots within the pixels. On the left the distribution of photon-equivalents $c$ of a typical shower event (Crab observation on November, 4th 2013, run 162, event 80) is shown. On the right the arrival times of that event's photons with respect to the mean arrival time in ns are displayed.}
+  \caption{The measured observables of the main-pulse representation are shown as scatter plots within the pixels \textcolor{red}{[source]}. On the left the distribution of photon-equivalents $c$ of a typical shower event (Crab observation on November, 4th 2013, run 162, event 80) is shown. On the right the arrival times of that event's photons with respect to the mean arrival time in ns are displayed.}
   \label{fig:mainpulse}
 \end{figure}
 
 \section{The PhotonStream representation}
 \label{sec:phs}
 %
-The Photonstream representation aims at creating a data format consisting of photons by storing their observed physical properties. So from the measured time series single photons are extracted instead of deriving photon counts in pixels. Each of these photons is assigned an arrival time and pixel, creating a list of arrival times per photon for each pixel. By doing so, a 3-dimensional data set is created, which can be represented in form of so called point clouds (\autoref{fig:point_cloud}).
+The PhotonStream representation aims at creating a data format consisting of photons by storing their observed physical properties \textcolor{red}{(klarmachen, dass auf Sebastian's Arbeit basierend)}. So from the measured time series single photons are extracted instead of deriving photon counts in pixels. Each of these photons is assigned an arrival time and pixel, creating a list of arrival times per photon for each pixel. By doing so, a 3-dimensional data set is created, which can be represented in form of so called point clouds (\autoref{fig:point_cloud}).
 %
 \begin{figure}
   \centering
@@ -47,11 +47,11 @@ The Photonstream representation aims at creating a data format consisting of pho
 %
 \subsection{Single Photon Extraction}
 %
-To generate the PhotonStream data from the measured time series single photons
+To generate the PhotonStream data from the measured time series, single photons
 need to be found and extracted. FACT is sampling recorded events with a
 frequency of $\SI{2}{\giga\hertz}$. This yields a very high time resolution, but still quantized values within the time series. The time series consists of multiple signals
 of single photons and different kinds of noise. Among the latter are several
-electronic artifacts [\textbf{source}]. The photon extraction does not take such artifacts into
+electronic artifacts. The photon extraction does not take such artifacts into
 account, so the data has to be cleaned of those at first. Unfortunately there
 are rare kinds of artifacts that can not be handled and may remain in the
 calibrated data.
@@ -93,7 +93,7 @@ PhotonStream for the specific event and pixel.
 \begin{figure}
   \centering
   \includegraphics[width=0.95\textwidth]{Plots/photon_extraction_sebastian.png}
-  \caption{Example of the photon extraction from a calibrated time series. Shown are several steps of the iterative extraction for the time series of a single pixel. The top frame shows the full time series as returned from the calibration process. The red vertical line shows the time position of the first found photon. After subtracting the photon pulse template $T_1$, the series as shown in the frame below remains, where another photon is found at the same position (red vertical line). The extraction continues until the time series in the bottom frame remains, which is considered noise. The extracted photon arrival times represent the PhotonStream for this specific pixel.}
+  \caption{Example of the photon extraction from a calibrated time series \textcolor{red}{[source]}. Shown are several steps of the iterative extraction for the time series of a single pixel. The top frame shows the full time series as returned from the calibration process. The red vertical line shows the time position of the first found photon. After subtracting the photon pulse template $T_1$, the series as shown in the frame below remains, where another photon is found at the same position (red vertical line). The extraction continues until the time series in the bottom frame remains, which is considered noise. The extracted photon arrival times represent the PhotonStream for this specific pixel.}
   \label{fig:extraction}
 \end{figure}
 %

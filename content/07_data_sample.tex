@@ -12,7 +12,7 @@ cover a zenith distance between $\SIrange{6}{30}{\degree}$, \autoref{fig:zenith}
 \begin{figure}
   \centering%
   \includegraphics[width=0.8\textwidth]{Plots/zenith.pdf}%
-  \caption{The distribution of the $\SI{17.7}{\hour}$ of Crab observations within the FACT open data sample over the zenith distance.}%
+  \caption{The distribution of the $\SI{17.7}{\hour}$ of Crab observations within the FACT open data sample over the zenith distance \cite{fact-data}.}%
   \label{fig:zenith}%
 \end{figure}
 %
@@ -25,9 +25,12 @@ these simulations is essential to the quality of the analysis. The simulations
 are processed in two steps: firstly the interactions of cosmic rays with earth's
 atmosphere is computed and secondly, the interaction of the generated Cherenkov
 light with the telescopes hardware is simulated. The first step is done by the
-framework CORSIKA [cite]. The detector response of FACT's camera, including
-triggers, is then determined for the simulated events using CERES [cite]. The
-parameters used for generating the simulations are shown below.
+framework CORSIKA~\cite{CORSIKA}.
+
+The detector response of FACT's camera, including
+triggers, is then determined for the simulated events using CERES~\cite{ceres}.
+
+The parameters used for generating the simulations are shown below.
 
 \begin{table}
   \centering%

@@ -183,11 +183,11 @@ containing large amounts of PE, can still easily be considered part of the
 air-shower.
 
 From these deviations another important question arises: how well do the MC
-simualtions describe the reality or in other words do simulations and data
+simulations describe the reality or in other words do simulations and data
 match as expected? Without knowing which photons within an event are air-shower
 photons and which not it is hard to tell, whether the different topology of the
 PhotonStream clusters is closer to the real air-shower or not.
-\textbf{[Untersuchungen von Sebastian?]} Independent from that it is crucial to
+\textcolor{red}{[Untersuchungen von Sebastian?]} Independent from that it is crucial to
 have that same behaviour on simulations. \autoref{fig:feat_dbscan} shows the
 distributions of \texttt{width}, \texttt{length} and \texttt{size} of
 PhotonStream data on the DBSCAN cleaning for data and the gamma and proton MC
@@ -206,14 +206,14 @@ expected, because the data naturally contains a lot of noise and other rather
 low energy events with small sizes. However, the distributions show very
 similar structures on the whole range, even at the lower end. Spatially bigger
 air-showers and bigger values for \texttt{size} in the MC simulations might
-appear due to missing noise events in the simulations \textbf{[really?]}.
+appear due to missing noise events in the simulations \textcolor{red}{[really?]}.
 
 When expanding the DBSCAN clustering by excluding very dark pixels from the
 calculations of \texttt{width} and \texttt{length},
 \autoref{fig:feat_dbscan_perc}, the proton MC distributions of those features
 are shifted to smaller values, as expected. The distributions of the features
 on data are not really affected much, resulting in a better agreement of data
-and MC simualtions.
+and MC simulations.
 %
 \begin{figure}
   \begin{subfigure}{0.5\textwidth}
@@ -248,7 +248,7 @@ and MC simualtions.
   \label{fig:feat_dbscan_perc}
 \end{figure}
 %
-\textbf{[Anhand von mismatches die cuts motivieren?]}
+\textcolor{red}{[Anhand von mismatches die cuts motivieren?]}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Time Features on the PhotonStream}
@@ -265,7 +265,7 @@ implemented. The classical features can be expanded onto this dimension,
 examining the light distributions along the time axis and calculating
 statistical moments of them. There are additional angles describing the
 shower's position when working in three dimensions, and new features can be
-engineered. \textbf{[Soll hier überhaupt weiter drauf eingegangen werden? Großartige Untersuchungen hab ich ja nich gemacht... Man könnte natürlich alle schon durchgeführten Untersuchungen einfach auf time features schmeißen]}
+engineered. \textcolor{red}{[Soll hier überhaupt weiter drauf eingegangen werden? Großartige Untersuchungen hab ich ja nich gemacht... Man könnte natürlich alle schon durchgeführten Untersuchungen einfach auf time features schmeißen]}
 %
 \begin{figure}
   \begin{subfigure}{\textwidth}
@@ -623,7 +623,7 @@ space. The number of reconstructed clusters also gradually rises when setting
 a bigger $\varepsilon$. This is to be expected, since a bigger $\varepsilon$
 allows for less dense regions of the point cloud to be considered a dense
 cluster. At some point this will lead to noise or ambient light to be
-classified as air-shower clusters. For $\varepsilon = 0.11 \/ 0.12$ however, it
+classified as air-shower clusters. For $\varepsilon = 0.11 / 0.12$ however, it
 definiteley leads to large mismatches between MC simulations and data, that
 become very clear for $\varepsilon = 0.14$. For $\varepsilon = 0.175$ the
 distance for photons within a cluster becomes so big, that the initial large
@@ -746,7 +746,7 @@ $\varepsilon$.
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{Plots/Epsilon/eps_sigma.pdf}
-  \caption{Detection significances for the PhotonStream open crab sample in dependancy of the DBSCAN's $\varepsilon$.}
+  \caption{Detection significances for the PhotonStream open crab sample in dependancy of the DBSCAN's $\varepsilon$. \textcolor{red}{Punkte für 0.06 und 0.05 hinzufügen}}
   \label{fig:eps_sigma}
 \end{figure}
 %
@@ -762,4 +762,4 @@ $\varepsilon$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 The pixel-based cleaning on PE thresholds as described in \autoref{sec:thresh}
-has been implemented on PhotonStream data. \textbf{[Rein theoretisch kann man hier alles bereits gezeigte daran nochmal durchexerzieren... Aber im Prinzip kam nur raus, dass es damit noch ein bisschen schlechter läuft, die Sachen aber logischerweise besser zur FACTtools Analyse passen.]}
+has been implemented on PhotonStream data. \textcolor{red}{[Rein theoretisch kann man hier alles bereits gezeigte daran nochmal durchexerzieren... Aber im Prinzip kam nur raus, dass es damit noch ein bisschen schlechter läuft, die Sachen aber logischerweise besser zur FACTtools Analyse passen.]}

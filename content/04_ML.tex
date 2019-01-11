@@ -8,12 +8,11 @@ successfull applications in modern physics.
 
 \section{Machine Learning}
 %
-Machine learning describes the field of applied statistics that uses computers to learn to solve certain problems. The \textit{learning} is defined by~\cite{mitchell} as: \enquote{A computer program is said to learn from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$.} There is a wide variety of different tasks this can be applied to and many performance measures. The most important preposition for well suited problems is the available experience or in this case the amount of data to learn on.
+Machine learning describes the field of applied statistics that uses computers to learn to solve certain problems. The \textit{learning} is defined by Mitchell~\cite{mitchell} as: \enquote{A computer program is said to learn from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$.} There is a wide variety of different tasks this can be applied to and many performance measures. The most important preposition for well suited problems is the available experience or in this case the amount of data to learn on.
 
 Machine learning aims at solving problems that profit from the computing power
 of modern technology but are not the kind of problem to be solved by a typical
-program written by a human \cite{goodfellow}. The concept is to try to
-reproduce the concept of intelligence within a computer.
+program written by a human \cite{goodfellow}.
 
 \subsection{The Experience}
 %
@@ -23,14 +22,13 @@ information to base a decision on and to be shown how that decision based on
 the information is supposed to look. The kind of data suitable for learning
 depends on the kind of algorithm to be used and vice versa. Generally, machine
 learning algorithms can be divided into \textbf{supervised} and
-\textbf{unsupervised} algorithms, but in this work only supervised algorithms
-will be used.
+\textbf{unsupervised} algorithms, both of which will be used in this work.
 
 Data to derive experience from for supervised algorithms consists of data points
 with a certain feature set and a specific label or true value. The datasets for
 the \textit{separation} of two classes for example contain a certain feature
 set for every data point and a label for the corresponding class each of these
-points belongs to. Unsupervised learning therefore aims at learning to predict
+points belongs to. Supervised learning therefore aims at learning to predict
 a certain target value (or multiple) from a given feature set including this
 value. The used learning data in this analysis is provided by simulations, so
 that the true values for the machine learning tasks are known.
@@ -39,21 +37,23 @@ that the true values for the machine learning tasks are known.
 %
 The task a machine learning algorithm is supposed to do is the solution of a
 specific problem in the best possible way. To reach this solution the process
-of learning is used but not the task. A machine learning algorithm used to
-distinguish between to things is therefore given the task to distinguish two
-things rather than to learn to distinguish these two. The three desired tasks
+of learning is used. A machine learning algorithm uses data to adapt to a specific task upon the given data. The three desired tasks
 within the analysis of Cherenkov images are the \textit{separation} of
 gamma-rays from hadronic cosmic rays, as well as the \textit{estimation} of the
 energy and source position of cosmic gamma-rays. The kind of task already
 determines what machine learning techniques are best to be used or which ones
-don't suit the task and how working architectures have to look. A classification like the separation
+don't suit the task and how working architectures have to look. A
+classification like the separation of gamma-rays from hadronic cosmic rays
+requires a different output and therefore networ structure than a regression
+task.
 
 \subsection{The Performance Measure}
 %
 As described above machine learning is about improving on certain tasks.
 Therefore it is essential to quantify the performance during but also after the
 learning process. This already implicates that performance measures are very
-specific to the task. The performance of a classification task is naturally
+specific to the task. During the training of a machine learning algorithm a
+loss is being minimalized. This loss is dependant on the task at hand and improved during the training epochs until a saturation is reached. The performance of a classification task is naturally
 measured by the \textbf{accuracy} of the model, because it simply describes how
 many of the model's outputs are correct. When validating continuous outputs
 rather than discrete classifications an accuracy is not appropriate. The
@@ -68,7 +68,7 @@ be calculated. A frequently used method for this is the
 \textbf{cross-validation}. The data set is divided into $n$ equaly sized, random
 subsamples; $n-1$ samples are used for training whereas the single excluded
 sample is used for validation. This is done $n$ times for each one of the
-subsamples and the metrics calculated as the mean value of all the single
+subsamples and the metrics are calculated as the mean value of all the single
 validations.
 
 \section{Random Forests}
@@ -82,7 +82,7 @@ supervised learning algorithm based on the so called \textit{decision tree}.
 Decision trees classify data points based on consecutive binary decisions. The
 decisions are based on the single features of the data point and result in a
 point specific result that is being returned. The number of single binary
-decisions (also called \textit{leaf}) preceding the final classification is
+decisions (also called \textit{node}) preceding the final classification is
 called \textit{depth} of the tree. Decision trees are trained on labelled data
 and determine thresholds for every feature to classify the data point.
 %
@@ -106,20 +106,19 @@ and determine thresholds for every feature to classify the data point.
     \draw [pil] (f3) -- node[anchor=east] {$\symbf{<-\sfrac{\pi}{2}}$\;} (c3);
     \draw [pil] (f3) -- node[anchor=west] {\;$\symbf{\geq-\sfrac{\pi}{2}}$} (c4);
   \end{tikzpicture}
-  \caption{Example sketch of a decision tree. The tree decides whether an input data point is of class 1 or class 2. The available features are \texttt{feature\_1}, \texttt{feature\_2} and \texttt{feature\_3}. This decision tree has a depth of 2 and solves the task of a binary separation at each leaf (green boxes). The decision thresholds are written next to the respective connecting lines.}
+  \caption{Example sketch of a decision tree. The tree decides whether an input data point is of class 1 or class 2. The available features are \texttt{feature\_1}, \texttt{feature\_2} and \texttt{feature\_3}. This decision tree has a depth of 2 and solves the task of a binary separation at each node (green boxes). The decision thresholds are written next to the respective connecting lines.}
   \label{fig:tree}
 \end{figure}
 %
-To determine the best decision threshold for each leaf, a performance measure
-for the information gain is necessary. For a classification task the required
-metric would be the accuracy. The thresholds are thus optimized to get the best
-accuracy at the respective leaf. This way the decision tree is build from the
-top leaf downwards until a perfect classification is achieved or until a set
+To determine the best decision threshold for each node, a specific loss function
+to be minimalized is necessary. For a classification task the required
+loss would be the information gain. The thresholds are thus optimized to get the best gain in information at the respective node. This way the decision tree is build from the
+top node downwards until a perfect classification is achieved or until a set
 maximum depth is reached.
 
-Decision tress can also be used for regression tasks. The only difference when
-solving such tasks is the metric to find the best thresholds at each leaf.
-While for classification tasks the accuracy is the natural choice, regression
+Decision trees can also be used for regression tasks. The only difference when
+solving such tasks is the metric to find the best thresholds at each node.
+While for classification tasks the information gain is the natural choice, regression
 tasks require a metric describing the error of the single result. Thus, the
 thresholds are determined by minimizing the variance of the target variable.
 
@@ -143,7 +142,7 @@ still prone to overfitting to noise in its respective dataset, averaging over
 all of them is not, as long as the trees are not correlated. To prevent such
 correlations and further generalize the model, additionally every decision node
 inside a single tree is only given a random subset of all available features.
-Random forests therefore have two parameters: the number of trees $n$ and the
+Random forests therefore have two additional parameters: the number of trees $n$ and the
 number $k$ of available features at each node.
 
 The output of the model consisting of such a forest is then generated
@@ -151,7 +150,8 @@ by counting trees with a specific decision. A confidence for a multi-class
 separation, e.g., can be generated by counting the fraction of trees that
 decided for the specific class. By setting a threshold on the confidence
 classification decisions can be performed. In case of regression tasks the
-output of the forest is the mean of the regression results of the single trees.
+output of the forest is the mean of the regression results of the single trees,
+as well. \textcolor{red}{score}
 
 \section{Performance Measures}
 %
@@ -164,7 +164,7 @@ examples for which the model computes the right output. This performance
 measure can be used for models with discrete outputs, such as classifications
 because it only takes perfect matches as the right output.
 
-\textbf{Receiver Operating Characteristic.} For every classification task the
+\textbf{Receiver Operating Characteristic.} For every classification (\textcolor{red}{nur für score classifier}) task the
 so called \textit{receiver operating characteristic} curve (ROC) can be
 determined. For a given class this represents the rate of correctly classified
 examples dependant on the rate of falsely classified ones. The area under this
@@ -206,4 +206,6 @@ chosen model. For a regression task, the $\symbf{R^2}$ score or sometimes
 called \textit{coefficient of determination} measures how well the input data
 points are approximated by the model. A regression perfectly describing the
 input data is indicated by an $\symbf{R^2}$ score of 1, whereas an
-$\symbf{R^2}$ score of \num{0} characterizes the opposite.
+$\symbf{R^2}$ score closer to \num{0} characterizes a decreasing quality of the
+model. Models with scores below zero can be interpreted as not suitable to the
+data.

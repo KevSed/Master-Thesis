@@ -4,7 +4,7 @@
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.95\textwidth]{Plots/cosmic_rays.jpg}
-  \caption{Different constituents of the cosmic rays reaching earth \cite{cosmic-rays}. There are three different particle types of cosmic rays that reach Earth. The uncharged and very light neutrinos (white) barely interact with anything on their way through the universe. Thus, they give strong hints on their origin, but are very hard to detect as well. The charged particles such as protons or ionized atoms (blue) are deflected by magnetic fields and therefore lose any direction information, making astronomical analyses impossible. Lastly, cosmic gamma-rays (yellow), massless uncharged photons, are emitted through various processes and from different sources such as active galctic nuclei. They are not deflected much and are the main signal for Cherenkov astronomy.}
+  \caption{Different constituents of the cosmic rays reaching Earth \cite{cosmic-rays}. There are three different particle types of cosmic rays that reach Earth. The uncharged and very light neutrinos (white) barely interact with anything on their way through the universe. Thus, they give strong hints on their origin, but are very hard to detect as well. The charged particles such as protons or ionized atoms (blue) are deflected by magnetic fields and therefore lose any direction information, making astronomical analyses impossible. Lastly, cosmic gamma-rays (yellow), massless uncharged photons, are emitted through various processes and from different sources such as active galctic nuclei. They are not deflected much and are the main signal for Cherenkov astronomy.}
   \label{fig:rays}
 \end{figure}
 %
@@ -12,7 +12,7 @@ The atmosphere of Earth is continously penetrated by radiation from different
 sources within our universe. This cosmic radiation is made up of different types
 of particles, interacting with the atmosphere in various ways. There are
 charged protons and the uncharged neutrinos and photons (gamma rays). Neutrinos
-are uncharged, very light fermions, that interact very weakly and are not
+are uncharged, very light leptons, that interact very weakly and are not
 detectable by optical telescopes yet. Protons make up the largest number of
 particles reaching Earth's atmosphere. Due to their electric charge, they are
 deflected by magnetic fields and therefore lose information on their origin on
@@ -20,15 +20,13 @@ the way to Earth, making them unsuitable for Cherenkov astronomy.
 %
 \section{Cosmic Gamma-Rays}
 %
-Cosmic gamma-rays are photons with a very high energy, originating from bright
-sources such as active galactic nuclei or super nova remnants \cite{FACT-Design}. When such particles intersect
-with earth's atmosphere, they create new particles moving faster than light
+Cosmic gamma-rays are photons with a very high energy, originating from sources such as active galactic nuclei or super nova remnants \cite{FACT-Design}. When such particles intersect
+with Earth's atmosphere, they create new particles moving faster than light
 within that atmosphere due to their high energy. Particles moving at such
 speeds through a medium cause, among the creation of other particles, the
 emission of bluish photons, the Cherenkov-light.
-Cherenkov-light is emitted by the medium directly from the moving particle
-within a specific angle towards the direction of movement of that primary
-particle.
+Cherenkov-light is emitted by the medium the moving particle directly traverses.
+The light is emitted within a specific angle towards the direction of movement of the moving particle.
 %
 \begin{equation}
     \cos(\vartheta) = \frac{1}{n\beta}, \quad \text{with } \beta=\frac{v}{c}
@@ -37,19 +35,19 @@ particle.
 %
 As \autoref{eq:angle_cherenkov} shows, this angle depends on the index of
 refraction $n$ of the medium and the particle's velocity $v$. Due to this emission
-angle the light traverses the medium in a cone-shape, when being described from
-earth's point of view. By the time it is reaching the ground it thus
+angle the light traverses the medium in a cone-shape, when being observed from
+Earth's point of view. By the time it reaches the ground it thus
 illuminates an elliptical area of about $\SI{200}{\meter}$ diameter, depending
 on the height of interaction and the primary particle's energy.
 This already implicates that the light, although a secondary product of the
 cosmic gamma-ray, can be used to reconstruct physical properties of
 said gamma-ray. To do so, the flashes of the Cherenkov-light need to
-be captured by cameras capable of filming very short time scales (about
+be captured by cameras capable of resolving very short time scales (about
 $\SI{e-9}{\second}$).
 
 \section{Imaging Air Cherenkov Telescopes}
 
-Imaging Air Cherenkov Telescopes (IACTs) are using videos of this light, to
+Imaging Air Cherenkov Telescopes (IACTs) are recording images of the Cherenkov light flashes, which are used to
 reconstruct properties of the incident cosmic radiation above
 $\SI{100}{\giga\electronvolt}$, by analyzing the spatial geometry of the
 measured pictures.
@@ -66,8 +64,8 @@ This means that the task is to resolve single incoming cosmic gamma rays and
 reconstruct these properties. By doing so, the atmosphere is used as a very
 wide spread detector. When trying to avoid any interactions of the incident
 particles and measuring their properties directly in a specifically prepared
-detector material, one eventuually has to leave earth's atmosphere. Such direct
-measurements are carried out in earth's orbit, outside its atmosphere.
+detector material, one eventually has to leave Earth's atmosphere. Such direct
+measurements are carried out in Earth's orbit, outside its atmosphere.
 Detectors like the Fermi Large-Area-Telescope \cite{fermiLAT} (Fermi LAT) are satellites
 carrying their own detectors for the necessary measurements. They consist of
 interaction volumes taking over what the atmosphere does to intersecting cosmic
@@ -79,8 +77,7 @@ characteristics of these interactions and the produced particles strongly
 depend on the properties of the incident particle, such as energy and particle
 type. There are particles that mainly interact via the electromagnetic force.
 Such showers are called electromagnetic showers. They are usually initiated by
-photons or electrons and mainly consist of light, charged fermions like electrons or
-muons and photons or light, charged bosons like pions. Showers initiated by
+photons or electrons and mainly consist of light, charged leptons like electrons or muons and photons. Showers initiated by
 hadronic cosmic rays like protons show different kinds of interactions, also
 resulting in different spatial topologies. The momentum perpendicular to the
 primary particle's trajectory is bigger, giving the shower a wider spread of
@@ -101,15 +98,15 @@ to such.
   \centering
   \begin{subfigure}{0.475\textwidth}
     \centering
-    \includegraphics[width=0.85\textwidth]{example-image-a}
+    \includegraphics[width=0.6\textwidth]{Plots/photon_xz.png}
     \label{fig:proton}
   \end{subfigure}
   \begin{subfigure}{0.475\textwidth}
     \centering
-    \includegraphics[width=0.85\textwidth]{example-image-b}
+    \includegraphics[width=0.6\textwidth]{Plots/proton_xz.png}
     \label{fig:gamma}
   \end{subfigure}
-  \caption{Simple sketch of the two different shower types.}
+  \caption{Simulated particle trajectories of the two different shower types (left: gama-shower, right: proton-shower)~\cite{shower}.}
   \label{fig:shower}
 \end{figure}
 
@@ -118,10 +115,10 @@ energy is available for the resulting shower. Thus, the size of these showers
 is expected to strongly correlate with the energy. But, to register a cosmic
 ray, there has to be interaction first. The effective area of the telescope
 is mainly determined by the interactions that can be covered by the sensors. So
-bringing up a detector to earth's orbit strongly limits the sensored
+bringing up a detector to Earth's orbit strongly limits the sensored
 interaction material, which already highlights the disadvantage of satellite
 telescopes: the amount of interaction material is strongly limited and the
-measurement is strongly dependent on that quantity. Direct measurements, e.g.
+measurement is strongly dependent on that quantity. Direct measurements, e.\,g.
 can derive the direction of cosmic rays by reconstructing the interactions of
 the cosmic ray itself inside the tracker volume, rather than secondary
 particles. They also give the possibility to measure the energy by counting the
@@ -141,7 +138,7 @@ properties. It also means using a detector that is bigger than anything
 man-build and readily available. Good understanding of these fluctuations and
 the respective modelling is crucial for the analysis of the data.
 
-High energy cosmic particles interacting with the earth's atmosphere generate
+High energy cosmic particles interacting with the Earth's atmosphere generate
 showers as described above in a highly boosted way. The secondary particles
 therefore continue their trajectories almost parallel to the incident particle.
 The spatial distribution of the shower again depends on the energy of the
