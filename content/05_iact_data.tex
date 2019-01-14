@@ -36,7 +36,7 @@ representation, besides the photon-equivalents.
 \section{The PhotonStream representation}
 \label{sec:phs}
 %
-The PhotonStream representation aims at creating a data format consisting of photons by storing their observed physical properties \textcolor{red}{(klarmachen, dass auf Sebastian's Arbeit basierend)}. So from the measured time series single photons are extracted instead of deriving photon counts in pixels. Each of these photons is assigned an arrival time and pixel, creating a list of arrival times per photon for each pixel. By doing so, a 3-dimensional data set is created, which can be represented in form of so called point clouds (\autoref{fig:point_cloud}).
+The PhotonStream representation aims at creating a data format consisting of photons by storing their observed physical properties. This data representation, its extraction from the data and the cleaning process are based on Sebastian Müller's work \cite{sebastian}. From the measured time series single photons are extracted instead of deriving photon counts in pixels. Each of these photons is assigned an arrival time and pixel, creating a list of arrival times per photon for each pixel. By doing so, a 3-dimensional data set is created, which can be represented in form of so called point clouds (\autoref{fig:point_cloud}).
 %
 \begin{figure}
   \centering
@@ -93,7 +93,7 @@ PhotonStream for the specific event and pixel.
 \begin{figure}
   \centering
   \includegraphics[width=0.95\textwidth]{Plots/photon_extraction_sebastian.png}
-  \caption{Example of the photon extraction from a calibrated time series \textcolor{red}{[source]}. Shown are several steps of the iterative extraction for the time series of a single pixel. The top frame shows the full time series as returned from the calibration process. The red vertical line shows the time position of the first found photon. After subtracting the photon pulse template $T_1$, the series as shown in the frame below remains, where another photon is found at the same position (red vertical line). The extraction continues until the time series in the bottom frame remains, which is considered noise. The extracted photon arrival times represent the PhotonStream for this specific pixel.}
+  \caption{Example of the photon extraction from a calibrated time series \cite{sebastian}. Shown are several steps of the iterative extraction for the time series of a single pixel. The top frame shows the full time series as returned from the calibration process. The red vertical line shows the time position of the first found photon. After subtracting the photon pulse template $T_1$, the series as shown in the frame below remains, where another photon is found at the same position (red vertical line). The extraction continues until the time series in the bottom frame remains, which is considered noise. The extracted photon arrival times represent the PhotonStream for this specific pixel.}
   \label{fig:extraction}
 \end{figure}
 %

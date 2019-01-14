@@ -206,7 +206,7 @@ expected, because the data naturally contains a lot of noise and other rather
 low energy events with small sizes. However, the distributions show very
 similar structures on the whole range, even at the lower end. Spatially bigger
 air-showers and bigger values for \texttt{size} in the MC simulations might
-appear due to missing noise events in the simulations \textcolor{red}{[really?]}.
+appear due to missing noise events in the simulations.
 
 When expanding the DBSCAN clustering by excluding very dark pixels from the
 calculations of \texttt{width} and \texttt{length},
@@ -248,7 +248,25 @@ and MC simulations.
   \label{fig:feat_dbscan_perc}
 \end{figure}
 %
-\textcolor{red}{[Anhand von mismatches die cuts motivieren?]}
+From the feature distributions it becomes clear that there are regions, where
+data and MC simulations fit better. The \texttt{size} is in better agreement
+above a threshold of about \num{100}. In general, events with a big size are
+less prone to reconstruction errors, since  noise fluctuations in the number of
+PE and in the spatial distribution of photons, both affecting the origin
+reconstruction, are suppressed. Small clusters, especially within the data
+might very well also be noise events. However, they appear in data, but are not
+accounted for in the MC simulations used for training the random forests, making them a likely source of error.
+
+Especially with respect to the origin reconstruction, the number of pixels
+\texttt{n\_pixel} associated with an air-shower is important for the accuracy
+of the reconstructed position. Very small events are strongly influenced by
+fluctuating neighboring pixels and the main axis direction is generally hard to
+reconstruct. Due to the quantization of the single pixels a singular photon
+within a neighboring pixel can impact the result significantly.
+The optimization of the cuts on all used features has to be performed in
+detail beyond the scope of this thesis, but to investigate the potential of the
+PhotonStream data, the quality cuts are restrained to those excluding events,
+which are intrinsically prone to reconstruction errors.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Time Features on the PhotonStream}
@@ -265,7 +283,33 @@ implemented. The classical features can be expanded onto this dimension,
 examining the light distributions along the time axis and calculating
 statistical moments of them. There are additional angles describing the
 shower's position when working in three dimensions, and new features can be
-engineered. \textcolor{red}{[Soll hier überhaupt weiter drauf eingegangen werden? Großartige Untersuchungen hab ich ja nich gemacht... Man könnte natürlich alle schon durchgeführten Untersuchungen einfach auf time features schmeißen]}
+engineered. These new features possibly offer a way to strongly boost
+performance by taking advantage of the new additional dimension.
+
+The distributions of arrival times of the single photons for data and MC
+simulations are shown in \autoref{fig:slices}. The histograms show the arrival
+times for every single Photon of 2000 events normalized to an area of 1. The
+top histogram represents all arriving photons. It becomes clear that there
+seems to be a significant discrepancy between the MC simulations and data.
+While distributions of the MC simulations of both, gammas and protons, quite
+resemble each other, the data distribution shows a very different picture. The
+most common arrival time of data lies way beyond the one on MC simulations.
+Furthermore, the structure of the distribution before the main peak in data
+shows two dips and generally not a very clear distribution as compared to the
+monotonous rise of the MC distributions. This behaviour might result from noise
+events and falsely triggered events or originate from electronic artifacts. To
+investigate the origins of this structure, the bottom histogram shows the
+arrival times of all photons located in pixels with at least \num{10} photons.
+This way the fraction of non air-shower photons becomes very small. In the
+result the normally distributed underground, as seen in the top histogram,
+vanishes almost completely. The most common arrival times for the MC
+simulations become sharper but remain at the same position as before. In
+contrast to the complete events, the data distribution now shows a peak near to
+the ones in the MC simulations and does no longer show the unstructered
+behaviour in the first \num{40} time slices as described above. The difference
+between data and MC simulations still manifests between time slices \num{60}
+and \num{80}, though. The data distribution decreases slower and takes about
+\num{20} time slices more to return to a supposed background level.
 %
 \begin{figure}
   \begin{subfigure}{\textwidth}
@@ -279,6 +323,12 @@ engineered. \textcolor{red}{[Soll hier überhaupt weiter drauf eingegangen werde
   \caption{Arrival times of the single photons within all the pixels (top) and the cleaned air-shower pixels containing at least 10 photons (bottom) on data and MC simulations.}
   \label{fig:slices}
 \end{figure}
+%
+The arrival time distributions show quite some disagreement in uncleaned
+pixels, originating from data-MC-mismatches probably due to noise effects. For 
+the cleaned images, which are the crucial ones, the agreement is better, so
+implementing time features into a working PhotonStream analysis is a natural
+next step.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Reconstruction of the Source Position}

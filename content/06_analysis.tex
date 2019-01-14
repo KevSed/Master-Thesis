@@ -70,7 +70,7 @@ light is emitted, creates a light cone, which, when projected to the
 $x$-$y$-plane of the camera causes the specific elliptical shape. Both of these
 topological features are mandated by the physical process and can therefore be
 unrestrictedly used for the cleaning. Background events like ambient light or
-starlight don't show these characteristics and tend to appear randomly.
+starlight do not show these characteristics and tend to appear randomly.
 
 The threedimensional $xyt$-representation of the PhotonStream's point-cloud
 quantifies photons with exactly those three observables. Thus, a cleaning
@@ -170,19 +170,34 @@ single observables into account, which very much represents a way to find
 air-showers in a space well suited for describing them. Furthermore, this way
 single photons are selected rather than specific pixels. When expecting
 background photons also within signal pixels, this should yield a cleaned image,
-closer to the true air-shower image.
+closer to the true air-shower image. An example event before and after cleaning
+is shown in \autoref{fig:event_u} and \autoref{fig:event_c}.
+%
+% \begin{figure}
+%   \begin{subfigure}{\textwidth}
+%     \centering
+%     \includegraphics[width=0.9\textwidth]{Plots/event2.png}
+%   \end{subfigure}
+%   \begin{subfigure}{\textwidth}
+%     \centering
+%     \includegraphics[width=0.9\textwidth]{Plots/event1.png}
+%   \end{subfigure}
+%   \caption{Event represented by the 3-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel. The right figure shows the remaining photons after cleaning.}
+%   \label{fig:event}
+% \end{figure}
+%
 %
 \begin{figure}
-  \begin{subfigure}{\textwidth}
-    \centering
-    \includegraphics[width=0.9\textwidth]{Plots/event2.png}
-  \end{subfigure}
-  \begin{subfigure}{\textwidth}
-    \centering
-    \includegraphics[width=0.9\textwidth]{Plots/event1.png}
-  \end{subfigure}
-  \caption{Event represented by the 3-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel. The right figure shows the remaining photons after cleaning.}
-  \label{fig:event}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Plots/event2.png}
+  \caption{Uncleaned event represented by the 3-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel.}
+  \label{fig:event_u}
+\end{figure}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Plots/event1.png}
+  \caption{Cleaned event represented by the 3-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel.}
+  \label{fig:event_c}
 \end{figure}
 %
 
@@ -261,7 +276,7 @@ on the angle under that the air-shower is hitting the camera. Thus, it is
 The second step is to determine the direction of disp along
 the main axis. As shown in \autoref{fig:disp_amb} the distance disp alone is
 not sufficient to determine the source position, but an additional direction is
-needed. Otherwise there remained an ambiguity, as shown in the two examples.
+needed. Otherwise there remains an ambiguity, as shown in the two examples.
 The assumption of the origin position being on the shower axis reduces this
 task to a binary classification of the sign of \texttt{disp}.
 %
@@ -319,4 +334,13 @@ equivalently be performed on PhotonStream data.
 
 \section{Energy Estimation and Signal-Background Separation}
 %
-IACT-tools
+The generated features (\autoref{sec:params}) are used for the estimation of
+the primary particle's energy and the classification of the particle via
+machine learning algorithms as described in \autoref{ch:ML}. To generate and
+train the random forests the framework \texttt{aict-tools} \cite{aicttools} is
+used. It provides executables for the configuration, training and application 
+of machine learning tasks on IACT data. The executables use the popular python
+machine learning library \texttt{scikit-learn}~\cite{scikit-learn}, which comes
+with a plethora of supervised and unsupervised machine learning algorithms,
+data preparation tools and evaluation functions. All three major tasks of this
+analysis can be performed by these tools on the used data set.
