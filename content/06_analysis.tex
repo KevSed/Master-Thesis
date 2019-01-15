@@ -18,7 +18,7 @@ shown in \autoref{fig:analysis}.
     \node (f4) [LP, below of=f2] {\begin{varwidth}{9em}\centering{Identifying large pulses}\end{varwidth}};
 
     \node (f5) [feature, below of=f3] {DBSCAN};
-    \node (f6) [LP, below of=f4] {\begin{varwidth}{9em}\centering{pixelbased thresholds}\end{varwidth}};
+    \node (f6) [LP, below of=f4] {\begin{varwidth}{9em}\centering{pixel-based thresholds}\end{varwidth}};
     \node (s2) [astep, below of=s1] {image cleaning};
     \node (f7) [feature, below of=f5] {parameter set A};
     \node (f8) [LP, below of=f6] {parameter set B};
@@ -38,7 +38,7 @@ shown in \autoref{fig:analysis}.
     \draw [arry] (f8) -- node[anchor=east] {} (f9);
     \draw [arry, color=cyan] (f9) -- node[anchor=east] {} (f10);
   \end{tikzpicture}
-  \caption{Schematic flow of the different analysis steps of this analysis. The PhotonStream analysis uses different calibrations (\autoref{sec:phs}) and a different cleaning (DBSCAN) than the LP representation. Nonetheless, the PhotonStream data contains all information neccessary to apply the LP pixel based threshold cleaning on the calibrated data.}
+  \caption{Schematic flow of the different analysis steps of this analysis. The PhotonStream analysis uses different calibrations (\autoref{sec:phs}) and a different cleaning (DBSCAN) than the LP representation. Nonetheless, the PhotonStream data contains all information neccessary to apply the LP pixel-based threshold cleaning on the calibrated data.}
   \label{fig:analysis}
 \end{figure}
 %
@@ -220,7 +220,7 @@ air-shower image is shown in \autoref{fig:hillas}.
 \begin{figure}
   \centering%
   \includegraphics[width=0.6\textwidth]{Plots/hillas.pdf}%
-  \caption{A graphical representation of a typical air-shower image \textcolor{red}{[\textbf{source}]}. The figure shows the number of photons per pixel of an air-shower. The dotted
+  \caption{A graphical representation of a typical air-shower image \cite{maxhillas}. The figure shows the number of photons per pixel of an air-shower. The dotted
   line represents the air-shower axis. It corresponds to the line minimising the
   sum of perpendicular angular distance, weighted by the number of photons per
   pixel. The standard deviations along this axis and the perpendicular axis are
@@ -287,7 +287,7 @@ task to a binary classification of the sign of \texttt{disp}.
   \begin{subfigure}{0.5\textwidth}
     \includegraphics[width=\textwidth]{Plots/hillas_5.pdf}
   \end{subfigure}
-  \caption{Ambiguity of the reconstruction direction along an example shower's main axis \textcolor{red}{[\textbf{source}]}. The calculated \texttt{disp} can be applied to two directions along the shower axis and therefore needs to be determined as well.}
+  \caption{Ambiguity of the reconstruction direction along an example shower's main axis \cite{maxhillas}. The calculated \texttt{disp} can be applied to two directions along the shower axis and therefore needs to be determined as well.}
   \label{fig:disp_amb}
 \end{figure}
 %
@@ -298,11 +298,11 @@ between the both is labelled $\theta$ and source specific.
 \begin{figure}
   \centering%
   \includegraphics[width=0.6\textwidth]{Plots/hillas_disp.pdf}%
-  \caption{Result of the reconstruction of the source position using the disp method \textcolor{red}{[\textbf{source}]}. From the reconstructed source position the distance $\theta$ to the true source position can be calculated to validate the reconstruction.}%
+  \caption{Result of the reconstruction of the source position using the disp method \cite{maxhillas}. From the reconstructed source position the distance $\theta$ to the true source position can be calculated to validate the reconstruction.}%
   \label{fig:disp}%
 \end{figure}
 %
-\section{Image Cleaning with Pixelbased Thresholds}
+\section{Image Cleaning with Pixel-Based Thresholds}
 \label{sec:thresh}
 %
 When using the largest pulse representation (LP), a different cleaning is
@@ -338,7 +338,7 @@ The generated features (\autoref{sec:params}) are used for the estimation of
 the primary particle's energy and the classification of the particle via
 machine learning algorithms as described in \autoref{ch:ML}. To generate and
 train the random forests the framework \texttt{aict-tools} \cite{aicttools} is
-used. It provides executables for the configuration, training and application 
+used. It provides executables for the configuration, training and application
 of machine learning tasks on IACT data. The executables use the popular python
 machine learning library \texttt{scikit-learn}~\cite{scikit-learn}, which comes
 with a plethora of supervised and unsupervised machine learning algorithms,

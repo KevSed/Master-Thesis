@@ -29,14 +29,14 @@ representation, besides the photon-equivalents.
   \begin{subfigure}{0.475\textwidth}
     \includegraphics[width=1.1\textwidth, page=40]{Plots/cleaning_facttools_arrival_times_20131104_162.pdf}
   \end{subfigure}
-  \caption{The measured observables of the main-pulse representation are shown as scatter plots within the pixels \textcolor{red}{[source]}. On the left the distribution of photon-equivalents $c$ of a typical shower event (Crab observation on November, 4th 2013, run 162, event 80) is shown. On the right the arrival times of that event's photons with respect to the mean arrival time in ns are displayed.}
+  \caption{The measured observables of the main-pulse representation are shown as scatter plots within the pixels. On the left the distribution of photon-equivalents $c$ of a typical shower event (Crab observation on November, 4th 2013, run 162, event 80) is shown. On the right the arrival times of that event's photons with respect to the mean arrival time in ns are displayed.}
   \label{fig:mainpulse}
 \end{figure}
 
 \section{The PhotonStream representation}
 \label{sec:phs}
 %
-The PhotonStream representation aims at creating a data format consisting of photons by storing their observed physical properties. This data representation, its extraction from the data and the cleaning process are based on Sebastian Müller's work \cite{sebastian}. From the measured time series single photons are extracted instead of deriving photon counts in pixels. Each of these photons is assigned an arrival time and pixel, creating a list of arrival times per photon for each pixel. By doing so, a 3-dimensional data set is created, which can be represented in form of so called point clouds (\autoref{fig:point_cloud}).
+The PhotonStream representation aims at creating a data format consisting of photons by storing their observed physical properties. This data representation, its extraction from the data and the cleaning process are based on Sebastian Müller's work \cite{sebastian, photonstream, phs}. From the measured time series single photons are extracted instead of deriving photon counts in pixels. Each of these photons is assigned an arrival time and pixel, creating a list of arrival times per photon for each pixel. By doing so, a 3-dimensional data set is created, which can be represented in form of so called point clouds (\autoref{fig:point_cloud}).
 %
 \begin{figure}
   \centering

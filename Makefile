@@ -34,6 +34,5 @@ build/runs.csv: build
 eps: eps_scores.pdf eps_sigma.pdf eps_theta_cut.pdf
 
 eps_scores.pdf eps_sigma.pdf eps_theta_cut.pdf:
-	TEXINPUTS=$$(pwd): \
-	MATPLOTLIBRC=./matplotlibrc_full \
+	TEXINPUTS=$$(pwd): MATPLOTLIBRC=./matplotlibrc_full \
 	python plot_eps_scores.py

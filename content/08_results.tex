@@ -137,7 +137,7 @@ fraction of the classical features, along with some PhotonStream-specific ones.
     \centering
     \includegraphics[width=\textwidth, page=5]{Plots/comparison_data_dl3.pdf}
   \end{subfigure}
-  \caption{\texttt{size} of the air-shower for the same events on PhotonStream data and DBSCAN cleaning (blue) and on LP data and FACTtools cleaning (orange).}
+  \caption{\texttt{size} of the air-shower for the same events on PhotonStream data and DBSCAN cleaning (blue) and on LP data and FACT-Tools cleaning (orange).}
   \label{fig:size_comp}
 \end{figure}
 %
@@ -149,7 +149,7 @@ larger air-shower clusters than the classical approach.
 
 The main features from the Hillas parametrization are \texttt{width} and
 \texttt{length} along with higher order statistical moments and the
-air-shower's \texttt{size}. \autoref{fig:feat_comp} shows the Hillas features for the same events on PhotonStream data and DBSCAN cleaning (blue) and on LP data and FACTtools cleaning (orange).
+air-shower's \texttt{size}. \autoref{fig:feat_comp} shows the Hillas features for the same events on PhotonStream data and DBSCAN cleaning (blue) and on LP data and FACT-Tools cleaning (orange).
 %
 \begin{figure}
   \begin{subfigure}{0.5\textwidth}
@@ -168,7 +168,7 @@ air-shower's \texttt{size}. \autoref{fig:feat_comp} shows the Hillas features fo
     \centering
     \includegraphics[width=\textwidth, page=4]{Plots/comparison_data_dl3.pdf}
   \end{subfigure}
-  \caption{Hillas features for the same events on PhotonStream data and DBSCAN cleaning (blue) and on LP data and FACTtools cleaning (orange).}
+  \caption{Hillas features for the same events on PhotonStream data and DBSCAN cleaning (blue) and on LP data and FACT-Tools cleaning (orange).}
   \label{fig:feat_comp}
 \end{figure}
 %
@@ -324,8 +324,9 @@ and \num{80}, though. The data distribution decreases slower and takes about
   \label{fig:slices}
 \end{figure}
 %
+
 The arrival time distributions show quite some disagreement in uncleaned
-pixels, originating from data-MC-mismatches probably due to noise effects. For 
+pixels, originating from data-MC-mismatches probably due to noise effects. For
 the cleaned images, which are the crucial ones, the agreement is better, so
 implementing time features into a working PhotonStream analysis is a natural
 next step.
@@ -370,7 +371,7 @@ reconstruction of the air-shower events.
 \begin{figure}
   \centering
   \includegraphics[width=0.7\textwidth]{Plots/delta_delta/delta_delta_facttools.pdf}
-  \caption{Difference between calculated delta and true delta for the FACTtools analysis. The distributions show the calculated $\symup{\Delta}\delta$ for the different predictions of sign of \texttt{disp} on the whole open data crab sample.}
+  \caption{Difference between calculated delta and true delta for the FACT-Tools analysis. The distributions show the calculated $\symup{\Delta}\delta$ for the different predictions of sign of \texttt{disp} on the whole open data crab sample.}
   \label{fig:delta_fact}
 \end{figure}
 %
@@ -420,32 +421,26 @@ likely to also affect the origin reconstruction on such events.
 
 %
 \begin{figure}
-  \begin{subfigure}{\textwidth}
-    \centering
-    \includegraphics[width=0.8\textwidth]{Plots/delta_delta/delta_diff_hist_different_cleanings_DBSCAN_delta_20131104_162.pdf}
-  \end{subfigure}
-  \begin{subfigure}{\textwidth}
-    \centering
-    \includegraphics[width=0.8\textwidth]{Plots/delta_delta/delta_diff_hist_perc_DBSCAN_delta_20131104_162.pdf}
-  \end{subfigure}
-  \caption{Differences between the PhotonStream \texttt{delta} and the FACTtools \texttt{delta} for the DBSCAN cleaning (top histogram) and the DBSCAN cleaning extended by excluding pixels with less than $\SI{1}{\percent}$ of the shower's \texttt{size}.}
+  \centering
+  \includegraphics[width=\textwidth]{Plots/delta_delta/delta_diff_hist_perc_and_normal_DBSCAN_delta_20131104_162.pdf}
+  \caption{Differences between the PhotonStream \texttt{delta} and the FACT-Tools \texttt{delta} for the DBSCAN cleaning (blue) and the DBSCAN cleaning extended by excluding pixels with less than $\SI{1}{\percent}$ of the shower's \texttt{size} (orange).}
   \label{fig:delta}
 \end{figure}
 %
-Since the FACTtools analysis yields good results and a working origin
+Since the FACT-Tools analysis yields good results and a working origin
 reconstruction, the differences between its features and the DBSCAN cluster
 features can also be investigated to understand the new data representation.
 \autoref{fig:delta} shows the differences between the PhotonStream
-\texttt{delta} and the FACTtools \texttt{delta} for the DBSCAN cleaning (top
+\texttt{delta} and the FACT-Tools \texttt{delta} for the DBSCAN cleaning (blue
 histogram) and the DBSCAN cleaning extended by excluding pixels with less
-than $\SI{1}{\percent}$ of the shower's \texttt{size}.
+than $\SI{1}{\percent}$ of the shower's \texttt{size} (orange histogram).
 From these distributions, it becomes clear that the difference of the
 PhotonStream's air-showers does not solely result from the wider spread of
 the light distribution over the camera pixels. The two distributions barely
 differ from another, although as shown by \autoref{fig:delta_diff_perc}, the
 reconstruction of \texttt{delta} seems to improve with the additional
 cleaning. For the majority of events the calculated \texttt{delta} is within
-$\mathcal{O}(\SI{10}{\degree})$ to the FACTtools \texttt{delta}, but for the
+$\mathcal{O}(\SI{10}{\degree})$ to the FACT-Tools \texttt{delta}, but for the
 origin reconstruction such a difference can become a difficult obstacle.
 However, this comparison, as the one with the expected source position
 within the camera, is not a comparison with truth values, but rather one
@@ -650,7 +645,10 @@ clustering, DBSCAN is defined by two dedicated parameters, as described in
 as well. However, there does not appear to be reason to believe that an
 analysis specific set of the two parameters needs to be derived.
 
-The minimum number of photons within a cluster $m$ has not been investigated.
+The minimum number of photons within a cluster $m$ has not been investigated. A
+minimum number of \num{20} photons excludes only very small noise clusters. For
+the analysis, the cuts in \texttt{size} and \texttt{n\_cluster} will then
+exclude the small events.
 
 The minimum distance $\varepsilon$ for a photon to still be associated with a
 dense cluster has been investigated to be \num{0.1} for optimal results. The
@@ -781,10 +779,12 @@ To investigate the effects of $\varepsilon$ further on a higher level than the
 feature distributions, the scores used to validate the analysis results can be
 investigated in dependancy to the value of $\varepsilon$. To do so, these
 scores are shown in \autoref{fig:eps_scores}, \ref{fig:eps_sigma} and
-\ref{fig:eps_theta} for $\varepsilon \in [0.07,\,0.1]$. No real dependancy can
+\ref{fig:eps_theta} for $\varepsilon \in [0.07,\,0.1]$. \autoref{fig:eps_sigma}
+additionally contains smaller values of $\varepsilon$. No real dependancy can
 be seen and the results seem to be the same throughout the variation. Except
 for the number of reconstructed air-showers, which decreases strongly for small
-$\varepsilon$.
+$\varepsilon$, resulting in the sharply decreasing detection significance in
+\autoref{fig:eps_sigma}.
 %
 \begin{figure}
   \centering
@@ -796,7 +796,7 @@ $\varepsilon$.
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{Plots/Epsilon/eps_sigma.pdf}
-  \caption{Detection significances for the PhotonStream open crab sample in dependancy of the DBSCAN's $\varepsilon$. \textcolor{red}{Punkte für 0.06 und 0.05 hinzufügen}}
+  \caption{Detection significances for the PhotonStream open crab sample in dependancy of the DBSCAN's $\varepsilon$.}
   \label{fig:eps_sigma}
 \end{figure}
 %
@@ -812,4 +812,4 @@ $\varepsilon$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 The pixel-based cleaning on PE thresholds as described in \autoref{sec:thresh}
-has been implemented on PhotonStream data. \textcolor{red}{[Rein theoretisch kann man hier alles bereits gezeigte daran nochmal durchexerzieren... Aber im Prinzip kam nur raus, dass es damit noch ein bisschen schlechter läuft, die Sachen aber logischerweise besser zur FACTtools Analyse passen.]}
+has been implemented on PhotonStream data. \textcolor{red}{[Rein theoretisch kann man hier alles bereits gezeigte daran nochmal durchexerzieren... Aber im Prinzip kam nur raus, dass es damit noch ein bisschen schlechter läuft, die Sachen aber logischerweise besser zur FACT-Tools Analyse passen.]}
