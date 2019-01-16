@@ -288,7 +288,7 @@ performance by taking advantage of the new additional dimension.
 
 The distributions of arrival times of the single photons for data and MC
 simulations are shown in \autoref{fig:slices}. The histograms show the arrival
-times for every single Photon of 2000 events normalized to an area of 1. The
+times for every single photon of 2000 events normalized to an area of 1. The
 top histogram represents all arriving photons. It becomes clear that there
 seems to be a significant discrepancy between the MC simulations and data.
 While distributions of the MC simulations of both, gammas and protons, quite
@@ -371,7 +371,7 @@ reconstruction of the air-shower events.
 \begin{figure}
   \centering
   \includegraphics[width=0.7\textwidth]{Plots/delta_delta/delta_delta_facttools.pdf}
-  \caption{Difference between calculated delta and true delta for the FACT-Tools analysis. The distributions show the calculated $\symup{\Delta}\delta$ for the different predictions of sign of \texttt{disp} on the whole open data crab sample.}
+  \caption{Difference between calculated delta and true delta for the FACT-Tools analysis \cite{openana}. The distributions show the calculated $\symup{\Delta}\delta$ for the different predictions of sign of \texttt{disp} on the whole open data crab sample.}
   \label{fig:delta_fact}
 \end{figure}
 %
@@ -561,12 +561,12 @@ significantly.
 \end{figure}
 %
 %
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth, page=3]{Plots/results/DBSCAN/separation_performance.pdf}
-  \caption{Gamma hadron separation plot.}
-  \label{fig:sep2}
-\end{figure}
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=0.8\textwidth, page=3]{Plots/results/DBSCAN/separation_performance.pdf}
+%   \caption{Gamma hadron separation plot.}
+%   \label{fig:sep2}
+% \end{figure}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Energy Estimation}
@@ -612,7 +612,7 @@ Especially for low energies the spread becomes very large. Air-showers
 resulting from low energy primary particles contain less Cherenkov photons, as
 described above. Therefore the reconstructed air-shower not only contains less
 photons but also illuminates a smaller area of the camera. Thus, fluctuations
-become more important and the acurat reconstruction of the image features more
+become more important and the accurate reconstruction of the image features more
 difficult. Low energy events consequently are intrinsically harder to assign
 the right energy to.
 %
@@ -624,13 +624,16 @@ the right energy to.
 \end{figure}
 %
 %
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Plots/results/DBSCAN/bias_resolution.pdf}
-  \caption{Bias and resolution.}
-  \label{fig:bias}
-\end{figure}
-%
+% The energy bias and resolution of the analysis are shown for bins of true gamma
+% energy in \autoref{fig:bias}.
+% %
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=0.9\textwidth]{Plots/results/DBSCAN/bias_resolution.pdf}
+%   \caption{Bias (blue histogram) and resolution (orange histogram) of the PhotonStream data on DBSCAN cleaning as a function of true Energy of the gamma rays.}
+%   \label{fig:bias}
+% \end{figure}
+% %
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -811,5 +814,34 @@ $\varepsilon$, resulting in the sharply decreasing detection significance in
 \section{Pixelbased Threshold Cleaning on the PhotonStream}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-The pixel-based cleaning on PE thresholds as described in \autoref{sec:thresh}
-has been implemented on PhotonStream data. \textcolor{red}{[Rein theoretisch kann man hier alles bereits gezeigte daran nochmal durchexerzieren... Aber im Prinzip kam nur raus, dass es damit noch ein bisschen schlechter läuft, die Sachen aber logischerweise besser zur FACT-Tools Analyse passen.]}
+As shown in \autoref{fig:analysis}, the cleaning via DBSCAN is not exclusive
+for PhotonStream data. The point-cloud can easily be integrated over time and
+thus reprojected to the camera plane. This way the DBSCAN cleaning can be
+evaluated by applying the classical pixelbased threshold cleaning, as defined
+in \autoref{sec:thresh}, on PhotonStream data. Since the PhotonStream data
+differs from the LP by consisting of generally brighter images (larger number
+of PE), the best thresholds for air-shower pixels might differ from the ones
+described in \autoref{sec:thresh}. Still, the results might explain the
+differences of the novel data format.
+
+The features of this cleaned data set resemble those of the FACT-Tools
+analysis: air-showers have a rather small \texttt{length} and \texttt{width},
+culminating around \num{10} rather than the large values of the DBSCAN
+air-showers. Since the cleaning equals the one used within the FACT-Tools
+analysis, apart from a small offset due to brighter air-showers, this is
+expected. However, the data MC mismatches still remain significant, resulting
+in worse performance on the analysis tasks than the DBSCAN data. The gamma-
+hadron separation AUC drops to $0.7501\,\pm\,0.0019$, while the detection
+significance on the data sample does not exceed $10.2\,\symup{\sigma}$. The
+classification output is shown in \autoref{fig:threshg}. It becomes clear that
+a large number of protons is classified as gammas by the descision trees. Thus,
+the proton MC simulations on this cleaning look very similar to the gamma MC
+simulations and the trained model is not performing well. Of course, the
+cleaning is not optimized to this data format, but
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth, page=5]{Plots/data_mc/features_thresh.pdf}
+  \caption{Output of the random forest used for the gamma hadron separation on the PhotonStream data set cleaned via the pixelbased threshold method.}
+  \label{fig:threshg}
+\end{figure}

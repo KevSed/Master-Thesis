@@ -1,28 +1,20 @@
 \chapter{Appendix}
 \addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
 %
-\section{Plots}
-\begin{table}
-  \centering%
-  \begin{tabular}{l
-                  c
-                  c}
-      \toprule
-      {}    & Anzahl der Filter in den Dichtelagen  & Struktur der Dropout Lagen      \\
-      \midrule
-      Modell 0    & (1024, 512, 128, 64, 32)  & (0.5, 0.4, 0.4, 0.3, 0.2) \\
-      Modell 1    & (1024, 512, 256, 128, 64, 32, 16)  & (0.5, 0.4, 0.4, 0.4, 0.2, 0.2, 0.1) \\
-      Modell 2    & (512, 256, 128, 64, 32, 16)  & (0.4, 0.4, 0.3, 0.3, 0.2, 0.1) \\
-      Modell 3    & (1024, 256, 64, 16)  & (0.6, 0.4, 0.2, 0.1) \\
-      Modell 4    & (512, 128, 32)  & (0.5, 0.3, 0.1) \\
-      \bottomrule
-  \end{tabular}
-  \caption{Getestete Grundstrukturen für die Netzarchitekturen der alternativen Methode. Das $n$-te Element der Tupel beschreibt jeweils die Filtergröße der $n$-ten Dichtelage. Selbiges gilt für die Dropout Lagen. Es folgt auf jede Dichtelage (abgesehen von der letzten Lage) eine Dropout Lage.}
-  \label{tab:grid}
-\end{table}
+To quantify the mismatches of proton MC simulations and observed data, a random
+forest is trained on the feature set, implemented in the \texttt{FeatureStream}, to distinguish the both. Since the
+observed data vastly consists of hadron events, for a perfect simulation it
+should hardly be possible to distinguish the data sets, while for existing
+mismatches, the AUC of the model quantifies those. The ROC curve is shown in \autoref{fig:mcd_roc}. The resulting AUC of
+0.7509\,\pm\,0.0025 is very high and therefore represents a good
+discrimination. An AUC this large thus indicates strong data MC mismatches.
 %
-
-
-
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{Plots/data_mc/data_mc_separation.pdf}
+  \caption{ROC curve for a random forest model discriminating between proton MC simulations and observed data based in the features implemented in the \texttt{FeatureStream}. The resulting AUC of 0.7509\,\pm\,0.0025 is very high and therefore represents a good discrimination. The proton MC simulations are supposed to model the vast majority of observed data, since the hadron flux is dominating. An AUC this large thus indicates strong data MC mismatches.}
+  \label{fig:mcd_roc}
+\end{figure}
+%
 
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}

@@ -1,4 +1,4 @@
-\chapter{Analysis chain}
+\chapter{Analysis chain}\label{ch:analysis}
 %
 For the PhotonStream data representation, as a new way of describing IACT data,
 there is no reference analysis chain so far. The new possibilities of this
@@ -23,9 +23,9 @@ shown in \autoref{fig:analysis}.
     \node (f7) [feature, below of=f5] {parameter set A};
     \node (f8) [LP, below of=f6] {parameter set B};
     \node (s3) [astep, below of=s2] {parametrization};
-    \node (f9) [both, below of=f7, xshift=2.0cm] {IACT Tools};
+    \node (f9) [both, below of=f7, xshift=2.0cm] {IACT Tools~\cite{aicttools}};
     \node (s4) [astep, below of=s3] {separation};
-    \node (f10) [both, below of=f9] {IACT Tools};
+    \node (f10) [both, below of=f9] {IACT Tools~\cite{aicttools}};
     \node (s5) [astep, below of=s4] {energy \& origin reconstruction};
 
     \draw [arrg] (f3) -- node[anchor=east] {} (f5);
