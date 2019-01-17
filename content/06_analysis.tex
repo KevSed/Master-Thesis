@@ -23,9 +23,9 @@ shown in \autoref{fig:analysis}.
     \node (f7) [feature, below of=f5] {parameter set A};
     \node (f8) [LP, below of=f6] {parameter set B};
     \node (s3) [astep, below of=s2] {parametrization};
-    \node (f9) [both, below of=f7, xshift=2.0cm] {IACT Tools~\cite{aicttools}};
+    \node (f9) [both, below of=f7, xshift=2.0cm] {AICT Tools~\cite{aicttools}};
     \node (s4) [astep, below of=s3] {separation};
-    \node (f10) [both, below of=f9] {IACT Tools~\cite{aicttools}};
+    \node (f10) [both, below of=f9] {AICT Tools~\cite{aicttools}};
     \node (s5) [astep, below of=s4] {energy \& origin reconstruction};
 
     \draw [arrg] (f3) -- node[anchor=east] {} (f5);
@@ -72,8 +72,7 @@ topological features are mandated by the physical process and can therefore be
 unrestrictedly used for the cleaning. Background events like ambient light or
 starlight do not show these characteristics and tend to appear randomly.
 
-The threedimensional $xyt$-representation of the PhotonStream's point-cloud
-quantifies photons with exactly those three observables. Thus, a cleaning
+The threedimensional $xyt$-representation of the PhotonStream, called point-cloud, quantifies photons with exactly those three observables. Thus, a cleaning
 within the threedimensional space-time can heavily use the known topology.
 Within the point-cloud, an air-shower will appear as a very dense cluster of
 photons, surrounded by a merely isotropic distribution of background photons.
@@ -82,12 +81,12 @@ naturally suggest a density-based clustering algorithm as the cleaning method
 of choice. The two challenges at hand are the choice of a suited algorithm and
 a well defined metric to make the threedimensional spacetime usable.
 
-\subsection{Air-showers in the point-cloud}
+\subsection{Air-showers in the Point-Cloud}
 %
 The threedimensional spacetime of the PhotonStream and its representation as a
 point-cloud eventually mixes spatial dimensions with time. While this is
 physically motivated, defining distances in such a space is not trivial. They
-are highly dependent on the chosen metric, which defines how time correspondsto
+are highly dependent on the chosen metric, which defines how time corresponds to
 space. This already implies that the choice of metric contains certain
 assumptions and can be adapted to specific preferences. The essential parameter
 is the factor $\alpha$, which transfers time to space and vice versa:
@@ -108,7 +107,7 @@ to the photon distribution of a typical air-shower along each axis. So, by
 choosing
 %
 \begin{equation}
-  \alpha = 0.35\cdot10^9\,\si{\degree\per\second}
+  \alpha = 0.35\cdot10^9\,\si{\degree\per\second}\, ,
 \end{equation}
 %
 the one-dimensional density distribution of photons along the coordinates
@@ -253,8 +252,11 @@ coordinate axes.
   \text{kurt}(X) &= \text{E}\left[\left(\frac{X-\mu}{\sigma}\right)^4\right]  \label{eq:kurt}
 \end{align}
 %
-Additional to the \texttt{size} of an air-shower the \texttt{number of pixels}
-containing air-shower photons is used as a feature.
+Additional to the \texttt{size} of an air-shower the number of pixels
+\texttt{n\_pixel} containing air-shower photons is used as a feature. Since
+there might be more than one cluster in an air-shower event, especially for
+hadron showers, the ratio of the cluster sizes (\texttt{cluster\_size\_ratio})
+is used for the gamma hadron separation.
 %
 \section{Reconstruction of the Source Position}
 \label{sec:source_pos}%
@@ -268,13 +270,13 @@ dimensional problem of determining $x$ and $y$ coordinates is turned into a
 regression task and a classification task. The estimated source position within
 the camera's image is assumed to be on the shower's main axis. To find this
 position the first step is to estimate the distance to the \texttt{cog} of the
-air-shower. disp is representing that distance of the estimated source inside
+air-shower. \texttt{disp} is representing that distance of the estimated source inside
 the camera. As described earlier the fraction of \texttt{width} and \texttt{length} is dependant
 on the angle under that the air-shower is hitting the camera. Thus, it is
 \enquote{pointing} to the cosmic origin of the shower.
 
-The second step is to determine the direction of disp along
-the main axis. As shown in \autoref{fig:disp_amb} the distance disp alone is
+The second step is to determine the direction of \texttt{disp} along
+the main axis. As shown in \autoref{fig:disp_amb} the distance \texttt{disp} alone is
 not sufficient to determine the source position, but an additional direction is
 needed. Otherwise there remains an ambiguity, as shown in the two examples.
 The assumption of the origin position being on the shower axis reduces this
@@ -298,7 +300,7 @@ between the both is labelled $\theta$ and source specific.
 \begin{figure}
   \centering%
   \includegraphics[width=0.6\textwidth]{Plots/hillas_disp.pdf}%
-  \caption{Result of the reconstruction of the source position using the disp method \cite{maxhillas}. From the reconstructed source position the distance $\theta$ to the true source position can be calculated to validate the reconstruction.}%
+  \caption{Result of the reconstruction of the source position using the disp-method \cite{maxhillas}. From the reconstructed source position the distance $\theta$ to the true source position can be calculated to validate the reconstruction.}%
   \label{fig:disp}%
 \end{figure}
 %

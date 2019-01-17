@@ -480,17 +480,27 @@ on-source observations. Both, $\theta^2$-cut and the \texttt{gamma\_prediction}
 threshold are determined by finding the highest significance, calculated as
 described by Li \& Ma \cite{LiMa}.
 
+The used random forest is trained on gamma and proton MC simulations to perform
+the \texttt{disp} regression and the \texttt{sign} classification. The
+performance results of this training are very good for the \texttt{sign}
+classification, while the regression of \texttt{disp} seems to be more
+difficult. The accuracy of the \texttt{sign} classification averaged from the
+cross-validation is $0.7923\,\pm\,0.0018$. Slightly outperforming the FACT-
+Tools analysis with an accuracy of $0.7537\,\pm\,0.0018$. The regression of
+\texttt{disp}, however, only reaches an $R^2$ score of $0.5385\,\pm\,0.0046$,
+which is quite low and might strongly affect the accuracy of the origin reconstruction. The FACT-Tools analysis, in comparison, reaches an $R^2$ score of $0.6631\,\pm\,0.0044$.
+
 For a Crab Nebula data sample and a working analysis the $\theta^2$-plot is
 expected to have an equally distributed, low number of Off-events with a
 significant excess of On-events as close to $\theta^2 = 0$ as possible. From
 the results shown in \autoref{fig:theta2} it becomes very clear, that the
 reconstruction of the PhotonStream data in the way described above does not
-yield a very good source reconstruction. The optimal $\theta^2$-cuts around
-\num{0.1} are quite large. The distribution of the On-events around the true
-source position are rather fuzzy: there is no clear peak, especially not around
-\num{0}. The source excess starts around \num{0.10} and grows until between
-\num{0} and \num{0.05}. Thus, the reconstruction of the source position and
-especially the regression of \texttt{disp} seem to have a big error margin,
+yield a very good source reconstruction on data. The optimal $\theta^2$-cuts
+around \num{0.1} are quite large. The distribution of the On-events around the
+true source position are rather fuzzy: there is no clear peak, especially not
+around \num{0}. The source excess starts around \num{0.10} and grows until
+between \num{0} and \num{0.05}. Thus, the reconstruction of the source position
+and especially the regression of \texttt{disp} seem to have a big error margin,
 reconstructing events to the close proximity of the true source position. Since
 $\theta$ is not the error on the reconstructed position, but rather the
 distance of all cleaned events to a specific source, the cleaning and
@@ -581,7 +591,13 @@ results on the reconstructed energy.
 For this analysis a random forest is used for the energy estimation, as well.
 It performs a regression task and consists of \num{100} decision trees and a
 maximum depth of \num{15} for the single tree. The forest is trained on the
-features shown in \autoref{fig:energy_feat}. This figure also shows the
+features shown in \autoref{fig:energy_feat}. In addition to the features described in \autoref{sec:params}, the \texttt{area} of the shower is used for the energy estimation. It is defined as
+%
+\begin{equation}
+  \texttt{area} = \texttt{width}\times\texttt{length}\times\symup{\pi}\, .
+\end{equation}
+%
+\autoref{fig:energy_feat} also shows the
 proportional importances of the single features within the trained model. The
 most important features for the energy estimation of a shower are those
 strongly correlated with the number of photons within the air-shower. The
@@ -623,6 +639,12 @@ the right energy to.
   \label{fig:energy_matr}
 \end{figure}
 %
+The resulting $R^2$ score for the best energy estimation model on PhotonStream
+data is $R^2 = 0.74$. This is a quite good score for the energy estimation and
+shows that the energy reconstruction works well on the gamma MC simulations.
+Especially when compared to the FACT-Tools open data analysis~\cite{openana},
+which reaches an $R^2$ score of $0.6876$, this result outperforms the
+classical analysis.
 %
 % The energy bias and resolution of the analysis are shown for bins of true gamma
 % energy in \autoref{fig:bias}.
