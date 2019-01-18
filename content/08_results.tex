@@ -489,7 +489,7 @@ cross-validation is $0.7923\,\pm\,0.0018$. Slightly outperforming the FACT-
 Tools analysis with an accuracy of $0.7537\,\pm\,0.0018$. The regression of
 \texttt{disp}, however, only reaches an $R^2$ score of $0.5385\,\pm\,0.0046$,
 which is quite low and might strongly affect the accuracy of the origin
-reconstruction. The FACT-Tools analysis, in comparison, reaches an $R^2$ score 
+reconstruction. The FACT-Tools analysis, in comparison, reaches an $R^2$ score
 of $0.6631\,\pm\,0.0044$.
 
 For a Crab Nebula data sample and a working analysis the $\theta^2$-plot is
@@ -823,14 +823,14 @@ $\varepsilon$, resulting in the sharply decreasing detection significance in
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{Plots/Epsilon/eps_sigma.pdf}
-  \caption{Detection significances for the PhotonStream open crab sample in dependancy of the DBSCAN's $\varepsilon$.}
+  \caption{Detection significances for the PhotonStream open crab sample in dependancy of the DBSCAN's $\varepsilon$. The significances represent the maximum detection significance as a function of the $\theta^2$-cut and the prediction threshold of the separation.}
   \label{fig:eps_sigma}
 \end{figure}
 %
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{Plots/Epsilon/eps_theta_cut.pdf}
-  \caption{$\theta^2$ cuts for the maximum detection signifance on the PhotonStream open crab sample for different $\varepsilon$-configurations.}
+  \caption{$\theta^2$ cuts for the maximum detection signifance on the PhotonStream open crab sample for different $\varepsilon$-configurations. The cuts are optimized to yield the maximum detection significance.}
   \label{fig:eps_theta}
 \end{figure}
 
@@ -858,14 +858,22 @@ in worse performance on the analysis tasks than the DBSCAN data. The gamma-
 hadron separation AUC drops to $0.7501\,\pm\,0.0019$, while the detection
 significance on the data sample does not exceed $10.2\,\symup{\sigma}$. The
 classification output is shown in \autoref{fig:threshg}. It becomes clear that
-a large number of protons is classified as gammas by the descision trees. Thus,
+a large number of protons is classified as gammas by the descision trees, affecting the origin reconstruction as well. Thus,
 the proton MC simulations on this cleaning look very similar to the gamma MC
-simulations and the trained model is not performing well. Of course, the
-cleaning is not optimized to this data format, but
-%
+simulations and the trained model is not performing well.
+
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth, page=5]{Plots/data_mc/features_thresh.pdf}
   \caption{Output of the random forest used for the gamma hadron separation on the PhotonStream data set cleaned via the pixelbased threshold method.}
   \label{fig:threshg}
 \end{figure}
+%
+This cleaning, however, is not optimized to this data format and does not
+profit from the new representation, since the point-cloud needs to be projected 
+back to a two-dimensional representation. Furthermore, with the PhotonStream
+data containing brighter events, the thresholds might be to low and background
+pixels may survive the cleaning. However, even with higher cleaning thresholds,
+it appears that the DBSCAN cleaning is way better suited for the PhotonStream
+data format and there is, indeed, quite some optimization needed to find the
+right analysis parameters for this new data format.
