@@ -5,14 +5,30 @@ cosmic rays via their Cherenkov-light. The Cherenkov-light flashes that are
 only nano seconds in duration are measured and can be separated from background
 light from stars or ambient light by their brightness and topology within the
 camera image. There are different ways to represent air shower data. FACT uses
-the so called main-pulse representation, whereas this work focuses on a novel
+the so called largest-pulse representation (LP), whereas this work focuses on a novel
 data format, both of which are described in the following chapter.
 
 \section{The Main-Pulse representation}
 %
-Data taken by an Imaging-Air-Cherenkov-Telescope
-(IACT), like FACT, is usually represented in so called time series.
-These time series owe their name to the fact that they represent voltages at the photosensors over time. Within these time series lie so called main-pulses that represent the increased voltage that a charge deposition of an air-shower causes. So by looking for those main-pulses, shower events can be found upon the detector noise and ambient light in the camera. Of course, the main-pulses consist of multiple photon signals and noise superposed over time, but in this state they are electric pulses representing the response of very specific hardware. So rather than measuring physical properties, this means that the charge deposit has to be interpretated to be transferred into physics observables, independent of these specifics \textcolor{red}{(which ones?)}. Such interpretations always include assumptions of physical and technical kinds. By integrating the charge in one pixel an equivalent of a photon count can be obtained, called the \textit{photon equivalent} (PE). So the first observable in this representation is the PE which corresponds to the best estimate of the number of photons measured per pixel. The photon counts are spatially located by the corresponding pixel they are assigned to. The 1440 pixels of FACT are the determining grid that yield the spatial coordinates of every shower event.
+Data taken by an Imaging Air Cherenkov Telescope, like FACT, is usually represented in so called time series.
+These time series owe their name to the fact that they represent voltages at
+the photosensors over time. Within these time series lie so called main-pulses
+that represent the increased voltage that a charge deposition of an air-shower
+causes. So, by looking for those main-pulses, shower events can be found upon
+the detector noise and ambient light in the camera. Of course, the main-pulses
+consist of multiple photon signals and noise superposed over time, but in this
+state they are electric pulses representing the response of very specific
+hardware. So rather than measuring physical properties, this means that the
+charge deposit has to be interpretated to be transferred into physics
+observables, independent of these specifics \textcolor{red}{(which ones?)}.
+Such interpretations always include assumptions of physical and technical
+kinds. By integrating the charge in one pixel an equivalent of a photon count
+can be obtained, called the \textit{photon equivalent} (PE). So the first
+observable in this representation is the PE which corresponds to the best
+estimate of the number of photons measured per pixel. The photon counts are
+spatially located by the corresponding pixel they are assigned to. The 1440
+pixels of FACT are the determining grid that yield the spatial coordinates of
+every shower event.
 
 The second observable is the time. When the telescope is triggered and records
 data the arrival time of the event is measured via the time information within
@@ -63,7 +79,7 @@ The transformation of data to the PhotonStream consists of two steps:
   \item subtract those photons from the time series until only noise is left
 \end{enumerate}
 %
-To achieve this two templates are used. At first, the ideal template of a
+To achieve this, two templates are used. Firstly, the ideal template of a
 single photon pulse $T_1$ is generated. It represents the discharge-pulse of a
 GAPD when measuring a photon. This template is used to subtract found photons
 from the remaining time series. To find these pulses the rising edge of that

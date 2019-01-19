@@ -22,9 +22,8 @@ simulated point sources and diffuse background sources. To train the analysis
 tools, dedicated truths for each of the tasks are needed. The simulations
 contain these truths, and are used for this task. Therefore, the quality of
 these simulations is essential to the quality of the analysis. The simulations
-are processed in two steps: firstly the interactions of cosmic rays with earth's
-atmosphere is computed and secondly, the interaction of the generated Cherenkov
-light with the telescopes hardware is simulated. The interaction of the particles with the atmosphere and the resulting air-showers are simulated by the framework CORSIKA~\cite{CORSIKA}.
+are processed in two steps: firstly the interactions of cosmic rays with Earth's
+atmosphere is computed and secondly, the interaction of the generated Cherenkov-light with the telescope's hardware is simulated. The interaction of the particles with the atmosphere and the resulting air-showers are simulated by the framework CORSIKA~\cite{CORSIKA}.
 
 The detector response of FACT's camera, including
 triggers, is then determined for the simulated events using CERES~\cite{ceres}.
@@ -62,7 +61,7 @@ but in LP representation.
 As described in \autoref{fig:analysis}, the analysis uses the pixel-based
 cleaning algorithm, as defined in \autoref{sec:thresh}. Furthermore, the
 parameter set, used for the analysis tasks, contains a number of additional
-features, not yet implemented in the
+features, not yet implemented in the PhotonStream's feature generation
 \texttt{FeatureStream}~\cite{FeatureStream}. In contrast to this work, the
 quality cuts on the used events were optimized and are based on the work and
 experience of hitherto performed analyses. The three main tasks of such
@@ -71,7 +70,7 @@ reconstrcution) are performed with the machine learning package \texttt{aict-too
 The analysis tasks, therefore, are performed the same way as for the
 PhotonStream analysis, but with a parameter set beyond the standard features implemented for the PhotonStream analysis.
 
-For the above mentioned reasons concerning the data representation and anylsis
+For the above mentioned reasons concerning the data representation and analysis
 details, a direct comparison of results is very hard. The results of this
 classical analysis are nevertheless based on the same data and definetely allow
 for a comparison of the PhotonStream's characteristics to LP data. They

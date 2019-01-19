@@ -72,19 +72,19 @@ topological features are mandated by the physical process and can therefore be
 unrestrictedly used for the cleaning. Background events like ambient light or
 starlight do not show these characteristics and tend to appear randomly.
 
-The threedimensional $xyt$-representation of the PhotonStream, called point-cloud, quantifies photons with exactly those three observables. Thus, a cleaning
+The threedimensional $xyt$-representation of the PhotonStream, called point cloud, quantifies photons with exactly those three observables. Thus, a cleaning
 within the threedimensional space-time can heavily use the known topology.
-Within the point-cloud, an air-shower will appear as a very dense cluster of
+Within the point cloud, an air-shower will appear as a very dense cluster of
 photons, surrounded by a merely isotropic distribution of background photons.
 These characteristics of shower events in the PhotonStream representation
 naturally suggest a density-based clustering algorithm as the cleaning method
 of choice. The two challenges at hand are the choice of a suited algorithm and
 a well defined metric to make the threedimensional spacetime usable.
 
-\subsection{Air-showers in the Point-Cloud}
+\subsection{Air-showers in the Point Cloud}
 %
 The threedimensional spacetime of the PhotonStream and its representation as a
-point-cloud eventually mixes spatial dimensions with time. While this is
+point cloud eventually mixes spatial dimensions with time. While this is
 physically motivated, defining distances in such a space is not trivial. They
 are highly dependent on the chosen metric, which defines how time corresponds to
 space. This already implies that the choice of metric contains certain
@@ -98,7 +98,7 @@ is the factor $\alpha$, which transfers time to space and vice versa:
 %
 The choice of this parameter e.g. gives the possibility to prefer spatial
 distance over timing information, or the opposite. The spacetime of the
-point-cloud is quantized in all its three dimensions: the pixels of the camera
+point cloud is quantized in all its three dimensions: the pixels of the camera
 define the spatial grid, whereas the time slices, each event is binned to, do so
 for the timing information. When trying to separate air-showers from
 background via the density of the shower's photons, the distance plays the
@@ -118,7 +118,7 @@ photons $a$ and $b$ is defined as
   d_{a,b} = \sqrt{(c_x^a - c_x^b)^2 + (c_y^a - c_y^b)^2 + (c_t^a - c_t^b)^2}
 \end{equation}
 
-The twodimensional projections of the point-cloud within this metric are shown
+The twodimensional projections of the point cloud within this metric are shown
 in \autoref{fig:pc} for an example air-shower event. With the calculated
 degree-equivalent of time the air-shower shows a similar distribution in
 each dimension.
@@ -126,7 +126,7 @@ each dimension.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.6\textwidth, angle=-90]{Plots/point_cloud.pdf}
-  \caption{Twodimensional projections of the point-cloud using the metric described above.}
+  \caption{Twodimensional projections of the point cloud using the metric described above. The blue spheres represent single photons. Dense regions therefore appear in a darker blue.}
   \label{fig:pc}
 \end{figure}
 %
@@ -135,9 +135,7 @@ each dimension.
 %
 To find clusters of photons within the space described above, the PhotonStream
 uses the \textit{density-based algorithm for discovering clusters with noise}
-(DBSCAN) \cite{DBSCAN}. The DBSCAN is well suited for finding air-showers with the
-PhotonStream's observables, when choosing the right parameter set for the algorithm. This
-algorithm either assigns each extracted photon to one of potentially multiple
+(DBSCAN) \cite{DBSCAN}. The DBSCAN is well suited for finding air-showers with the PhotonStream's observables, when choosing the right parameter set for the algorithm. This unsupervised algorithm either assigns each extracted photon to one of potentially multiple
 clusters or identifies it as a night-sky-background photon. There are no
 assumptions on the shape, location or number of the clusters. The algorithm is
 characterized by only two parameters.
@@ -220,7 +218,7 @@ air-shower image is shown in \autoref{fig:hillas}.
   \centering%
   \includegraphics[width=0.6\textwidth]{Plots/hillas.pdf}%
   \caption{A graphical representation of a typical air-shower image \cite{maxhillas}. The figure shows the number of photons per pixel of an air-shower. The dotted
-  line represents the air-shower axis. It corresponds to the line minimising the
+  line represents the air-shower axis. It corresponds to the line minimizing the
   sum of perpendicular angular distance, weighted by the number of photons per
   pixel. The standard deviations along this axis and the perpendicular axis are
   the two features called \texttt{length} and \texttt{width}. The center of
@@ -230,7 +228,7 @@ air-shower image is shown in \autoref{fig:hillas}.
 \end{figure}
 %
 The figure shows the number of photons per pixel of an air-shower. The dotted
-line represents the air-shower axis. It corresponds to the line minimising the
+line represents the air-shower axis. It corresponds to the line minimizing the
 sum of perpendicular angular distance, weighted by the number of photons per
 pixel. The standard deviations along this axis and the perpendicular axis are
 the two features called \texttt{length} and \texttt{width}. The center of
@@ -265,13 +263,13 @@ FACT is a single telescope and therefore has no stereoscopic features to
 determine the origin of the cosmic ray showers. Thus, specific techniques only
 using the features of the air-shower images have to be performed. In this
 analysis the so called disp-method is used. It estimates the origin position of
-the cosmic gamma-rays by estimating the \texttt{disp} and the \texttt{sign}. The two
+the cosmic gamma-rays by estimating the two features \texttt{disp} and the \texttt{sign}. The two
 dimensional problem of determining $x$ and $y$ coordinates is turned into a
 regression task and a classification task. The estimated source position within
 the camera's image is assumed to be on the shower's main axis. To find this
 position the first step is to estimate the distance to the \texttt{cog} of the
 air-shower. \texttt{disp} is representing that distance of the estimated source inside
-the camera. As described earlier the fraction of \texttt{width} and \texttt{length} is dependant
+the camera. As described earlier the fraction of \texttt{width} and \texttt{length} is dependent
 on the angle under that the air-shower is hitting the camera. Thus, it is
 \enquote{pointing} to the cosmic origin of the shower.
 
