@@ -17,7 +17,7 @@ shown in \autoref{fig:analysis}.
     \node (f3) [feature, below of=f1] {\begin{varwidth}{9em}\centering{Extracting single photons}\end{varwidth}};
     \node (f4) [LP, below of=f2] {\begin{varwidth}{9em}\centering{Identifying large pulses}\end{varwidth}};
 
-    \node (f5) [feature, below of=f3] {DBSCAN};
+    \node (f5) [feature, below of=f3] {\begin{varwidth}{9em}\centering{density-based clustering}\end{varwidth}};
     \node (f6) [LP, below of=f4] {\begin{varwidth}{9em}\centering{pixel-based thresholds}\end{varwidth}};
     \node (s2) [astep, below of=s1] {image cleaning};
     \node (f7) [feature, below of=f5] {parameter set A};
@@ -38,7 +38,7 @@ shown in \autoref{fig:analysis}.
     \draw [arry] (f8) -- node[anchor=east] {} (f9);
     \draw [arry, color=cyan] (f9) -- node[anchor=east] {} (f10);
   \end{tikzpicture}
-  \caption{Schematic flow of the different analysis steps of this analysis. The PhotonStream analysis uses different calibrations (\autoref{sec:phs}) and a different cleaning (DBSCAN) than the LP representation. Nonetheless, the PhotonStream data contains all information neccessary to apply the LP pixel-based threshold cleaning on the calibrated data.}
+  \caption{Schematic flow of the different analysis steps of this analysis. The PhotonStream analysis uses different calibrations (\autoref{sec:phs}) and a different cleaning (density-based clustering) than the LP representation. Nonetheless, the PhotonStream data contains all information neccessary to apply the LP pixel-based threshold cleaning on the calibrated data.}
   \label{fig:analysis}
 \end{figure}
 %
@@ -46,7 +46,7 @@ To generate PhotonStream data a different calibration is needed. As described
 in \autoref{sec:phs}, instead of finding large pulses and calculating the data
 coordinates, the time series data is turned into single photons. The additional
 information of the PhotonStream is then used to clean the image in the
-threedimensional spacetime via the DBSCAN algorithm, rather than by setting
+threedimensional spacetime via the DBSCAN algorithm (\autoref{subsec:dbscan}), rather than by setting
 timing and PE thresholds for air-shower pixels. Nonetheless, the PhotonStream
 data contains all that is neccessary to perform this pixel-based cleaning
 instead. Therefore, this analysis is investigating said cleaning on
@@ -88,7 +88,9 @@ point cloud eventually mixes spatial dimensions with time. While this is
 physically motivated, defining distances in such a space is not trivial. They
 are highly dependent on the chosen metric, which defines how time corresponds to
 space. This already implies that the choice of metric contains certain
-assumptions and can be adapted to specific preferences. The essential parameter
+assumptions and can be adapted to specific preferences. It also shows that the
+image characteristics, its cleaning and therefore all analysis steps are
+influenced by the choice of parameters. The essential parameter
 is the factor $\alpha$, which transfers time to space and vice versa:
 %
 \begin{equation}
@@ -101,9 +103,9 @@ distance over timing information, or the opposite. The spacetime of the
 point cloud is quantized in all its three dimensions: the pixels of the camera
 define the spatial grid, whereas the time slices, each event is binned to, do so
 for the timing information. When trying to separate air-showers from
-background via the density of the shower's photons, the distance plays the
+background via the density of the shower's photons, the distance between photons plays the
 essential role. The natural way to equalize between space and time is to adapt
-to the photon distribution of a typical air-shower along each axis. So, by
+to the photon distribution of a typical air-shower along each dimension. So, by
 choosing
 %
 \begin{equation}
@@ -121,7 +123,8 @@ photons $a$ and $b$ is defined as
 The twodimensional projections of the point cloud within this metric are shown
 in \autoref{fig:pc} for an example air-shower event. With the calculated
 degree-equivalent of time the air-shower shows a similar distribution in
-each dimension.
+each dimension. Air-shower events show high density regions represented by
+dark blue photon accumulations in this point cloud representation.
 %
 \begin{figure}[H]
   \centering
@@ -131,7 +134,7 @@ each dimension.
 \end{figure}
 %
 
-\subsection{Density-based Clustering with DBSCAN}
+\subsection{Density-based Clustering with DBSCAN}\label{subsec:dbscan}
 %
 To find clusters of photons within the space described above, the PhotonStream
 uses the \textit{density-based algorithm for discovering clusters with noise}
@@ -148,7 +151,7 @@ characterized by only two parameters.
 These two parameters represent the specific topology of the air-shower events
 by giving limits on typical shower sizes and spreads in spacetime. For
 air-shower events recorded by FACT the best choice was found to be $m = 20$ and
-$\varepsilon = \SI{0.45}{\degree}$. So, to survive the cleaning, every found
+$\varepsilon = \SI{0.45}{\degree}$ \cite{sebastian}. So, to survive the cleaning, every found
 cluster must at least contain 20 photons within a maximum distance of
 $\SI{0.45}{\degree}$ to the respective closest photon. The algorithm determines
 the clusters by iterating over the photons in 4 steps:
@@ -318,9 +321,9 @@ pixel the time correlation has to be given between neighboring pixels. The
 algorithm executes the following steps \cite{facttools}:
 %
 \begin{enumerate}
-  \item find pixels containing more photons than an upper threshold $t_1$ (5~p.e.)
+  \item find pixels containing more photons than an upper threshold $t_1$ (5~PE)
   \item remove pixels with less than 2 neighbors above $t_1$
-  \item add neighbors of remaining pixels that are above a lower threshold $t_2$ (2.5~p.e.)
+  \item add neighbors of remaining pixels that are above a lower threshold $t_2$ (2.5~PE)
   \item remove pixels that have less than 2 neighbors arriving in $\SI{5}{\nano\second}$ time window
   \item remove single pixels with less than 2 neighbors
   \item remove pixels that have less than 2 neighbors inside a $\SI{5}{\nano\second}$ time window
@@ -328,7 +331,7 @@ algorithm executes the following steps \cite{facttools}:
 %
 The remaining pixels are considered to be the cleaned image. When projecting
 the PhotonStream data into a camera image and calculating the mean arrival
-times per pixel, unlike the threedimensional DBSCAN, this cleaning can
+times per pixel, unlike the threedimensional space for DBSCAN, this cleaning can
 equivalently be performed on PhotonStream data.
 
 
