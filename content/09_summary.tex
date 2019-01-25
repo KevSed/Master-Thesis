@@ -1,21 +1,60 @@
 \chapter{Summary}\label{ch:summary}
 %
-Paar Sachen gehören wohl eher in den outlook
-\begin{itemize}
-  \item there is an open data FACT sample, ready to be used for analysis
-  \item structure and tools to do so with PhotonStream data have been set up
-  \item PhotonStream data enables new methods and features for analyses
-  \item PhotonStream data contains more photons and therefore seems to reconstruct air-showers very efficient and closer to reality. but still similar to LP data format
-  \item with DBSCAN cleaning PhotonStream air-showers have larger spatial distributions along the pixels, which may need to be accounted for
-  \item on PhotonStream data all the classical features plus a large number of unprecedented features can be engineered
-  \item the main classical features on PhotonStream data have significant data MC mismatches
-  \item new time features can be implemented, but first hints on even stronger mismatches on time information in MC simulations
-  \item the topology of PhotonStream air-showers affects the orientation of the calculated shower axes strongly and causes the origin reconstruction to become blurred
-  \item a high performance origin reconstruction with the standard analysis very hard, \texttt{disp} regression not working well even on MC data
-  \item very high performance of the gamma hadron separation on MC data, better than compared FACT-Tools analysis
-  \item high performance of energy estimation on MC simulations, also better than FACT-Tools
-  \item DBSCAN cleaning seems to work best on PhotonStream data
-  \item other cleanings on threedimensional space possible
-  \item DBSCAN as implemented not really possible to be improved, rather optimize cuts in study since data mc mismatches have to be accounted for
-  \item classical pixel based threshold cleaning yields poor performance, threedimensional cleaning way to go
-\end{itemize}
+The PhotonStream offers a great number of new opportunities for future IACT
+analyses, only a few of which have been investigated in this analysis.
+In this work a very first analysis of the new IACT data representation
+PhotonStream is performed. It exclusively uses openly accessible data from the
+FACT open data sample~\cite{fact-data} and only open source software tools. The
+necessary data handling and feature generation tools have been implemented in
+the openly available \texttt{FeatureStream}~\cite{FeatureStream}. The extensive
+investigations on the different characteristics of the new representation and
+the implications for the analysis of PhotonStream data resulted in several
+remarks.
+
+The PhotonStream opens new ways to represent IACT data and to parametrize air-
+shower events for analysis. The single photon extraction results in a larger
+number of reconstructed photons and enables a more efficient and exact way to
+reconstruct air-shower events. The resulting images still suit the classical LP
+representation very well. The new per photon timing information impacts every
+analysis step. The density-based cleaning DBSCAN is a completely new way to
+clean air-shower events of the background. The resulting data set is
+characterized by brighter images with larger distributions along the spatial
+coordinates, that require new thresholds for cleanings and mismatches between
+simulations and observations. Generally, the PhotonStream data contains the
+information neccessary to generate the classical Hillas features and additional
+fetaures used in FACT analyses. Additionally, the new three-dimensional
+representation offers a great number of new features to be engineered. The
+classical features have been investigated in this work and show significant
+mismatches to the respective simulations. The mismatches have a strong impact
+on the analysis results and need to be accounted for by quality cuts or
+improving the simulation quality.
+
+The timing information within the PhotonStream shows even bigger mismatches and
+therefore needs better simukation quality and optimized analysis methods to
+boost the analysis performance. The different topology of cleaned air-shower
+events strongly affects the used machine learning techniques for the origin
+reconstruction. The orientation of air-showers shows significant mismatches,
+making the reconstrcution error very large and the reconstructed signal source
+blurred. The disp-method used for the origin reconstruction does not perform
+very well, even on the MC simulations it is trained on. The separation of gamma
+air-showers and hadronic air-showers is working very well on MC simulations.
+The performance measures yield better results than the comparative FACT-Tools
+analysis. The energy estimation of the gamma air-showers yields a significantly
+better performance than the FACT-Tools analysis. Both these results indicate
+that the cleaned air-shower clusters show a better agreement with the true air-
+showers and therefore can better be reconstructed. The used unsupervised
+clustering algorithm DBSCAN shows much better results on PhotonStream data than
+the classical threshold based cleaning. An improvement of the mismatches
+between observations and MC simulations via this algorithms hyperparameters
+could not be achieved. It seems that the data needs to be cleaned of noises and
+the different topologies of observed data and MC simulations need to be
+understood better to improve. To achieve this dedicated studies for quality
+cuts and the noises in the data samples are needed. However, since the two-
+dimensional cleaning on the shower pixels has a poor performance the three-
+dimensional space is the most promising space for event cleaning.
+
+The PhotonStream data representation shows very good tendencies for energy
+reconstruction and gamma hadron separation and therefore promising
+opportunities for the field of imaging air Cherenkov telescopes. It is not only
+a very intuitive data representation but also one suited very well for
+analysing air-shower images as is done by FACT.
