@@ -4,11 +4,20 @@
 The analysis tasks described in \autoref{ch:iact} make strong use of machine
 learning tools to be performed in the most efficient way. There are a lot of
 different machine learning techniques that find increasingly many and
-successfull applications in modern physics.
+successfull applications in modern physics. The following overview is based on
+the works \cite{bagging, goodfellow, mitchell}.
 
 \section{Machine Learning}
 %
-Machine learning describes the field of applied statistics that uses computers to learn to solve certain problems. The \textit{learning} is defined by Mitchell~\cite{mitchell} as: \enquote{A computer program is said to learn from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$.} There is a wide variety of different tasks this can be applied to and many performance measures. The most important preposition for well suited problems is the available experience or in this case the amount of data to learn on.
+Machine learning describes the field of applied statistics that uses computers
+to learn to solve certain problems. The \textit{learning} is defined by Tom
+Mitchell~\cite{mitchell} as: \enquote{A computer program is said to learn from
+experience $E$ with respect to some class of tasks $T$ and performance measure
+$P$, if its performance at tasks in $T$, as measured by $P$, improves with
+experience $E$.} There is a wide variety of different tasks this can be applied
+to and many performance measures. The most important preposition for well
+suited problems is the available experience or in this case the amount of data
+to learn from.
 
 Machine learning aims at solving problems that profit from the computing power
 of modern technology but are not the kind of problem to be solved by a typical
@@ -25,7 +34,7 @@ learning algorithms can be divided into \textbf{supervised} and
 \textbf{unsupervised} algorithms, both of which will be used in this work.
 
 Data to derive experience from for supervised algorithms consists of data points
-with a certain feature set and a specific label or true value. The datasets for
+with a certain feature set and a specific label or true value. The data sets for
 the \textit{separation} of two classes for example contain a certain feature
 set for every data point and a label for the corresponding class each of these
 points belongs to. Supervised learning therefore aims at learning to predict
@@ -40,7 +49,7 @@ a clustering algorithm.
 The task a machine learning algorithm is supposed to do is the solution of a
 specific problem in the best possible way. To reach this solution the process
 of learning is used. A machine learning algorithm uses data to adapt to a specific task upon the given data. The three desired tasks
-within the analysis of Cherenkov images are the \textit{separation} of
+within the analysis of Cherenkov telescope images are the \textit{separation} of
 gamma-rays from hadronic cosmic rays, as well as the \textit{estimation} of the
 energy and source position of cosmic gamma-rays. The kind of task already
 determines what machine learning techniques are best to be used or which ones
@@ -62,9 +71,9 @@ rather than discrete classifications an accuracy is not appropriate. The
 estimation of the energy, e.g., requires a continuous-valued metric.
 
 The models are trained on specific, simulated data but only to be applied on
-datasets they have \textit{not} been trained on. Thus, the interesting metrics
-are those calculated on datasets complementary to the training data sets,
-because they resemble the real use case. To do so, the whole dataset is divided
+data sets they have \textit{not} been trained on. Thus, the interesting metrics
+are those calculated on data sets complementary to the training data sets,
+because they resemble the real use case. To do so, the whole data set is divided
 into a fraction determined for training and a test set on which the metrics can
 be calculated. A frequently used method for this is the
 \textbf{cross-validation}. The data set is divided into $n$ equaly sized, random
@@ -108,7 +117,7 @@ and determine thresholds for every feature to classify the data point.
     \draw [pil] (f3) -- node[anchor=east] {$\symbf{<-\sfrac{\pi}{2}}$\;} (c3);
     \draw [pil] (f3) -- node[anchor=west] {\;$\symbf{\geq-\sfrac{\pi}{2}}$} (c4);
   \end{tikzpicture}
-  \caption{Example sketch of a decision tree. The tree decides whether an input data point is of class 1 or class 2. The available features are \texttt{feature\_1}, \texttt{feature\_2} and \texttt{feature\_3}. This decision tree has a depth of 2 and solves the task of a binary separation at each node (green boxes). The decision thresholds are written next to the respective connecting lines.}
+  \caption{Example sketch of a decision tree. The tree decides whether an input data point is of class 1 or class 2. The available features are \texttt{feature\_1}, \texttt{feature\_2} and \texttt{feature\_3}. This decision tree has a depth of 2 and solves the task of a binary separation by performing binary decisions at each node (green boxes). The decision thresholds are written next to the respective connecting lines.}
   \label{fig:tree}
 \end{figure}
 %
@@ -140,7 +149,7 @@ Random forests are generated by a process called
 \textit{bagging}~\cite{bagging}. Every tree within the forest is trained on a
 subset of the data randomly sampled with replacement. This way, a large number
 of slightly different trees is generated. While every single decision tree is
-still prone to overfitting to fluctuations in its respective dataset, averaging over
+still prone to overfitting to fluctuations in its respective data set, averaging over
 all of them is not, as long as the trees are not correlated. To prevent such
 correlations and further generalize the model, additionally every decision node
 inside a single tree is only given a random subset of all available features.
@@ -171,7 +180,7 @@ so called \textit{receiver operating characteristic} curve (ROC) can be
 determined. For a given class this represents the rate of correctly classified
 examples dependant on the rate of falsely classified ones. The area under this
 curve (AUC) can be used to quantify the performance of a classification model.
-When randomly deciding on an equally distributed dataset of two classes, the
+When randomly deciding on an equally distributed data set of two classes, the
 AUC is expected to be about \num{0.5}, representing the worst possible
 classification performance. A perfect classification yields an AUC of \num{1}.
 

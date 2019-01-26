@@ -3,7 +3,7 @@
 For the PhotonStream data representation, as a new way of describing IACT data,
 there is no reference analysis chain so far. The new possibilities of this
 representation need new analysis structures and give way for new methods and
-solutions. This work is therefore comparing different approaches to solve the
+solutions. This work is therefore comparing different approaches derived from classical analysis chains used by the FACT collaboration to solve the
 tasks of this analysis. A schematic representation of the analysis flow is
 shown in \autoref{fig:analysis}.
 %
@@ -46,7 +46,7 @@ To generate PhotonStream data a different calibration is needed. As described
 in \autoref{sec:phs}, instead of finding large pulses and calculating the data
 coordinates, the time series data is turned into single photons. The additional
 information of the PhotonStream is then used to clean the image in the
-threedimensional spacetime via the DBSCAN algorithm (\autoref{subsec:dbscan}), rather than by setting
+three-dimensional spacetime via the DBSCAN algorithm (\autoref{subsec:dbscan}), rather than by setting
 timing and PE thresholds for air-shower pixels. Nonetheless, the PhotonStream
 data contains all that is neccessary to perform this pixel-based cleaning
 instead. Therefore, this analysis is investigating said cleaning on
@@ -69,21 +69,21 @@ nanoseconds. Furthermore, the characteristic Cherenkov-angle under which the
 light is emitted, creates a light cone, which, when projected to the
 $x$-$y$-plane of the camera causes the specific elliptical shape. Both of these
 topological features are mandated by the physical process and can therefore be
-unrestrictedly used for the cleaning. Background events like ambient light or
+used for the cleaning. Background events like ambient light or
 starlight do not show these characteristics and tend to appear randomly.
 
-The threedimensional $xyt$-representation of the PhotonStream, called point cloud, quantifies photons with exactly those three observables. Thus, a cleaning
-within the threedimensional space-time can heavily use the known topology.
+The three-dimensional $xyt$-representation of the PhotonStream, called point cloud, quantifies photons with exactly those three observables. Thus, a cleaning
+within the three-dimensional spacetime can heavily use the known topology.
 Within the point cloud, an air-shower will appear as a very dense cluster of
 photons, surrounded by a merely isotropic distribution of background photons.
 These characteristics of shower events in the PhotonStream representation
 naturally suggest a density-based clustering algorithm as the cleaning method
 of choice. The two challenges at hand are the choice of a suited algorithm and
-a well defined metric to make the threedimensional spacetime usable.
+a well defined metric to make the three-dimensional spacetime usable.
 
 \subsection{Air-showers in the Point Cloud}
 %
-The threedimensional spacetime of the PhotonStream and its representation as a
+The three-dimensional spacetime of the PhotonStream and its representation as a
 point cloud eventually mixes spatial dimensions with time. While this is
 physically motivated, defining distances in such a space is not trivial. They
 are highly dependent on the chosen metric, which defines how time corresponds to
@@ -120,7 +120,7 @@ photons $a$ and $b$ is defined as
   d_{a,b} = \sqrt{(c_x^a - c_x^b)^2 + (c_y^a - c_y^b)^2 + (c_t^a - c_t^b)^2}
 \end{equation}
 
-The twodimensional projections of the point cloud within this metric are shown
+The two-dimensional projections of the point cloud within this metric are shown
 in \autoref{fig:pc} for an example air-shower event. With the calculated
 degree-equivalent of time the air-shower shows a similar distribution in
 each dimension. Air-shower events show high density regions represented by
@@ -129,7 +129,7 @@ dark blue photon accumulations in this point cloud representation.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.6\textwidth, angle=-90]{Plots/point_cloud.pdf}
-  \caption{Twodimensional projections of the point cloud using the metric described above. The blue spheres represent single photons. Dense regions therefore appear in a darker blue.}
+  \caption{Two-dimensional projections of the point cloud using the metric described above. The blue spheres represent single photons. Dense regions therefore appear in a darker blue.}
   \label{fig:pc}
 \end{figure}
 %
@@ -182,21 +182,21 @@ is shown in \autoref{fig:event_u} and \autoref{fig:event_c}.
 %     \centering
 %     \includegraphics[width=0.9\textwidth]{Plots/event1.png}
 %   \end{subfigure}
-%   \caption{Event represented by the 3-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel. The right figure shows the remaining photons after cleaning.}
+%   \caption{Event represented by the three-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel. The right figure shows the remaining photons after cleaning.}
 %   \label{fig:event}
 % \end{figure}
 %
 %
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Plots/event2.png}
-  \caption{Uncleaned event represented by the 3-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel.}
+  \includegraphics[width=0.85\textwidth]{Plots/event2.png}
+  \caption{Uncleaned event represented by the three-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel.}
   \label{fig:event_u}
 \end{figure}
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Plots/event1.png}
-  \caption{Cleaned event represented by the 3-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel.}
+  \includegraphics[width=0.85\textwidth]{Plots/event1.png}
+  \caption{Cleaned event represented by the three-dimensional point cloud of the Photonstream. Every blue sphere represents a measured photon in the corresponding time slice and pixel.}
   \label{fig:event_c}
 \end{figure}
 %
@@ -209,7 +209,7 @@ learning algorithms work with specific features rather than the whole image,
 although there are indeed ways to analyze whole images.
 
 The parametrization that is most frequently chosen for IACT data is based on
-the one proposed by Hillas~\cite{Hillas}. It operates on the two dimensional
+the one proposed by Hillas~\cite{Hillas}. It operates on the two-dimensional
 images recorded by the cameras, calculating features of the air-shower pixels.
 In the original publication these features were used to successfully analyze
 images on a 37-pixels camera. The parametrization is based on the light
@@ -225,7 +225,7 @@ air-shower image is shown in \autoref{fig:hillas}.
   sum of perpendicular angular distance, weighted by the number of photons per
   pixel. The standard deviations along this axis and the perpendicular axis are
   the two features called \texttt{length} and \texttt{width}. The center of
-  gravity (\texttt{cog}) of the air-shower image is the two dimensional weighted
+  gravity (\texttt{cog}) of the air-shower image is the two-dimensional weighted
   mean of all shower pixels.}%
   \label{fig:hillas}%
 \end{figure}
@@ -235,7 +235,7 @@ line represents the air-shower axis. It corresponds to the line minimizing the
 sum of perpendicular angular distance, weighted by the number of photons per
 pixel. The standard deviations along this axis and the perpendicular axis are
 the two features called \texttt{length} and \texttt{width}. The center of
-gravity (\texttt{cog}) of the air-shower image is the two dimensional weighted
+gravity (\texttt{cog}) of the air-shower image is the two-dimensional weighted
 mean of all shower pixels. The position and orientation of the shower is also
 characterized by the angle \texttt{delta}. It is the angle between the shower
 axis and the camera's $x$-axis. The \texttt{size} of the air-shower simply
@@ -266,7 +266,7 @@ FACT is a single telescope and therefore has no stereoscopic features to
 determine the origin of the cosmic ray showers. Thus, specific techniques only
 using the features of the air-shower images have to be performed. In this
 analysis the so called disp-method is used. It estimates the origin position of
-the cosmic gamma-rays by estimating the two features \texttt{disp} and the \texttt{sign}. The two
+the cosmic gamma-rays by estimating the two features \texttt{disp} and \texttt{sign}. The two
 dimensional problem of determining $x$ and $y$ coordinates is turned into a
 regression task and a classification task. The estimated source position within
 the camera's image is assumed to be on the shower's main axis. To find this
@@ -308,7 +308,7 @@ between the both is labelled $\theta$ and source specific.
 \section{Image Cleaning with Pixel-Based Thresholds}
 \label{sec:thresh}
 %
-When using the largest pulse representation (LP), a different cleaning is
+When using the largest-pulse representation (LP), a different cleaning is
 used. Since the PhotonStream is a different representation, of course the
 optimal cleaning differs. When cleaning LP data an algorithm working on the PE
 of the pixels is used. This cleaning is based on the assumption that air-shower
@@ -331,8 +331,8 @@ algorithm executes the following steps \cite{facttools}:
 %
 The remaining pixels are considered to be the cleaned image. When projecting
 the PhotonStream data into a camera image and calculating the mean arrival
-times per pixel, unlike the threedimensional space for DBSCAN, this cleaning can
-equivalently be performed on PhotonStream data.
+times per pixel, unlike in the three-dimensional space for DBSCAN, this
+cleaning can equivalently be performed on PhotonStream data.
 
 
 \section{Energy Estimation and Signal-Background Separation}
@@ -340,7 +340,7 @@ equivalently be performed on PhotonStream data.
 The generated features (\autoref{sec:params}) are used for the estimation of
 the primary particle's energy and the classification of the particle via
 machine learning algorithms as described in \autoref{ch:ML}. To generate and
-train the random forests the framework \texttt{aict-tools} \cite{aicttools} is
+train the random forests, the framework \texttt{aict-tools} \cite{aicttools} is
 used. It provides executables for the configuration, training and application
 of machine learning tasks on IACT data. The executables use the popular python
 machine learning library \texttt{scikit-learn}~\cite{scikit-learn}, which comes
