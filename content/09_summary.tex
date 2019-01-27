@@ -9,7 +9,7 @@ necessary data handling and feature generation tools have been implemented in
 the openly available \texttt{FeatureStream}~\cite{FeatureStream}. The extensive
 investigations on the different characteristics of the new representation and
 the implications for the analysis of PhotonStream data resulted in several
-remarks.
+remarks and yield the basis for a new, dedicated PhotonStream analysis.
 
 The PhotonStream opens new ways to represent IACT data and to parametrize air-
 shower events for analysis. The single photon extraction results in a larger
@@ -19,8 +19,7 @@ representation very well. The new per photon timing information impacts every
 analysis step. The density-based cleaning DBSCAN is a completely new way to
 clean air-shower events of the background. The resulting data set is
 characterized by brighter images with larger distributions along the spatial
-coordinates, that require new thresholds for cleanings and mismatches between
-simulations and observations. Generally, the PhotonStream data contains the
+coordinates, that require new thresholds for cleanings and special treatment of mismatches between simulations and observations. Generally, the PhotonStream data contains the
 information neccessary to generate the classical Hillas features and additional
 fetaures used in FACT analyses. Additionally, the new three-dimensional
 representation offers a great number of new features to be engineered. The
@@ -30,7 +29,7 @@ on the analysis results and need to be accounted for by quality cuts or
 improving the simulation quality.
 
 The timing information within the PhotonStream shows even bigger mismatches and
-therefore needs better simukation quality and optimized analysis methods to
+therefore needs better simulation quality and optimized analysis methods to
 boost the analysis performance. The different topology of cleaned air-shower
 events strongly affects the used machine learning techniques for the origin
 reconstruction. The orientation of air-showers shows significant mismatches,
@@ -45,13 +44,11 @@ that the cleaned air-shower clusters show a better agreement with the true air-
 showers and therefore can better be reconstructed. The used unsupervised
 clustering algorithm DBSCAN shows much better results on PhotonStream data than
 the classical threshold based cleaning. An improvement of the mismatches
-between observations and MC simulations via this algorithms hyperparameters
+between observations and MC simulations via this algorithm's hyperparameters
 could not be achieved. It seems that the data needs to be cleaned of noises and
 the different topologies of observed data and MC simulations need to be
 understood better to improve. To achieve this dedicated studies for quality
-cuts and the noises in the data samples are needed. However, since the two-
-dimensional cleaning on the shower pixels has a poor performance the three-
-dimensional space is the most promising space for event cleaning.
+cuts and the noises in the data samples are needed. However, since the two-dimensional cleaning on the shower pixels has a poor performance the three-dimensional space is the most promising space for event cleaning.
 
 The PhotonStream data representation shows very good tendencies for energy
 reconstruction and gamma hadron separation and therefore promising

@@ -181,7 +181,7 @@ containing large amounts of PE, can still easily be considered part of the
 air-shower.
 
 From these deviations another important question arises: how well do the MC
-simulations describe the reality or in other words do simulations and data
+simulations describe the reality or in other words do simulations and observations
 match as expected? Without knowing which photons within an event are air-shower
 photons and which not it is hard to tell, whether the different topology of the
 PhotonStream clusters is closer to the real air-shower or not.
@@ -296,7 +296,7 @@ The distributions of arrival times of the single photons for data and MC
 simulations are shown in \autoref{fig:slices}. The histograms show the arrival
 times for every single photon of 2000 events normalized to an area of 1. The
 top histogram represents all arriving photons. It becomes clear that there
-seems to be a significant discrepancy between the MC simulations and data.
+seems to be a significant discrepancy between the MC simulations and observations.
 While distributions of the MC simulations of both, gammas and protons, quite
 resemble each other, the data distribution shows a very different picture. The
 most common arrival time of data lies way beyond the one on MC simulations.
@@ -326,7 +326,7 @@ and \num{80}, though. The data distribution decreases slower and takes about
     \centering
     \includegraphics[width=0.8\textwidth]{Plots/all_slices_min_10_per_pixel.pdf}
   \end{subfigure}
-  \caption{Arrival times of the single photons within all the pixels (top) and the cleaned air-shower pixels containing at least 10 photons (bottom) on data and MC simulations.}
+  \caption{Arrival times of the single photons within all the pixels (top) and the cleaned air-shower pixels containing at least 10 photons (bottom) on data and MC simulations. The distributions are normalized to an area of \num{1}.}
   \label{fig:slices}
 \end{figure}
 %
@@ -345,9 +345,9 @@ improved, to get usefull features.
 The observed data mainly consists of proton events, since the majority of the
 cosmic ray flux consists of protons. Therefore, it is important to distinguish
 gamma air-shower events from proton events, which are considered background for
-this analysis. A working gamma hadron separation affects all steps of the
+this analysis. A working gamma hadron separation affects both other tasks of the
 analysis, because the energy reconstruction is trained on gamma events as well
-as the source reconstruction. A badly cleaned data set thus will not work well
+as the source reconstruction. A badly separated data set thus will not work well
 with the trained models.
 
 For this analysis a random forest is used for the classification. It consists
@@ -356,20 +356,20 @@ This figure also shows the proportional importances of the single features
 within the trained model. The most important features for the separation are
 the \texttt{width} and \texttt{kurtosis\_trans}, the higher order statistical
 moment along the same axis. From this, one can see that the spatial topology of
-the air-shower is the main discriminator.
+the air-shower is the main discriminator, as is expected when comparing the shower types (\autoref{sec:iact}).
 
 % neccessary line ^^^^
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth, page=4]{Plots/results/DBSCAN/separation_performance.pdf}
-  \caption{Features used for the gamma hadron separation model. The features are defined in \autoref{sec:params} and sorted by their importance for the separation task.}
+  \caption{Features used for the gamma hadron separation model. The features are defined in \autoref{sec:params} and sorted by their importance for the separation task. The black lines represent the error on the estimated feature importance.}
   \label{fig:sep_feat}
 \end{figure}
 %
 The trained model can be validated on the MC data, because the particle type is
-known for the datasets. To do so, the model is trained on a subset of the
+known for the data sets. To do so, the model is trained on a subset of the
 available simulations to then be validated on the small complementary
-dataset. To avoid statistical fluctuations within the subsamples to affect the
+data set. To avoid statistical fluctuations within the subsamples to affect the
 results, a cross-validation is used. \autoref{fig:sep_auc} shows the ROC curve
 of the trained model, consisting of the true positive rate as a function of the
 false positive rate. The blue line shows the results of the averaging from the
@@ -401,7 +401,7 @@ significantly.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 As described in \autoref{sec:source_pos} the reconstruction of the source
-position uses the air-shower's features \texttt{delta}, \texttt{width} and
+position uses, among others, the air-shower's features \texttt{delta}, \texttt{width} and
 \texttt{length}. The calculated angle \texttt{delta} plays a major role in
 finding the right source position, since it describes the axis along which
 the source position is assumed to be. It is calculated as the angle between
@@ -410,7 +410,7 @@ on the covariance of the light distribution and thus affected by the
 differences within the PhotonStream.
 
 To investigate the differences on PhotonStream data, it is possible to
-calculate a true delta on the data images by using the telescope's pointing
+calculate a true \texttt{delta} on the data images by using the telescope's pointing
 position. From the pointing position and the known source position an
 expected source position within the camera can be calculated. The
 air-shower's \texttt{cog} and the calculated source position within the camera can
@@ -449,11 +449,13 @@ accumulation ranges around zero and $\pi$. Thus, the calculated
 \texttt{delta} seems to differ quite significantly from the expected
 \texttt{delta}. Furthermore, both \texttt{sign} predictions show similar
 distributions, hinting at a low accuracy for the \texttt{sign}
-classification. The main difference between the air-showers found by DBSCAN
+classification.
+
+The main difference between the air-showers found by DBSCAN
 and the ones found by the classic cleaning projected to the camera plane is
 the spread across the camera axes. DBSCAN clustering is associating photons
 from pixels quite distant from the shower core to the air-shower cluster.
-This way, the spread within $x$ and $y$ becomes way bigger. Because
+This way, the spread within $x$ and $y$ becomes bigger. Because
 \texttt{delta} is calculated on the $x$-$y$-distribution weighted by the
 number of photons, these outlier photons might have a big impact on the
 calculation of \texttt{delta}, even though they usually only contain very
@@ -470,7 +472,7 @@ cleaning are shown in \autoref{fig:delta_diff_perc}.
   \subcaptionbox{\label{fig:delta_diff_perc}}[0.48\textwidth]{
     \includegraphics[width=0.5\textwidth]{Plots/delta_delta/delta_delta _DBSCAN_1perc_rad_20131104_162.pdf}
   }
-  \caption{Difference between calculated delta and true delta for a subset of 500 data events. delta is calculated using all cleaned pixels \protect\subref{fig:delta_diff_a} and using only cleaned pixels containing more than $\SI{1}{\percent}$ of the air-shower's size \protect\subref{fig:delta_diff_perc}.}
+  \caption{Difference between calculated delta and true delta for all observation data events above a \texttt{gamma\_prediction} threshold of \num{0.766}. delta is calculated using all cleaned pixels \protect\subref{fig:delta_diff_a} and using only cleaned pixels containing more than $\SI{1}{\percent}$ of the air-shower's size \protect\subref{fig:delta_diff_perc}.}
   \label{fig:true_delta}
 \end{figure}
 %
@@ -532,7 +534,7 @@ position. Since the Crab Nebula is a well known source with a well known
 position, the difference between the reconstructed and the known source
 position can be calculated. It is tipically quantized as the euklidian distance
 squared in $[\theta^2] = \si{\degree\squared}$ and illustrated as shown in
-\autoref{fig:theta2}. These $\theta^2$-plots show the distribution of the
+\autoref{fig:theta2}. These so called $\theta^2$-plots show the distribution of the
 distances squared of the reconstructed source position per event from the Crab
 Nebula's known position. They contain all events after preselection cuts and
 applying the gamma hadron separation at a specific \texttt{gamma\_prediction}
@@ -547,13 +549,12 @@ on-source observations. Both, $\theta^2$-cut and the \texttt{gamma\_prediction}
 threshold are determined by finding the highest significance, calculated as
 described by Li \& Ma \cite{LiMa}.
 
-The used random forest is trained on gamma and proton MC simulations to perform
+The used random forest is trained on gamma MC simulations to perform
 the \texttt{disp} regression and the \texttt{sign} classification. The
 performance results of this training are very good for the \texttt{sign}
 classification, while the regression of \texttt{disp} seems to be more
 difficult. The accuracy of the \texttt{sign} classification averaged from the
-cross-validation is $0.7923\,\pm\,0.0018$. Slightly outperforming the FACT-
-Tools analysis with an accuracy of $0.7537\,\pm\,0.0018$. The regression of
+cross-validation is $0.7923\,\pm\,0.0018$, slightly outperforming the FACT-Tools analysis with an accuracy of $0.7537\,\pm\,0.0018$. The regression of
 \texttt{disp}, however, only reaches an $R^2$ score of $0.5385\,\pm\,0.0046$,
 which is quite low and might strongly affect the accuracy of the origin
 reconstruction. The FACT-Tools analysis, in comparison, reaches an $R^2$ score
@@ -561,7 +562,7 @@ of $0.6631\,\pm\,0.0044$.
 
 For a Crab Nebula data sample and a working analysis the $\theta^2$-plot is
 expected to have an equally distributed, low number of Off-events with a
-significant excess of On-events as close to $\theta^2 = 0$ as possible. From
+significant excess of On-events as close to $\theta^2 = 0$ as possible, dependent on the telescope's point-spread-function and the analysis accuracy. From
 the results shown in \autoref{fig:theta2} it becomes very clear, that the
 reconstruction of the PhotonStream data in the way described above does not
 yield a very good source reconstruction on data. The optimal $\theta^2$-cuts
@@ -570,11 +571,15 @@ true source position are rather fuzzy: there is no clear peak, especially not
 around \num{0}. The source excess starts around \num{0.10} and grows until
 between \num{0} and \num{0.05}. Thus, the reconstruction of the source position
 and especially the regression of \texttt{disp} seem to have a big error margin,
-reconstructing events to the close proximity of the true source position. The
+reconstructing events to the close proximity of rather than exactly to the true source position. The
 error of the reconstruction is represented by $\theta$, but does not only
 result from the reconstruction. The results of course strongly depend on the
-cleaning and especially the gamma hadron separation just as much. However, from
-the above investigations it becomes clear that on PhotonStream data the right
+cleaning and especially the gamma hadron separation just as much. The bottom
+plot in \autoref{fig:theta2} shows the resulting source reconstruction when
+using the DBSCAN cleaning and additionally excluding pixels with less than
+$\SI{1}{\percent}$ of the air-shower's \texttt{size}. This cleaning showed a
+better performance when reconstructing \texttt{delta}, but is not achieving
+better results on the final reconstruction. From these investigations it becomes clear that on PhotonStream data the right
 reconstruction requires a deeper understanding of the data in this new
 representation.
 %
@@ -598,7 +603,7 @@ representation.
 The reconstruction of the air-shower's energy is applied on cleaned and as
 gamma air-shower classified images. It uses the same features as the separation
 model. Since the PhotonStream paired with DBSCAN reconstructs bigger air-shower
-images and a larger number of photons it is interesting to investigate the
+images and a larger number of photons, both of which are strongly correlated to the shower's energy, it is interesting to investigate the
 results on the reconstructed energy.
 
 For this analysis a random forest is used for the energy estimation, as well.
@@ -622,7 +627,7 @@ depends on the energy of the primary particle, that is expected.
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth, page=4]{Plots/results/DBSCAN/energy_performance.pdf}
-  \caption{Features used for the energy estimation model. The features are defined in \autoref{sec:params} and sorted by their importance for the estimation task.}
+  \caption{Features used for the energy estimation model. The features are defined in \autoref{sec:params} and sorted by their importance for the estimation task. The black lines represent the error on the estimated feature importance.}
   \label{fig:energy_feat}
 \end{figure}
 %
@@ -636,18 +641,19 @@ correlation is visible on the diagonal, showing that the trained model is
 reconstructing energies close to the true energies. Rather than a thin line,
 the spread of this distribution however is quite wide. The reconstructed
 energies therefore lie within a wide error margin around the true energy.
-Especially for low energies the spread becomes very large. Air-showers
-resulting from low energy primary particles contain less Cherenkov photons, as
-described above. Therefore the reconstructed air-shower not only contains less
-photons but also illuminates a smaller area of the camera. Thus, fluctuations
-become more important and the accurate reconstruction of the image features more
-difficult. Low energy events consequently are intrinsically harder to assign
-the right energy to.
+Especially for low energies the spread becomes very large.
+
+Air-showers resulting from low energy primary particles contain less Cherenkov
+photons, as described above. Therefore the reconstructed air-shower not only
+contains less photons but also illuminates a smaller area of the camera. Thus,
+fluctuations become more important and the accurate reconstruction of the image
+features more difficult. Low energy events consequently are intrinsically
+harder to assign the right energy to.
 %
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Plots/results/DBSCAN/energy_migration.pdf}
-  \caption{Confusion matrix for the estimation of the primary particle's energy. The energy estimated by the random forest ($y$-axis) is shown against the event's true energy ($x$-axis).}
+  \caption{Confusion matrix for the estimation of the primary particle's energy. The energy estimated by the random forest ($y$-axis) is shown against the event's true energy ($x$-axis) in a double logarithmic scale.}
   \label{fig:energy_matr}
 \end{figure}
 %
@@ -682,10 +688,10 @@ clustering, DBSCAN is defined by two dedicated parameters, as described in
 as well. However, there does not appear to be reason to believe that an
 analysis specific set of the two parameters needs to be derived.
 
-The minimum number of photons within a cluster $m$ has not been investigated. A
+The effect of the minimum number of photons within a cluster $m$ has not been investigated. A
 minimum number of \num{20} photons excludes only very small noise clusters. For
 the analysis, the cuts in \texttt{size} and \texttt{n\_pixel} will then
-exclude the small events.
+exclude even bigger events, so $m$ will just reduce the computing time, but not exclude too many events.
 
 The minimum distance $\varepsilon$ for a photon to still be associated with a
 dense cluster has been investigated to be \num{0.1} for optimal results \cite{sebastian}. The
@@ -708,8 +714,8 @@ space. The number of reconstructed clusters also gradually rises when setting
 a bigger $\varepsilon$. This is to be expected, since a bigger $\varepsilon$
 allows for less dense regions of the point cloud to be considered a dense
 cluster. At some point this will lead to noise or ambient light to be
-classified as air-shower clusters. For $\varepsilon = 0.11 / 0.12$ however, it
-definiteley leads to large mismatches between MC simulations and data, that
+classified as air-shower clusters. For $\varepsilon = 0.11$ and also $0.12$ however, it
+definiteley leads to large mismatches between MC simulations and observations, that
 become very clear for $\varepsilon = 0.14$. For $\varepsilon = 0.175$ the
 distance for photons within a cluster becomes so big, that the initial large
 number of small clusters decreases again, because many of these are combined to
@@ -816,7 +822,7 @@ To investigate the effects of $\varepsilon$ further on a higher level than the
 feature distributions, the scores used to validate the analysis results can be
 investigated in dependancy to the value of $\varepsilon$. To do so, these
 scores are shown in \autoref{fig:eps_scores}, \ref{fig:eps_sigma} and
-\ref{fig:eps_theta} for $\varepsilon \in [0.07,\,0.1]$. \autoref{fig:eps_sigma}
+\ref{fig:eps_theta} for $\varepsilon \in [0.07,\,0.1]$. The cuts are not changed for the different $\varepsilon$-configurations. \autoref{fig:eps_sigma}
 additionally contains smaller values of $\varepsilon$. No real dependancy can
 be seen and the results seem to be the same throughout the variation. Except
 for the number of reconstructed air-showers, which decreases strongly for small
@@ -826,14 +832,14 @@ detection significance in \autoref{fig:eps_sigma}. From the data rates it become
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{Plots/Epsilon/eps_scores.pdf}
-  \caption{Validation scores for the analysis tasks in dependance of the DBSCAN's $\varepsilon$. The AUC for the gamma hadron separation's ROC (blue), the source position reconstruction's accuracy of the sign(disp) (black) and the $R^2$-score for the \texttt{disp} regression (green), as well as the $R^2$-score for the energy reconstrcution (red) are shown.}
+  \caption{Validation scores for the analysis tasks in dependance of the DBSCAN's $\varepsilon$. The AUC for the gamma hadron separation's ROC (blue), the source position reconstruction's accuracy of the sign(disp) (black) and the $R^2$ score for the \texttt{disp} regression (green), as well as the $R^2$ score for the energy reconstrcution (red) are shown.}
   \label{fig:eps_scores}
 \end{figure}
 %
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{Plots/Epsilon/eps_sigma.pdf}
-  \caption{Detection significances for the PhotonStream open crab sample in dependancy of the DBSCAN's $\varepsilon$. The significances represent the maximum detection significance as a function of the $\theta^2$-cut and the prediction threshold of the gamma hadron separation.}
+  \caption{Detection significances for the PhotonStream open crab sample in dependancy of the DBSCAN's $\varepsilon$. The significances represent the maximum detection significance, optimized as a function of the $\theta^2$-cut and the prediction threshold of the gamma hadron separation.}
   \label{fig:eps_sigma}
 \end{figure}
 %
@@ -841,14 +847,14 @@ detection significance in \autoref{fig:eps_sigma}. From the data rates it become
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{Plots/data_rates_eps.pdf}
-  \caption{Data rates for the PhotonStream open crab sample observations in dependancy of the DBSCAN's $\varepsilon$. The data rate represent the number of events as a function of the \texttt{size}-cut on the data observations. For comparison, the rate for the FACT-Tools data is shown as well.}
+  \caption{Data rates for the PhotonStream open crab sample observations for the different $\varepsilon$-configurations of the DBSCAN. The data rate represent the number of events as a function of the \texttt{size}-cut on the data observations. For comparison, the rate for the FACT-Tools data is shown as well.}
   \label{fig:eps_rate}
 \end{figure}
 %
 \begin{figure}
   \centering
   \includegraphics[width=0.95\textwidth]{Plots/Epsilon/eps_theta_cut.pdf}
-  \caption{$\theta^2$ cuts for the maximum detection signifance on the PhotonStream open crab sample for different $\varepsilon$-configurations. The cuts are optimized to yield the maximum detection significance.}
+  \caption{$\theta^2$ cuts for the maximum detection signifance on the PhotonStream open crab sample for different $\varepsilon$-configurations. The cuts are optimized to yield the maximum detection significance and therefore also represent the resolution of the reconstruction of this point source.}
   \label{fig:eps_theta}
 \end{figure}
 
