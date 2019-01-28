@@ -88,7 +88,17 @@ $\SI{10}{\nano\second}$ of $T_1$. This way, the detector's specific responses ca
 
 To extract all photons from a time series an iterative algorithm is used, that
 finds rising edges of single photons and then extracts the full photon pulse
-$T_1$. An example is shown in \autoref{fig:extraction}. Red vertical lines
+$T_1$. An example is shown in \autoref{fig:extraction}.
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{Plots/example_extraction_seed_5.png}
+  \caption{Example of the photon extraction from a calibrated time series \cite{singlephs}. Shown are several steps of the iterative extraction for the time series of a single pixel. The top frame shows the full time series as returned from the calibration process. The red vertical line shows the time position of the first found photon. After subtracting the photon pulse template $T_1$, the series as shown in the frame below remains, where another photon is found at the same position (red vertical line). The extraction continues until the time series in the bottom frame remains, which is considered noise. The extracted photon arrival times represent the PhotonStream for this specific pixel.}
+  \label{fig:extraction}
+\end{figure}
+%
+\newpage
+Red vertical lines
 indicate the time position of a found rising edge template $T_2$. The time
 series of a single pixel is correlated with $T_2$ to find the maximum of that
 correlation. The response is defined as
@@ -105,11 +115,3 @@ iteration step is reached when the maximum of the response $R[t]$ drops below
 half of the maximum of the response to a single-pulse.
 Every found arrival time of a photon is written to a list containing the
 PhotonStream for the specific event and pixel.
-%
-\begin{figure}
-  \centering
-  \includegraphics[width=0.95\textwidth]{Plots/photon_extraction_sebastian.png}
-  \caption{Example of the photon extraction from a calibrated time series \cite{sebastian}. Shown are several steps of the iterative extraction for the time series of a single pixel. The top frame shows the full time series as returned from the calibration process. The red vertical line shows the time position of the first found photon. After subtracting the photon pulse template $T_1$, the series as shown in the frame below remains, where another photon is found at the same position (red vertical line). The extraction continues until the time series in the bottom frame remains, which is considered noise. The extracted photon arrival times represent the PhotonStream for this specific pixel.}
-  \label{fig:extraction}
-\end{figure}
-%
