@@ -124,4 +124,28 @@ discrimination. An AUC this large thus indicates strong data MC mismatches.
 %
 \includegraphics[width=1.2\textwidth]{Plots/feature_stream_readme.png}
 
+%
+The energy bias and resolution of the analysis are shown for bins of true gamma
+energy in \autoref{fig:bias}.
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Plots/results/DBSCAN/bias_resolution.pdf}
+  \caption{Bias (blue histogram) and resolution (orange histogram) of the PhotonStream data on DBSCAN cleaning as a function of true Energy of the gamma rays.}
+  \label{fig:bias}
+\end{figure}
+%
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth, page=2]{Plots/results/DBSCAN/separation_performance.pdf}
+  \caption{Distributions of the gamma confidence for proton and MC simulations of the random forest used for the gamma hadron separation.}
+\end{figure}
+%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth, page=3]{Plots/results/DBSCAN/separation_performance.pdf}
+  \caption{Distributions of the precision, recall and $f_{0.10}$ score of the random forest used for the gamma hadron separation.}
+\end{figure}
+
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}

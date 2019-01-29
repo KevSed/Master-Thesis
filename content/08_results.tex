@@ -211,7 +211,11 @@ calculations of \texttt{width} and \texttt{length},
 \autoref{fig:feat_dbscan_perc}, the proton MC distributions of those features
 are shifted to smaller values, as expected. The distributions of the features
 on data are not really affected much, resulting in a better agreement of data
-and MC simulations. The additional pixels, the DBSCAN is associating to the air-shower as compared to the standard cleaning seem to be one cause for the mismatches of simulations and observed data.
+and MC simulations.
+
+The additional pixels, the DBSCAN is associating to the air-shower as compared
+to the standard cleaning seem to be one cause for the mismatches of simulations
+and observed data.
 %
 \begin{figure}
   \begin{subfigure}{0.5\textwidth}
@@ -472,7 +476,7 @@ cleaning are shown in \autoref{fig:delta_diff_perc}.
   \subcaptionbox{\label{fig:delta_diff_perc}}[0.48\textwidth]{
     \includegraphics[width=0.5\textwidth]{Plots/delta_delta/delta_delta _DBSCAN_1perc_rad_20131104_162.pdf}
   }
-  \caption{Difference between calculated delta and true delta for all observation data events above a \texttt{gamma\_prediction} threshold of \num{0.766}. delta is calculated using all cleaned pixels \protect\subref{fig:delta_diff_a} and using only cleaned pixels containing more than $\SI{1}{\percent}$ of the air-shower's size \protect\subref{fig:delta_diff_perc}.}
+  \caption{Difference between calculated \texttt{delta} and true \texttt{delta} for all observation data events above a \texttt{gamma\_prediction} threshold of \num{0.766}. The \texttt{gamma\_prediction} threshold results from the optimization of the detection significance. \texttt{delta} is calculated using all cleaned pixels \protect\subref{fig:delta_diff_a} and using only cleaned pixels containing more than $\SI{1}{\percent}$ of the air-shower's size \protect\subref{fig:delta_diff_perc}.}
   \label{fig:true_delta}
 \end{figure}
 %
