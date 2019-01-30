@@ -32,10 +32,10 @@
 \KOMAoption{headsepline}{0.5pt}
 \if@tucolor%
   \addtokomafont{title}{\color{tugreen}}          % title on titlepage
-  \addtokomafont{chapter}{\color{tugreen}}     % headlines of the chapters, sections etc. 
+  \addtokomafont{chapter}{\color{tugreen}}     % headlines of the chapters, sections etc.
   \addtokomafont{pagenumber}{\color{tugreen}}     % page number in the footer
   \addtokomafont{chapterentry}{\color{tugreen}}   % chapters in the table of contents
-  \setkomafont{headsepline}{\color{tugreen}}        % line between header and text body
+  \setkomafont{headsepline}{\color{gray}}        % line between header and text body
   \DeclareCaptionFont{tugreen}{\color{tugreen}}
   \captionsetup{%
               labelfont={bf,tugreen},     % bold label in tu colour
